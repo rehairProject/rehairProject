@@ -12,8 +12,8 @@ box-sizing:border-box;
 /* 탭 버튼 */
 .btn-group{width:100%;}
 .re_btn{color:#395781; border-radius:0;}
-.re_btn:hover{border-bottom:1px solid #395781; /*background:#395781; color:#fff;*/}
-.tab_box button.on{border-bottom:1px solid #395781;  /*background:#395781; color:#fff;*/}
+.re_btn:hover{background:#395781; color:#fff;}
+.tab_box button.on{background:#395781; color:#fff;}
 
 /* 탭 컨텐츠 hide show*/
 .mainWrap div.reservation{display:none;}

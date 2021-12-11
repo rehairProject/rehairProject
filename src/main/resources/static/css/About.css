@@ -1,15 +1,23 @@
+
         .about{
             color: white; text-align: center;
         }
-        .about-navzip {
-            text-align: center; border-bottom: 1px solid #7eabf2; padding: 20px 10px 0 0;
-        }
         .about-nav {
-            text-decoration: none;
+            display: block; text-align: center; text-decoration: none;
+            padding: 1rem; margin-bottom: 10px; color: black; border-bottom: 1px solid #7eabf2;
+        }
+        .about-nav:hover {
+            background: #7eabf2;
+            color: white;
+
         }
 
-        .about-nav:hover {
-            color: #0011ff;
+        .pouch {
+            width: 100%;
+            padding-right: var(--bs-gutter-x,.75rem);
+            padding-left: var(--bs-gutter-x,.75rem);
+            margin-right: auto;
+            margin-left: auto;
         }
 
         .heading {
