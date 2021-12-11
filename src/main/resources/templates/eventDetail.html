@@ -1,0 +1,34 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/eventDetail.css" rel="stylesheet" type="text/css" />
+
+    <title>Event Detail</title>
+</head>
+<body>
+    <div class="container">
+        <div th:insert="header.html" class="header"></div>
+
+        <div class="naviImage">
+            <h1> 이미지 디자인 </h1>
+        </div>
+        <div id="eventContainer">
+            <div class="subNavi">
+                <ul>
+                    <li>
+                        <a href="/notice" class="subNaviA" id="noticeNavi">NOTICE</a>
+                    </li>
+                    <li>
+                        <a href="/event" class="subNaviA" id="eventNavi">EVENT</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="eventDetail">
+                <img src="../images/studentEventDetail.jpg">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

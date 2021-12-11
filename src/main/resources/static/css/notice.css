@@ -1,0 +1,12 @@
+* { margin: 0; padding: 0; }
+.container { width: 1250px; text-align: center; margin: 0 auto; }
+.naviImage { background-color: gray; height: 100px;}
+.subNavi ul { list-style-type: none; display: flex; margin: 0; padding: 0; }
+.subNaviA { text-decoration: none; color:#395781; display: inline-block; width: 625px;
+text-align:center; height: 80px; line-height: 80px; font-weight: bold;
+margin-bottom: 60px; }
+#noticeContainer .subNavi ul li #noticeNavi { border-bottom: 2px solid #395781; }
+#noticeList .table thead #firstRow {color: gray; border-bottom: 2px solid gray; }
+#noticeList .table thead tbody {border-bottom: ligth-gray; }
+.clickRow { cursor:pointer; }
+tbody tr #hideRow { display:none; }

@@ -1,0 +1,55 @@
+        .about{
+            color: white; text-align: center;
+        }
+        .about-navzip {
+            text-align: center; border-bottom: 1px solid #7eabf2; padding: 20px 10px 0 0;
+        }
+        .about-nav {
+            text-decoration: none;
+        }
+
+        .about-nav:hover {
+            color: #0011ff;
+        }
+
+        .heading {
+            text-transform: uppercase;
+        }
+
+        .heading .heading-upper {
+            display: block;
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .heading .heading-lower {
+            display: block;
+            font-size: 3rem;
+            font-weight: 100;
+        }
+
+        .intro {
+            position: relative;
+            overflow: hidden;  margin-bottom: 50px;
+        }
+
+        @media (min-width: 992px) {
+            .intro .intro-img {
+                width: 75%;
+                float: right;
+            }
+
+            .intro .intro-text {
+                left: 0;
+                width: 60%;
+                margin-top: 3rem;
+                position: absolute;
+            }
+
+            .intro .intro-text .intro-button {
+                width: 100%;
+                left: 0;
+                position: absolute;
+                bottom: -2rem;
+            }
+        }
