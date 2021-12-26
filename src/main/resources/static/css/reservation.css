@@ -22,7 +22,7 @@ box-sizing:border-box;
     border-radius:0 !important;
     border-bottom:1px solid #395781;}
 .re_btn:hover{background-color:#395781; color:#fff !important;}
-.tab_box button.on{ border-bottom:1px solid #395781;}
+.tab_box button.on{ background-color:#395781; color:#fff}
 
 /* 탭 컨텐츠 hide show*/
 .mainWrap div.reservation{display:none;}
