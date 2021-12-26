@@ -2,7 +2,8 @@
         .about{
             color: white; text-align: center;
         }
-        .about-nav {
+        *,.btn:focus{ box-shadow: none !important;}
+        /*.about-nav {
             display: block; text-align: center; text-decoration: none;
             padding: 1rem; margin-bottom: 10px; color: black; border-bottom: 1px solid #7eabf2;
         }
@@ -11,6 +12,21 @@
             color: white;
 
         }
+        .about-nav.on {
+            background: #7eabf2;
+            color: white;
+        }*/
+
+        /* 탭 버튼 */
+        .btn-group{width:100%;}
+        .re_btn{
+            border-radius:0 !important;
+            border-bottom:1px solid #395781;}
+        .re_btn:hover{background-color:#395781; color:#fff !important;}
+        .tab_box button.on{ color:white; background: #395781;}
+
+        .about-property{display:none;}
+        .on{display:block;}
 
         .pouch {
             width: 100%;
