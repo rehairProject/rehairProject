@@ -14,19 +14,22 @@
     <script src="js/reservation.js" type="text/javascript"></script>
 </head>
 <body>
+<div class="container">
+    <div th:insert="header.html" class="header"></div>
+</div>
 <main class="container mainWrap">
     <!--    이미지 배너    -->
     <div class ="re_banner">
         <h1 class="re_title m-0">R E S E R V A T I O N</h1>
         <!--    <img src="images/reservation/re_banner.jpg" class="img-fluid" alt="예약 배너 이미지">-->
     </div>
-    <!--   탭 버튼   -->
-    <div class="text-center">
-        <div class="btn-group tab_box" role="group" aria-label="Basic example">
-            <button type="button" class="btn re_btn on m-0 py-2">예약하기</button>
-            <button type="button" class="btn re_btn m-0 py-2">예약확인</button>
-        </div>
-    </div>
+<!--    &lt;!&ndash;   탭 버튼   &ndash;&gt;-->
+<!--    <div class="text-center">-->
+<!--        <div class="btn-group tab_box" role="group" aria-label="Basic example">-->
+<!--            <button type="button" class="btn re_btn on m-0 py-2">예약하기</button>-->
+<!--            <button type="button" class="btn re_btn m-0 py-2">예약확인</button>-->
+<!--        </div>-->
+<!--    </div>-->
     <section class="reservation_info mt-5 text-center">
         <h5 class="border-3 py-3 <!--border-bottom-->"> RESERVATION CHECK</h5>
         <table class="table table-borderless text-center align-middle mt-2 py-4 border-top border-bottom border-3">

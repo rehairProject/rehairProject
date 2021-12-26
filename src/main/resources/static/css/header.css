@@ -1,10 +1,9 @@
 * { margin: 0; padding: 0; }
-.container { margin: 0 auto;}
-.container div .navi { color:#395781; text-align: right; padding-right: 20px;}
-.container div .navi:hover { color: blue; }
+.container { margin: 0 auto; }
+.container #loginJoinNavi .navi { color:#395781; text-align: right; padding-right: 20px;}
+.container #loginJoinNavi .navi:hover { color: blue; }
 #imgLogo {width: 160px; height: 110px; }
 
-#navbarsExample04 .navbar-nav {margin:0; padding:0; display: inline-block; width: 100%}
-#navbarsExample04 .navbar-nav div {width: 100%}
-#navbarsExample04 .navbar-nav div .nav-item .navi{ color:#395781; text-align: right;}
-#navbarsExample04 .navbar-nav div .nav-item .navi:hover { border-bottom: 2px solid #395781; }
+#navbarsExample04 ul { width: 100%; margin:0; padding:0; padding-top:70px;}
+#navbarsExample04 ul .nav-item .navi{ color:#395781; text-align: right; }
+#navbarsExample04 ul .nav-item .navi:hover { border-bottom: 2px solid #395781; }

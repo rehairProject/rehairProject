@@ -26,4 +26,9 @@ public class HomeController {
         return "event";
     }
 
+    @GetMapping("/reservationChk")
+    public String reservation_check() {
+        return "reservation_check";
+    }
+
 }
