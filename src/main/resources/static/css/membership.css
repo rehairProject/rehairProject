@@ -5,5 +5,12 @@
 .subNaviA { text-decoration: none; color:#395781; display: inline-block; width: 625px;
 text-align:center; height: 80px; line-height: 80px; font-weight: bold;
 margin-bottom: 60px; }
-#eventContainer .subNavi ul li #eventNavi { border-bottom: 2px solid #395781; }
-#eventDetail img { width: 80%; margin-bottom: 50px; }
+#membershipImg img { height: 450px; margin: 0 auto 80px; }
+
+ @media (max-width: 992px) {
+  #membershipImg img {
+      height: 300px;
+      margin: 0 auto 50px;
+      }
+  }
+

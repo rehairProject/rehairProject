@@ -1,12 +1,33 @@
 * { margin: 0; padding: 0; }
-.container { width: 1250px; text-align: center; margin: 0 auto; }
+.container { text-align: center; margin: 0 auto; }
 .naviImage { background-color: gray; height: 100px;}
-.subNavi ul { list-style-type: none; display: flex; margin: 0; padding: 0; }
-.subNaviA { text-decoration: none; color:#395781; display: inline-block; width: 625px;
-text-align:center; height: 80px; line-height: 80px; font-weight: bold;
-margin-bottom: 60px; }
-#noticeContainer .subNavi ul li #noticeNavi { border-bottom: 2px solid #395781; }
-#noticeList .table thead #firstRow {color: gray; border-bottom: 2px solid gray; }
-#noticeList .table thead tbody {border-bottom: ligth-gray; }
-.clickRow { cursor:pointer; }
+
+<!-- 탭버튼 -->
+.text-center{width:100%;}
+.btn-group{width:100%;}
+.re_btn{
+    border-radius:0 !important;
+    border-bottom:1px solid #395781;}
+.re_btn:hover{background-color:#395781; color:#fff !important;}
+.tab_box button.on{ background-color:#395781; color:#fff;}
+
+/* 탭 컨텐츠 hide show*/
+.noticeContainer div.notice{display:none;}
+.noticeContainer div.on{display:block;}
+
+<!-- 공지사항 -->
+.notice { padding-top: 30px; }
+.notice .table thead #firstRow {color: gray; border-bottom: 2px solid gray; }
+.notice .table thead tbody {border-bottom: ligth-gray; }
+.clickRow { cursor:pointer; text-decoration: none; color: black; }
 tbody tr #hideRow { display:none; }
+
+<!-- 이벤트 -->
+.eventContainer { margin: 0 auto; }
+.card { width: 300px; height: 255px; }
+.col a #event1 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
+.col a #event2 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
+.col a #event3 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
+.col a #event4 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
+.col a #event5 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
+.col a #event6 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
