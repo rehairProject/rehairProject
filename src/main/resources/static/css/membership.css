@@ -1,16 +1,15 @@
 * { margin: 0; padding: 0; }
-.container { width: 1250px; text-align: center; margin: 0 auto; }
-.naviImage { background-color: gray; height: 100px;}
-.subNavi ul { list-style-type: none; display: flex; margin: 0; padding: 0; }
-.subNaviA { text-decoration: none; color:#395781; display: inline-block; width: 625px;
-text-align:center; height: 80px; line-height: 80px; font-weight: bold;
-margin-bottom: 60px; }
-#membershipImg img { height: 450px; margin: 0 auto 80px; }
+
+/* 배너 */
+.naviImage { width:100%; height:auto; background-color:#ccc; }
+.naviImage h1 { text-align:center; padding:5%; margin-bottom: 0; }
+
+/* 멤버쉽 이미지 */
+#membershipContainer img { height: 500px; }
 
  @media (max-width: 992px) {
-  #membershipImg img {
+  #membershipContainer img {
       height: 300px;
-      margin: 0 auto 50px;
       }
   }
 

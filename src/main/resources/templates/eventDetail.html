@@ -11,24 +11,17 @@
     <div class="container">
         <div th:insert="header.html" class="header"></div>
 
+        <!-- 배너 -->
         <div class="naviImage">
-            <h1> 이미지 디자인 </h1>
+            <h1>COMMUNICATION</h1>
         </div>
-        <div id="eventContainer">
-            <div class="subNavi">
-                <ul>
-                    <li>
-                        <a href="/notice" class="subNaviA" id="noticeNavi">NOTICE</a>
-                    </li>
-                    <li>
-                        <a href="/event" class="subNaviA" id="eventNavi">EVENT</a>
-                    </li>
-                </ul>
-            </div>
-            <div id="eventDetail">
-                <img src="../images/studentEventDetail.jpg">
-            </div>
+
+        <!-- 이벤트 상세보기 -->
+        <div id="eventDetail" class="text-center mt-5 mb-5">
+            <img src="../images/studentEventDetail.jpg">
         </div>
+
+        <div th:insert="footer.html" class="footer"></div>
     </div>
 </body>
 </html>

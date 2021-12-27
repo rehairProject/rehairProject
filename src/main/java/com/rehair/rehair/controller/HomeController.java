@@ -21,14 +21,24 @@ public class HomeController {
         return "reservation";
     }
 
-    @GetMapping("/event")
-    public String event() {
-        return "event";
+    @GetMapping("/notice")
+    public String notice() {
+        return "notice";
     }
 
     @GetMapping("/reservationChk")
     public String reservation_check() {
         return "reservation_check";
+    }
+
+    @GetMapping("/eventDetail")
+    public String eventDetail() {
+        return "eventDetail";
+    }
+
+    @GetMapping("/membership")
+    public String membership() {
+        return "membership";
     }
 
 }
