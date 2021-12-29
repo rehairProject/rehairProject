@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -15,8 +16,10 @@
 
 <div class="container">
     <div class="d-flex justify-content-end mt-3">
-        <a href="#" class="col-md-1 text-decoration-none navi">LOGIN</a>
-        <a href="#" class="col-md-1 text-decoration-none navi">JOIN</a>
+        <a href="/login" class="text-decoration-none navi d-inline-block me-2" sec:authorize="!isAuthenticated()">LOGIN</a>
+        <a href="#" class="text-decoration-none navi d-inline-block" sec:authorize="!isAuthenticated()">JOIN</a>
+        <a href="#" class="text-decoration-none navi d-inline-block" th:onclick="document.getElementById('logout').submit();" sec:authorize="isAuthenticated()">LOGOUT</a>
+        <form id="logout" th:action="@{/logout}" method="POST"></form>
     </div>
     <nav class="navbar navbar-expand-md navbar-light" aria-label="Fourth navbar example">
         <div class="container-fluid">
