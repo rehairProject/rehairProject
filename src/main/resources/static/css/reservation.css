@@ -18,9 +18,7 @@ box-sizing:border-box;
 
 /* 탭 버튼 */
 .btn-group{width:100%;}
-.re_btn{
-    border-radius:0 !important;
-    border-bottom:1px solid #395781;}
+.re_btn{ border-radius:0 !important;}
 .re_btn:hover{background-color:#395781; color:#fff !important;}
 .tab_box button.on{ background-color:#395781; color:#fff;}
 

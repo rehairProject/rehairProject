@@ -2,7 +2,7 @@
 .container { margin: 0 auto; }
 .container nav .container-fluid { margin: 0; padding: 0; }
 .container div .navi { color:#395781; text-align: right; }
-.container div .navi:hover { color: blue; }
+.container div .navi:hover { color: #aaa; }
 #imgLogo { width: 160px; height: 110px; }
 
 #navbarsExample04 .navbar-nav { margin:0; padding:0; width: 100%; }
