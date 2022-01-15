@@ -1,7 +1,10 @@
 * { margin: 0; padding: 0; }
-.naviImage { background-color: gray; height: 100px;}
 
-<!-- 탭버튼 -->
+/* 배너 */
+.naviImage { width:100%; height:auto; background-color:#ccc; }
+.naviImage h1 { text-align:center; padding:5%; margin-bottom: 0; }
+
+/* 탭버튼 */
 .text-center{width:100%;}
 .btn-group{width:100%;}
 .re_btn{
@@ -11,18 +14,16 @@
 .tab_box button.on{ background-color:#395781; color:#fff;}
 
 /* 탭 컨텐츠 hide show*/
-.noticeContainer div.notice{display:none;}
-.noticeContainer div.on{display:block;}
+.communicationContainer div.notice{display:none;}
+.communicationContainer div.on{display:block;}
 
-<!-- 공지사항 -->
-.notice { padding-top: 30px; }
+/* 공지사항 */
 .notice .table thead #firstRow {color: gray; border-bottom: 2px solid gray; }
 .notice .table thead tbody {border-bottom: ligth-gray; }
 .clickRow { cursor:pointer; text-decoration: none; color: black; }
 tbody tr #hideRow { display:none; }
 
-<!-- 이벤트 -->
-.eventContainer { margin: 0 auto; }
+/* 이벤트 */
 .card { width: 300px; height: 255px; }
 .col a #event1 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
 .col a #event2 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }

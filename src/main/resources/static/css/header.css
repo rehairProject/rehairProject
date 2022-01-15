@@ -1,13 +1,16 @@
-* { margin: 0; padding: 0; }
-.container { margin: 0 auto; }
+*{
+margin:0; padding:0;
+box-sizing:border-box;
+}
+.container { margin: 0; padding: 0; }
 .container nav .container-fluid { margin: 0; padding: 0; }
 .container div .navi { color:#395781; text-align: right; }
 .container div .navi:hover { color: #aaa; }
 #imgLogo { width: 160px; height: 110px; }
 
+#navbarsExample04 { padding-top: 90px; }
 #navbarsExample04 .navbar-nav { margin:0; padding:0; width: 100%; }
-#navbarsExample04 .navbar-nav div { width: 100%; }
- #navbarsExample04 .navbar-nav div .nav-item .navi{ color:#395781; text-align: right; padding: 0; border-bottom: 2px solid #fff; }
- #navbarsExample04 .navbar-nav div .nav-item .navi:hover { border-color: #395781; }
+ #navbarsExample04 .navbar-nav .nav-item .navi{ color:#395781; text-align: right; padding: 0; border-bottom: 2px solid #fff; }
+ #navbarsExample04 .navbar-nav .nav-item .navi:hover { border-color: #395781; }
 
 

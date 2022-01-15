@@ -1,11 +1,7 @@
 package com.rehair.rehair.controller;
 
-import com.rehair.rehair.domain.ReservationInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
@@ -21,16 +17,9 @@ public class HomeController {
     }
 
     @GetMapping("/reservation")
-    public String reservation() {return "reservation";}
-
-    @PostMapping("/reservation")
-    public String reservationForm(ReservationForm form){
-        ReservationInfo info=new ReservationInfo();
-        info.setDesigner(form.getDesigner());
-        info.setProcedure(form.getProcedure());
-        return "/reservationChk";
+    public String reservation() {
+        return "reservation";
     }
-
 
     @GetMapping("/notice")
     public String notice() {
@@ -38,9 +27,18 @@ public class HomeController {
     }
 
     @GetMapping("/reservationChk")
-    public String reservation_check(Model model) {
-
+    public String reservation_check() {
         return "reservation_check";
+    }
+
+    @GetMapping("/eventDetail")
+    public String eventDetail() {
+        return "eventDetail";
+    }
+
+    @GetMapping("/membership")
+    public String membership() {
+        return "membership";
     }
 
 }

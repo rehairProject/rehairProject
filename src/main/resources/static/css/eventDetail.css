@@ -1,9 +1,8 @@
 * { margin: 0; padding: 0; }
-.container { width: 1250px; text-align: center; margin: 0 auto; }
-.naviImage { background-color: gray; height: 100px;}
-.subNavi ul { list-style-type: none; display: flex; margin: 0; padding: 0; }
-.subNaviA { text-decoration: none; color:#395781; display: inline-block; width: 625px;
-text-align:center; height: 80px; line-height: 80px; font-weight: bold;
-margin-bottom: 60px; }
-#eventContainer .subNavi ul li #eventNavi { border-bottom: 2px solid #395781; }
+
+/* 배너 */
+.naviImage { width:100%; height:auto; background-color:#ccc; }
+.naviImage h1 { text-align:center; padding:5%; margin-bottom: 0; }
+
+/* 이벤트 상세보기 */
 #eventDetail img { width: 80%; margin-bottom: 50px; }

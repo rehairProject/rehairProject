@@ -15,18 +15,23 @@
 <div class="container">
     <div th:insert="header.html" class="header"></div>
 
-    <div class="noticeContainer">
+    <div class="communicationContainer">
+        <!-- 배너 -->
         <div class="naviImage">
-            <h1> 이미지 디자인 </h1>
+            <h1>COMMUNICATION</h1>
         </div>
-        <div class="text-center">
+
+        <!-- 탭 메뉴 -->
+        <div class="text-center mb-4">
             <div class="btn-group tab_box" role="group" aria-label="Basic example">
                 <button type="button" class="btn re_btn on m-0 py-2">Notice</button>
                 <button type="button" class="btn re_btn m-0 py-2">Event</button>
             </div>
         </div>
+
         <div class="notice on">
-            <table class="table">
+            <!-- 공지사항 목록 -->
+            <table class="table mb-4 text-center">
                 <thead>
                 <tr id="firstRow">
                     <th scope="col">NO</th>
@@ -59,7 +64,8 @@
                 </tr>
                 </tbody>
             </table>
-            <!-- 페이징 -->
+
+            <!-- 공지사항 페이징 -->
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                     <li class="page-item">
@@ -79,47 +85,46 @@
             </nav>
         </div>
 
-        <div class="event notice">
-            <h4 style="text-align:left">이벤트</h4>
-            <div class="album py-5 bg-white">
-                <div class="container">
-                    <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-3 g-3 justify-content-between">
-                        <div class="col">
-                            <a href="#">
-                                <div class="card shadow-sm" id="event6"></div>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="#">
-                                <div class="card shadow-sm" id="event5"></div>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="#">
-                                <div class="card shadow-sm" id="event4"></div>
-                            </a>
-                        </div>
+        <!-- 이벤트 -->
+        <div class="notice event">
+            <h4 class="text-center mb-4">EVENT</h4>
+            <div class="eventList mb-4">
+                <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-3 g-3 justify-content-between">
+                    <div class="col">
+                        <a href="/eventDetail">
+                            <div class="card shadow-sm" id="event6"></div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/eventDetail">
+                            <div class="card shadow-sm" id="event5"></div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/eventDetail">
+                            <div class="card shadow-sm" id="event4"></div>
+                        </a>
+                    </div>
 
-                        <div class="col">
-                            <a href="#">
-                                <div class="card shadow-sm" id="event3"></div>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="#">
-                                <div class="card shadow-sm" id="event2"></div>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="#">
-                                <div class="card shadow-sm" id="event1"></div>
-                            </a>
-                        </div>
+                    <div class="col">
+                        <a href="/eventDetail">
+                            <div class="card shadow-sm" id="event3"></div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="/eventDetail">
+                            <div class="card shadow-sm" id="event2"></div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="#">
+                            <div class="card shadow-sm" id="event1"></div>
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- 페이징 -->
+            <!-- 이벤트 페이징 -->
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                     <li class="page-item">
@@ -139,13 +144,9 @@
             </nav>
         </div>
     </div>
-    </div>
 
-
-<!--        <div class="naviImage">
-            <h1> 이미지 디자인 </h1>
-        </div>-->
-
+    <div th:insert="footer.html" class="footer"></div>
+</div>
 
 <script type="text/javascript">
     function displayView(){
@@ -156,6 +157,6 @@
             con.style.display = 'none';
         }
     }
-    </script>
+</script>
 </body>
 </html>
