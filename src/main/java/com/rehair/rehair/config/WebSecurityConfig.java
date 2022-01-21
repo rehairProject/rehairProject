@@ -20,11 +20,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/","/join","/about","/notice","/membership","/eventDetail","/css/**","/js/**","/images/**").permitAll()
+				.antMatchers("/","/section/join","/section/about","/section/notice","/section/membership","/section/eventDetail","/css/**","/js/**","/images/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
-				.loginPage("/login")
+				.loginPage("/account/login")
 				.permitAll()
 				.and()
 			.logout()
