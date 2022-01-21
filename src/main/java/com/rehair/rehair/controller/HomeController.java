@@ -12,24 +12,10 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    private final UserRepository userRepository;
-
-    @Autowired
-    public HomeController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
     @GetMapping("/")
-    public String home(Model model) {
-        List<User> lists = userRepository.findAll();
-        model.addAttribute("lists", lists);
+    public String home() {
         return "home";
     }
-
-//    @GetMapping("/")
-//    public String home() {
-//        return "home";
-//    }
 
     @GetMapping("/about")
     public String about() {
