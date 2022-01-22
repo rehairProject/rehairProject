@@ -1,5 +1,6 @@
 package com.rehair.rehair.service;
 
+import com.rehair.rehair.domain.Auth;
 import com.rehair.rehair.domain.Grade;
 import com.rehair.rehair.domain.User;
 import com.rehair.rehair.repository.UserRepository;
@@ -27,8 +28,10 @@ public class UserService {
 
         user.setGrade(Grade.WELCOME); // 기본값 WELCOME
         user.setJoinDate(LocalDate.now());
-        user.setEnabled(true); // 계정 활성화
 
+        Auth auth = new Auth();
+        auth.setId(3L);
+        user.getAuths().add(auth);
         return userRepository.save(user);
     }
 }
