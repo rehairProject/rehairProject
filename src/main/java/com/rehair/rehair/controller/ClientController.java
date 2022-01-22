@@ -5,36 +5,36 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/section")
-public class SectionController {
+@RequestMapping("/client")
+public class ClientController {
 
     @GetMapping("/about")
     public String about() {
-        return "section/about";
+        return "client/about";
     }
 
     @GetMapping("/reservation")
     public String reservation() {
-        return "section/reservation";
+        return "client/reservation";
     }
 
     @GetMapping("/notice")
     public String notice() {
-        return "section/notice";
+        return "client/notice";
     }
 
     @GetMapping("/reservationChk")
     public String reservation_check() {
-        return "section/reservation_check";
+        return "client/reservation_check";
     }
 
     @GetMapping("/eventDetail")
     public String eventDetail() {
-        return "section/eventDetail";
+        return "client/eventDetail";
     }
 
     @GetMapping("/membership")
     public String membership() {
-        return "section/membership";
+        return "client/membership";
     }
 }
