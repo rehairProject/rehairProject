@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>예약</title>
+    <title>RESERVATION</title>
 <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
     <link href="/css/reservation.css"  th:href="@{/css/reservation.css}" type="text/css" rel="stylesheet">
     <link href="/css/calendar.css" th:href="@{/css/calendar.css}"type="text/css" rel="stylesheet">
@@ -43,7 +43,7 @@
     </div>
     <!--   예약하기   -->
     <div class="reservation on mt-5">
-        <form th:action="@{/reservation_check}"  method="post" name="reservationInfo" >
+        <form  action="" method="post" name="reservationInfo" >
         <!--  날짜 시간 선택 영역  -->
         <section class="cal-time-wrap mt-3">
             <!--   달력   -->
@@ -284,7 +284,7 @@
         </section>
         <!--    다음 버튼    -->
         <div class="text-center my-5">
-            <button type="submit" class="btn btn_outline px-4 py-2" onclick="location.href='/reservationChk'">다음 ></button>
+            <button type="button" class="btn btn_outline px-4 py-2" th:onclick="|location.href='@{/client/reservation_check}'|">다음 ></button>
         </div>
         </form>
     </div>

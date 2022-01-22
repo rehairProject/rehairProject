@@ -23,14 +23,14 @@ public class ClientController {
         return "client/notice";
     }
 
-    @GetMapping("/reservationChk")
-    public String reservation_check() {
+    @GetMapping("/reservation_check")
+    public String reservationCheck() {
         return "client/reservation_check";
     }
 
-    @GetMapping("/eventDetail")
+    @GetMapping("/event_detail")
     public String eventDetail() {
-        return "client/eventDetail";
+        return "client/event_detail";
     }
 
     @GetMapping("/membership")
