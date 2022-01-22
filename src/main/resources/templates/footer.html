@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,7 @@
 <footer class="d-flex flex-wrap justify-content-between align-items-center my-4 border-top border-5 p-5">
 
     <!-- 로고 -->
-    <div class="col-2"><img src="images/logo.png" class="f_logo " alt="푸터 로고" ></div>
+    <div class="col-2"><img th:src="@{/images/logo.png}" src="images/logo.png" class="f_logo " alt="푸터 로고" ></div>
     <p class="col-8 mb-0 text-muted text-end copy">COPYRIGHTS BY 2021 THE RE:HAIR.<br>ALL RIGHTS RESERVED.</p>
 </footer>
 </body>
