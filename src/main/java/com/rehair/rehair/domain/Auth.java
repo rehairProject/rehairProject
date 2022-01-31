@@ -13,11 +13,6 @@ public class Auth {
     private Long id;
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_auth",
-            joinColumns = @JoinColumn(name="user_id"),
-            inverseJoinColumns = @JoinColumn(name="auth_id")
-    )
+    @ManyToMany(mappedBy = "auths")
     private List<User> users;
 }
