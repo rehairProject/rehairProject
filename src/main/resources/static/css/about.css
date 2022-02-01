@@ -1,6 +1,6 @@
 
         .about{
-            color: white; text-align: center;
+             text-align:center; padding:5%; line-height: 250px; font-weight: 900; color: #fff;
         }
         *,.btn:focus{ box-shadow: none !important;}
         /*.about-nav {
@@ -16,6 +16,9 @@
             background: #7eabf2;
             color: white;
         }*/
+
+        /* 배너 */
+        .re_banner{ width:100%; height:350px; background-image: url("../images/about_banner.jpg"); background-size: cover; }
 
         /* 탭 버튼 */
         .btn-group{width:100%;}
