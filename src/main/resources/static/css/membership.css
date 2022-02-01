@@ -1,8 +1,8 @@
 * { margin: 0; padding: 0; }
 
 /* 배너 */
-.naviImage { width:100%; height:auto; background-color:#ccc; }
-.naviImage h1 { text-align:center; padding:5%; margin-bottom: 0; }
+.re_banner{ width:100%; height:350px; background-image: url("../images/membership.jpg"); background-size: cover; }
+.re_banner h1 {  text-align:center; padding:5%; line-height: 250px; font-weight: 900; color: #fff; margin-bottom: 0; }
 
 /* 멤버쉽 이미지 */
 #membershipContainer img { height: 500px; }
