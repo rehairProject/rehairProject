@@ -5,6 +5,7 @@
 .re_banner h1 {  text-align:center; padding:5%; line-height: 250px; font-weight: 900; color: #fff; margin-bottom: 0; }
 
 /* 탭버튼 */
+.text-center div .tabBtn { width: 50%; }
 .btn-group{width:100%;}
 .re_btn{ border-radius:0 !important;}
 .re_btn:hover{background-color:#395781; color:#fff !important;}
