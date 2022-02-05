@@ -26,7 +26,7 @@
 							<div class="alert alert-primary" role="alert"
 								th:if="${param.logout}">로그아웃되었습니다.</div>
 							<div class="alert alert-success" role="alert" th:if="${isSuccess}">
-								<span>회원가입을 축하합니다. 로그인 후 사용해주세요.</span>
+								<span>회원가입을 축하합니다.<br>로그인 후 사용해주세요.</span>
 							</div>
 							<form th:action="@{/account/login}" method="post">
 								<div class="form-floating mb-3">
