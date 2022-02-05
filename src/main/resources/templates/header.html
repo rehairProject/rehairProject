@@ -17,7 +17,7 @@
 <div class="container">
     <div class="d-flex justify-content-end mt-3">
         <a href="/account/login" class="text-decoration-none navi d-inline-block me-2" sec:authorize="!isAuthenticated()">LOGIN</a>
-        <a href="#" class="text-decoration-none navi d-inline-block" sec:authorize="!isAuthenticated()">JOIN</a>
+        <a href="/account/join" class="text-decoration-none navi d-inline-block" sec:authorize="!isAuthenticated()">JOIN</a>
         <a href="#" class="text-decoration-none navi d-inline-block" th:onclick="document.getElementById('logout').submit();" sec:authorize="isAuthenticated()">LOGOUT</a>
         <form id="logout" th:action="@{/logout}" method="POST"></form>
     </div>
