@@ -42,15 +42,15 @@ public class ClientController {
 
     @GetMapping("/notice")
     public String notice(Model model, @PageableDefault(size = 3, sort = "id",  direction = Sort.Direction.DESC)Pageable pageable) {
-        Page<Event> events = eventRepository.findAll(pageable);
-        int startPage=Math.max(1,events.getPageable().getPageNumber()-4);
-        int endPage = Math.min(events.getTotalPages(), events.getPageable().getPageNumber() + 4);
-
-        model.addAttribute("indexCalculator", events.getTotalElements() - events.getPageable().getPageNumber() * 3);
-
-        model.addAttribute("startPage",startPage);
-        model.addAttribute("endPage", endPage);
-        model.addAttribute("events", events);
+//        Page<Event> events = eventRepository.findAll(pageable);
+//        int startPage=Math.max(1,events.getPageable().getPageNumber()-4);
+//        int endPage = Math.min(events.getTotalPages(), events.getPageable().getPageNumber() + 4);
+//
+//        model.addAttribute("indexCalculator", events.getTotalElements() - events.getPageable().getPageNumber() * 3);
+//
+//        model.addAttribute("startPage",startPage);
+//        model.addAttribute("endPage", endPage);
+//        model.addAttribute("events", events);
         return "client/notice";
     }
 
@@ -89,7 +89,16 @@ public class ClientController {
     }
 
     @GetMapping("/event")
-    public String event() {
+    public String event(Model model, @PageableDefault(size = 3, sort = "id",  direction = Sort.Direction.DESC)Pageable pageable) {
+        Page<Event> events = eventRepository.findAll(pageable);
+        int startPage=Math.max(1,events.getPageable().getPageNumber()-4);
+        int endPage = Math.min(events.getTotalPages(), events.getPageable().getPageNumber() + 4);
+
+        model.addAttribute("indexCalculator", events.getTotalElements() - events.getPageable().getPageNumber() * 3);
+
+        model.addAttribute("startPage",startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("events", events);
         return "client/event";
     }
 }

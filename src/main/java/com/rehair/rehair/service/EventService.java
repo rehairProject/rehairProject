@@ -35,7 +35,6 @@ public class EventService {
         event.setFilename(fileName);
         event.setFilepath("/files/"+fileName);
         event.setUsername("USER");
-        event.setWritingDate(LocalDate.now());
         eventRepository.save(event);
     }
 }

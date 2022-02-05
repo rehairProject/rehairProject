@@ -59,16 +59,16 @@
             <!-- 이벤트 페이징 -->
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
+                    <li class="page-item" th:classappend="${1 == events.pageable.pageNumber+1} ? 'disabled'">
+                        <a class="page-link" th:href="@{/client/event(page=${events.pageable.pageNumber-1})}" href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
+                    <li class="page-item"  th:classappend="${i == events.pageable.pageNumber+1} ? 'disabled'" th:each="i:${#numbers.sequence(startPage, endPage)}">
+                        <a class="page-link" th:text="${i}" th:href="@{/client/event(page=${i-1})}" href="#">1</a></li>
+
+                    <li class="page-item"  th:classappend="${events.totalPages == events.pageable.pageNumber+1} ? 'disabled'">
+                        <a class="page-link" th:href="@{/client/event(page=${events.pageable.pageNumber+1})}" href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
