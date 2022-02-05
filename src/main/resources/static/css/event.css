@@ -1,9 +1,15 @@
 * { margin: 0; padding: 0; }
-.container { width: 1250px; text-align: center; margin: 0 auto; }
-.naviImage { background-color: gray; height: 100px;}
-.subNavi ul { list-style-type: none; display: flex; margin: 0; padding: 0; }
-.subNaviA { text-decoration: none; color:#395781; display: inline-block; width: 625px;
-text-align:center; height: 80px; line-height: 80px; font-weight: bold;
-margin-bottom: 60px; }
-#eventContainer .subNavi ul li #eventNavi { border-bottom: 2px solid #395781; }
+
+/* 배너 */
+.re_banner{ width:100%; height:350px; background-image: url("../images/membership.jpg"); background-size: cover; }
+.re_banner h1 {  text-align:center; padding:5%; line-height: 250px; font-weight: 900; color: #fff; margin-bottom: 0; }
+
+/* 이벤트 */
+.card { width: 300px; height: 255px; }
+.col a #event1 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
+.col a #event2 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
+.col a #event3 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
+.col a #event4 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
+.col a #event5 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
+.col a #event6 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
 

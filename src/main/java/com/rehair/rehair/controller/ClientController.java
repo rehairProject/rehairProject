@@ -33,8 +33,8 @@ public class ClientController {
         return "client/event_detail";
     }
 
-    @GetMapping("/membership")
-    public String membership() {
-        return "client/membership";
+    @GetMapping("/event")
+    public String event() {
+        return "client/event";
     }
 }
