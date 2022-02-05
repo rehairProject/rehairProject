@@ -12,8 +12,8 @@
 .tab_box button.on{ background-color:#395781; color:#fff;}
 
 /* 탭 컨텐츠 hide show*/
-.communicationContainer div.notice{display:none;}
-.communicationContainer div.on{display:block;}
+.noticeContainer div.notice{display:none;}
+.noticeContainer div.on{display:block;}
 
 /* 공지사항 */
 .notice .table thead #firstRow {color: gray; border-bottom: 2px solid gray; }
@@ -21,11 +21,12 @@
 .clickRow { cursor:pointer; text-decoration: none; color: black; }
 tbody tr #hideRow { display:none; }
 
-/* 이벤트 */
-.card { width: 300px; height: 255px; }
-.col a #event1 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
-.col a #event2 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
-.col a #event3 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
-.col a #event4 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
-.col a #event5 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
-.col a #event6 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
+/* 멤버쉽 */
+#membershipContainer img { height: 500px; }
+
+ @media (max-width: 992px) {
+  #membershipContainer img {
+      height: 300px;
+      }
+  }
+
