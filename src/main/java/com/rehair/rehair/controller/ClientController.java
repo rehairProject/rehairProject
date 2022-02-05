@@ -88,8 +88,8 @@ public class ClientController {
         return "redirect:/client/notice";
     }
 
-    @GetMapping("/membership")
-    public String membership() {
-        return "client/membership";
+    @GetMapping("/event")
+    public String event() {
+        return "client/event";
     }
 }

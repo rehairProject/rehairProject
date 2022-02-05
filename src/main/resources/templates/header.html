@@ -17,7 +17,7 @@
 <div class="container">
     <div class="d-flex justify-content-end mt-3">
         <a href="/account/login" class="text-decoration-none navi d-inline-block me-2" sec:authorize="!isAuthenticated()">LOGIN</a>
-        <a href="#" class="text-decoration-none navi d-inline-block" sec:authorize="!isAuthenticated()">JOIN</a>
+        <a href="/account/join" class="text-decoration-none navi d-inline-block" sec:authorize="!isAuthenticated()">JOIN</a>
         <a href="#" class="text-decoration-none navi d-inline-block" th:onclick="document.getElementById('logout').submit();" sec:authorize="isAuthenticated()">LOGOUT</a>
         <form id="logout" th:action="@{/logout}" method="POST"></form>
     </div>
@@ -40,10 +40,10 @@
                         <a class="nav-link fs-5 navi" href="/reservation" th:href="@{/client/reservation}">RESERVATION</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fs-5 navi" href="/notice" th:href="@{/client/notice}">COMMUNICATION</a>
+                        <a class="nav-link fs-5 navi" href="/notice" th:href="@{/client/notice}">NOTICE & MEMBERSHIP</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fs-5 navi" href="/membership" th:href="@{/client/membership}">MEMBERSHIP</a>
+                        <a class="nav-link fs-5 navi" href="/membership" th:href="@{/client/event}">EVENT</a>
                     </li>
                 </ul>
             </div>

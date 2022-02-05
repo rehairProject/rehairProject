@@ -5,7 +5,7 @@ $(document).ready(function() {
     console.log(idx);
     $(".tab_box > .re_btn").removeClass("on");
     $(".tab_box > .re_btn").eq(idx).addClass("on");
-    $(".communicationContainer > .notice").hide();
-    $(".communicationContainer > .notice").eq(idx).show();
+    $(".noticeContainer > .notice").hide();
+    $(".noticeContainer > .notice").eq(idx).show();
     });
 });
