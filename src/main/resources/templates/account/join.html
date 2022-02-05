@@ -9,33 +9,67 @@
             rel="stylesheet"
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossorigin="anonymous">
+    <link rel="stylesheet" href="css/join.css" th:href="@{/css/join.css}">
+    <!-- 제이쿼리 cdn -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/join.js" th:src="@{/js/join.js}" type="text/javascript"></script>
+    <!-- csrf token -->
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
 </head>
 <body>
 <div class="container" style="height: 50rem;">
     <div th:insert="header.html" class="header"></div>
     <hr>
     <div class="text-center mt-5">
-        <h1 class="mt-3 mb-2">RE:HAIR 회원가입</h1>
+        <h1 class="mt-3 mb-2">RE:HAIR SIGN UP</h1>
         <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="col-sm-9 col-md-7 col-lg-9 mx-auto">
                 <div class="card border-0 shadow rounded-3 my-5">
                     <div class="card-body p-4 p-sm-5">
-                        <form th:action="@{/join}" method="post">
+                        <form th:action="@{/account/join}" method="post" name="joinForm" id="formDiv">
+                            <!-- 에러 메시지 -->
+                            <div class="alert alert-danger" role="alert" th:if="${msg}">
+                                <span th:text="${msg}"></span>
+                            </div>
+                            <!-- 회원가입 항목 -->
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="username"
-                                       name="username" placeholder="Username"> <label
-                                    for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" maxlength="50" placeholder="Username" required>
+                                <label for="username" class="label">Username</label>
+                                <div id="duplicateBtnDiv">
+                                    <input id="duplicateBtn" class="btn btn-primary" type="button" value="중복검사">
+                                </div>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" name="password"
-                                       id="password" placeholder="Password"> <label
-                                    for="password">Password</label>
+                                <input type="password" class="form-control" name="password" id="password" maxlength="50" placeholder="Password" required>
+                                <label for="password" class="label">Password</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" name="passwordCheck" id="passwordCheck" maxlength="50" placeholder="Password Check" required>
+                                <label for="passwordCheck" class="label">Password Check</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="name" id="name" maxlength="50" placeholder="Name" required>
+                                <label for="name" class="label">Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" maxlength="50" placeholder="Phone Number" required>
+                                <label for="phoneNumber" class="label">Phone Number</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="date" class="form-control" name="birth" id="birth" maxlength="50" required>
+                                <label for="birth" class="label">Date of birth</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                    <select class="form-control" name="gender" id="gender">
+                                        <option th:value="M" th:text="Male"></option>
+                                        <option th:value="F" th:text="Female"></option>
+                                    </select>
+                                <label for="gender" class="col-lg-2 control-label text_align_left label">Gender</label>
                             </div>
 
                             <div class="d-grid">
-                                <button
-                                        class="btn btn-primary btn-login text-uppercase fw-bold"
-                                        type="submit">회원가입</button>
+                                <button class="btn btn-primary btn-login text-uppercase fw-bold" type="button" id="signupBtn">SIGN UP</button>
                             </div>
                             <hr class="my-4">
                         </form>

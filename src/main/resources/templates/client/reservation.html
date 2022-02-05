@@ -158,19 +158,25 @@
                     <div class="form-check mb-3 ">
                         <input class="form-check-input" type="radio"  value="" name="designer" id="designer1">
                         <label class="form-check-label" for="designer1">
-                            배경난 디자이너
+                            김하나 원장
                         </label>
                     </div>
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="radio"  value="" name="designer" id="designer2">
                         <label class="form-check-label" for="designer2">
-                            강현구 디자이너
+                            장철 수석 디자이너
                         </label>
                     </div>
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="radio"  value="" name="designer" id="designer3">
                         <label class="form-check-label" for="designer3">
-                            최희주 디자이너
+                            송하나 디자이너
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio"  value="" name="designer" id="designer3">
+                        <label class="form-check-label" for="designer3">
+                            안벨리사 디자이너
                         </label>
                     </div>
                 </div>
@@ -205,6 +211,12 @@
                                         청소년 커트<span class="position-absolute end-0 align-middle px-3">10,000</span>
                                     </label>
                                 </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox"  value="" id="cut_bangs">
+                                    <label class="form-check-label" for="cut_youth">
+                                        앞머리 커트<span class="position-absolute end-0 align-middle px-3">5,000</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -219,25 +231,25 @@
                                 <div class="form-check mb-2">
                                     <input class="form-check-input" type="checkbox" value="" id="color_root">
                                     <label class="form-check-label" for="color_root">
-                                        뿌리 염색<span class="position-absolute end-0 align-middle px-3">10,000</span>
+                                        뿌리 염색<span class="position-absolute end-0 align-middle px-3">30,000</span>
                                     </label>
                                 </div>
                                 <div class="form-check mb-2">
                                     <input class="form-check-input" type="checkbox" value="" id="color_basic">
                                     <label class="form-check-label" for="color_basic">
-                                        일반 염색<span class="position-absolute end-0 align-middle px-3">10,000</span>
+                                        베이직<span class="position-absolute end-0 align-middle px-3">50,000</span>
                                     </label>
                                 </div>
                                 <div class="form-check mb-2">
                                     <input class="form-check-input" type="checkbox" value="" id="color_premium">
                                     <label class="form-check-label" for="color_premium">
-                                        프리미엄 염색<span class="position-absolute end-0 align-middle px-3">10,000</span>
+                                        프리미엄<span class="position-absolute end-0 align-middle px-3">80,000</span>
                                     </label>
                                 </div>
                                 <div class="form-check mb-2">
                                     <input class="form-check-input" type="checkbox" value="" id="color_manicure">
                                     <label class="form-check-label" for="color_manicure">
-                                        매니큐어<span class="position-absolute end-0 align-middle px-3">10,000</span>
+                                        매니큐어<span class="position-absolute end-0 align-middle px-3">100,000</span>
                                     </label>
                                 </div>
                             </div>
@@ -254,25 +266,25 @@
                                 <div class="form-check mb-2">
                                     <input class="form-check-input" type="checkbox" value="" id="perm_basic">
                                     <label class="form-check-label" for="perm_basic">
-                                        베이직 펌<span class="position-absolute end-0 align-middle px-3">10,000</span>
+                                        베이직 펌<span class="position-absolute end-0 align-middle px-3">50,000</span>
                                     </label>
                                 </div>
                                 <div class="form-check mb-2">
                                     <input class="form-check-input" type="checkbox" value="" id="perm_design">
                                     <label class="form-check-label" for="perm_design">
-                                        디자인 펌<span class="position-absolute end-0 align-middle px-3">10,000</span>
+                                        디자인 펌<span class="position-absolute end-0 align-middle px-3">80,000</span>
                                     </label>
                                 </div>
                                 <div class="form-check mb-2">
                                     <input class="form-check-input" type="checkbox" value="" id="perm_volumeMagic">
                                     <label class="form-check-label" for="perm_volumeMagic">
-                                        볼륨 매직<span class="position-absolute end-0 align-middle px-3">10,000</span>
+                                        볼륨 매직<span class="position-absolute end-0 align-middle px-3">80,000</span>
                                     </label>
                                 </div>
                                 <div class="form-check mb-2">
                                     <input class="form-check-input" type="checkbox" value="" id="perm_man_down">
                                     <label class="form-check-label" for="perm_man_down">
-                                        남성 다운 펌<span class="position-absolute end-0 align-middle px-3">10,000</span>
+                                        남성 다운 펌<span class="position-absolute end-0 align-middle px-3">30,000</span>
                                     </label>
                                 </div>
                             </div>
@@ -292,8 +304,27 @@
     <div class="reservation">
         <!--  다가오는 예약 정보  -->
         <section class="reservation_info mt-5 text-center">
-            <h5 class="border-3 py-3 <!--border-bottom-->"> RECENT RESERVATION</h5>
-            <table class="table table-borderless text-center align-middle mt-2 py-4 border-top border-bottom border-3">
+            <h5 class="border-3 py-3"> RECENT RESERVATION</h5>
+            <div class="reservation_list_area text-left">
+                <ul class="reservation_list">
+                    <li class="card_item">
+                        <div class="card_header">
+                            <div class="icon" id="recent_icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-scissors" viewBox="0 0 16 16">
+                                    <path d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61 3.5 3.5zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zm7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"/>
+                                </svg>
+                            </div>
+                            <div class="reservation_info">
+                                <div class="title">베이직 펌</div>
+                                <div class="info_box">장철 디자이너</div>
+                            </div>
+                            <hr>
+                            <p class="card-text"><span class="date">2022. 02. 05 토 | </span><span class="time">오후 4:00</span></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!--<table class="table table-borderless text-center align-middle mt-2 py-4 border-top border-bottom border-3">
                 <tbody>
                 <tr  height="50">
                     <th class="py-2" scope="row">날짜</th>
@@ -308,13 +339,32 @@
                     <td>디자인 펌</td>
                 </tr>
                 </tbody>
-            </table>
-            <button type="button" class="btn btn_outline py-2 px-4 mt-3">예약 취소</button>
+            </table>-->
+            <button type="button" class="btn btn_outline py-2 px-4 mt-1">예약 취소</button>
         </section>
         <!--  예약 리스트  -->
         <section class="mt-5">
             <h5 class="text-center border-3 py-3 <!--border-bottom-->"> RESERVATION HISTORY</h5>
-            <table class="table table-hover table-borderless text-center align-middle mt-2 border-top border-bottom border-3">
+            <div class="reservation_list_area">
+                <ul class="reservation_list">
+                    <li class="card_item">
+                        <div class="card_header">
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-scissors" viewBox="0 0 16 16">
+                                    <path d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61 3.5 3.5zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zm7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"/>
+                                </svg>
+                            </div>
+                            <div class="reservation_info">
+                                <div class="title">남성 커트</div>
+                                <div class="info_box">김하나 원장</div>
+                            </div>
+                            <hr>
+                            <p class="card-text"><span class="date">2022. 01. 05 수 | </span><span class="time">오후 4:00</span></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!--<table class="table table-hover table-borderless text-center align-middle mt-2 border-top border-bottom border-3">
                 <thead>
                 <tr height="50" class="align-middle ">
                     <th scope="col"></th>
@@ -337,7 +387,7 @@
                     <td>2021.11.08 14:00</td>
                 </tr>
                 </tbody>
-            </table>
+            </table>-->
         </section>
     </div>
 
