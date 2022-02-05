@@ -5,7 +5,6 @@ import com.rehair.rehair.domain.Grade;
 import com.rehair.rehair.domain.User;
 import com.rehair.rehair.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +14,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
     private final UserRepository userRepository;
-    @Autowired
     private final PasswordEncoder passwordEncoder;
 
     public User joinUser(User user) {
