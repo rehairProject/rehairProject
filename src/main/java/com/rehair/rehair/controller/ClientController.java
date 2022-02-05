@@ -45,6 +45,9 @@ public class ClientController {
         Page<Event> events = eventRepository.findAll(pageable);
         int startPage=Math.max(1,events.getPageable().getPageNumber()-4);
         int endPage = Math.min(events.getTotalPages(), events.getPageable().getPageNumber() + 4);
+
+        model.addAttribute("indexCalculator", events.getTotalElements() - events.getPageable().getPageNumber() * 3);
+
         model.addAttribute("startPage",startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("events", events);

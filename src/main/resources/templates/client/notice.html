@@ -103,7 +103,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="event : ${events}">
-                    <th th:text="${event.id}">3</th>
+                    <th th:text="${indexCalculator - eventStat.index}">3</th>
                     <td><a th:text="${event.title}" th:href="@{/client/event_detail(id=${event.id})}">title</a></td>
                     <td th:text="${event.username}">username</td>
                     <td th:text="${event.writingDate}">2021.12.07</td>
