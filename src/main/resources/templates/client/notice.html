@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,25 +52,31 @@
 			<div class="notice on">
 				<!-- 공지사항 목록 -->
 				<div>
-					<div th:if="${param.writeStatus}" class="alert alert-primary text-center" role="alert">
-                		정상적으로 처리 되었습니다.
-            		</div>
-            		<div th:if="${param.deleteStatus}" class="alert alert-danger text-center" role="alert">
-                		정상적으로 삭제 되었습니다.
-            		</div>
+					<div th:if="${param.writeStatus}"
+						class="alert alert-primary text-center" role="alert">정상적으로
+						처리 되었습니다.</div>
+					<div th:if="${param.deleteStatus}"
+						class="alert alert-danger text-center" role="alert">정상적으로 삭제
+						되었습니다.</div>
 					<table class="table table-striped">
 						<thead>
-							<tr>
+							<tr id="firstRow">
 								<th class="col-3">NO</th>
 								<th class="col-6">제목</th>
 								<th class="col-3">작성일</th>
 							</tr>
 						</thead>
 						<tbody>
+							<tr>
+								<td id="hideRow" colspan="3">내용</td>
+							</tr>
 							<tr th:each="notice : ${notices}">
 								<td th:text="${indexCalculator - noticeStat.index}"></td>
-								<td><a th:text="${notice.title}" th:href="@{/client/notice_detail(id=${notice.id})}"></a></td>
-								<td th:text="${#temporals.format(notice.dateCreated, 'yyyy-MM-dd')}"></td>
+								<!-- onclick="displayView()" class="clickRow" -->
+								<td><a th:text="${notice.title}"
+									th:href="@{/client/notice_detail(id=${notice.id})}"></a></td>
+								<td
+									th:text="${#temporals.format(notice.dateCreated, 'yyyy-MM-dd')}"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -82,10 +89,9 @@
 							</li>
 							<li class="page-item"
 								th:classappend="${i == notices.pageable.pageNumber + 1} ? 'disabled'"
-								th:each="i : ${#numbers.sequence(startPage, endPage)}">
-							 <a class="page-link" href="#" th:text="${i}"
-								th:href="@{/client/notice(page=${i - 1})}">1</a>
-							</li>
+								th:each="i : ${#numbers.sequence(startPage, endPage)}"><a
+								class="page-link" href="#" th:text="${i}"
+								th:href="@{/client/notice(page=${i - 1})}">1</a></li>
 							<li class="page-item"
 								th:classappend="${notices.totalPages == notices.pageable.pageNumber + 1} ? 'disabled'">
 								<a class="page-link" href="#"
@@ -99,18 +105,17 @@
 							th:onclick="|location.href='@{/client/notice_writing}'|">글쓰기</button>
 					</div>
 				</div>
-				<!-- 멤버쉽 -->
-				<div class="notice membership">
+			</div>
+			<!-- 멤버쉽 -->
+				<div class="notice">
 					<div id="membershipContainer" class="text-center mt-5 mb-5">
-						<img src="images/membership.png"
-							th:src="@{/images/membership.png}">
+						<img src="images/membership.png" th:src="@{/images/membership.png}">
 					</div>
 				</div>
-			</div>
 
 			<div th:insert="footer.html" class="footer"></div>
-		</div>
 
+		</div>
 		<script type="text/javascript">
 			function displayView() {
 				var con = document.getElementById("hideRow");

@@ -89,10 +89,9 @@ public class ClientController {
 	}
 
 	@PostMapping("/notice_writing")
-	public String noticeSubmit(Notice notice, RedirectAttributes redirectAttributes) {
+	public String noticeSubmit(@ModelAttribute Notice notice, RedirectAttributes redirectAttributes) {
 		noticeRepository.save(notice);
 
-		redirectAttributes.addAttribute("notice", notice); // model.addAttribute("notice", notice); 동일
 		redirectAttributes.addAttribute("writeStatus", true); // 상태 전송
 		return "redirect:/client/notice";
 	}
