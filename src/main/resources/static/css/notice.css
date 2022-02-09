@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; box-sizing:border-box; }
 
 /* 배너 */
-.re_banner { width:100%; height:350px; background-image: url("../images/communication.jpg"); background-size: cover; background-repeat : no-repeat; }
+.re_banner { width:100%; height:350px; background-image: url("../images/communication.png"); background-size: cover; background-repeat : no-repeat; }
 .re_banner h1 {  text-align:center; padding:5%; line-height: 250px; font-weight: 900; color: #fff; margin-bottom: 0; }
 
 /* 탭버튼 */
