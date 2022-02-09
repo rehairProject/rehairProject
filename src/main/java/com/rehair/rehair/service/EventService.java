@@ -2,6 +2,9 @@ package com.rehair.rehair.service;
 
 import com.rehair.rehair.domain.Event;
 import com.rehair.rehair.repository.EventRepository;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,14 +15,10 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class EventService {
+	
     private final EventRepository eventRepository;
-
-    @Autowired
-    public EventService(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
-
-    }
 
     public void save(Event event, MultipartFile file) throws Exception {
         //저장할 경로 지정
