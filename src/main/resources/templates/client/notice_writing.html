@@ -8,12 +8,16 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/notice_writing.css}">
+		
 </head>
 <body>
 	<div class="container">
 		<div th:insert="header.html" class="header"></div>
-		<h4 class="text-center my-5">글쓰기</h4>
-		<form action="#" th:action method="post" th:object="${notice}">
+		<div class="re_banner">
+			<h1>공지사항 작성</h1>
+		</div>
+		<form class="mt-3" action="#" th:action method="post" th:object="${notice}" name="noticeForm">
 			<input type="hidden" th:field="*{id}">
 			<div class="mb-3">
 				<input type="text" class="form-control" placeholder="제목을 입력하세요"
@@ -24,11 +28,11 @@
 					th:field="*{username}">
 			</div>
 			<div class="mb-3">
-				<textarea class="form-control" rows="10" th:field="*{content}"></textarea>
+				<textarea class="form-control" rows="10" th:field="*{content}" placeholder="내용을 입력하세요"></textarea>
 			</div>
 			<input type="hidden" th:field="*{dateCreated}">
 			<div class="text-center mb-5">
-				<button type="submit" class="btn btn-primary px-4 py-2">등록</button>
+				<button type="button" onclick="return checkForm()" class="btn btn-primary px-4 py-2">등록</button>
 			</div>
 		</form>
 		<div class="text-end">
@@ -38,5 +42,23 @@
 
 		<div th:insert="footer.html" class="footer"></div>
 	</div>
+	<script>
+		function checkForm() {
+			const title = document.getElementById("title");
+			const content = document.getElementById("content")
+
+			if(title.value == "") {
+				alert("제목을 입력해 주세요");
+				title.focus();
+				return
+			}
+			if(content.value == "") {
+				alert("내용을 입력해 주세요");
+				content.focus();
+				return
+			}
+			return document.noticeForm.submit();
+		}
+	</script>
 </body>
 </html>

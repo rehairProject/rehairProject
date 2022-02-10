@@ -15,7 +15,7 @@
 		<div class="text-end mt-5">
 			<a class="btn btn-primary px-3 "
 				th:href="@{/client/notice_writing(id=${notice.id})}">수정</a> 
-			<a class="btn btn-danger px-3" th:href="@{/client/notice_delete(id=${notice.id})}">삭제</a>
+			<a class="btn btn-danger px-3" onclick="return deleteConfirm()" th:href="@{/client/notice_delete(id=${notice.id})}">삭제</a>
 		</div>
 		<div>
 			<h2 class="mb-2" id="title" th:text="${notice.title}">제목</h2>
@@ -33,5 +33,14 @@
 
 		<div th:insert="footer.html" class="footer"></div>
 	</div>
+	<script>
+		function deleteConfirm() {
+			const confirm = window.confirm('정말로 삭제 하시겠습니까?');
+			if(confirm) {
+				return true;
+			}
+			return false;
+		}
+	</script>
 </body>
 </html>
