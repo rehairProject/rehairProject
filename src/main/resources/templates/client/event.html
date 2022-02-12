@@ -19,7 +19,7 @@
         </div>
 
         <!-- 이벤트 -->
-        <div class="notice event">
+        <div class="event">
             <div class="eventList my-4">
                 <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-3 g-3 justify-content-between mt-5 mb-5">
                     <div class="col">
@@ -55,7 +55,9 @@
                     </div>
                 </div>
             </div>
-
+            <div class="text-end">
+                <button type="button" th:onclick="|location.href='@{/client/event_writing}'|" class="btn btn_outline px-4 py-2">작 성</button>
+            </div>
             <!-- 이벤트 페이징 -->
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">

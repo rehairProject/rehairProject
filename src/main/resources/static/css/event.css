@@ -13,3 +13,8 @@
 .col a #event5 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
 .col a #event6 { margin: 0 auto; background-image: url('../images/membership.png'); background-repeat: no-repeat; background-size: cover; }
 
+/* 글쓰기 버튼 */
+.btn_outline{border-color:#395781 !important; color:#395781 !important;}
+.btn_outline:hover{background:#395781; color:#fff !important;}
+
+.btn_list{background:#395781 !important; color:#fff !important;}

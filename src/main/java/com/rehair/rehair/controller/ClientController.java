@@ -94,6 +94,22 @@ public class ClientController {
 
 	// == Notice 로직 끝 ==//
 
+	// == Event 로직 시작 ==//
+
+	@GetMapping("/event")
+	public String event(Model model,
+						@PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<Event> events = eventRepository.findAll(pageable);
+		int startPage = Math.max(1, events.getPageable().getPageNumber() - 4);
+		int endPage = Math.min(events.getTotalPages(), events.getPageable().getPageNumber() + 4);
+
+		model.addAttribute("indexCalculator", events.getTotalElements() - events.getPageable().getPageNumber() * 3);
+
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("events", events);
+		return "client/event";
+	}
 
 	@GetMapping("/event_detail")
 	public String eventDetail(Model model, @RequestParam(required = false) Long id) {
@@ -120,18 +136,7 @@ public class ClientController {
 		return "redirect:/client/notice";
 	}
 
-	@GetMapping("/event")
-	public String event(Model model,
-			@PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-		Page<Event> events = eventRepository.findAll(pageable);
-		int startPage = Math.max(1, events.getPageable().getPageNumber() - 4);
-		int endPage = Math.min(events.getTotalPages(), events.getPageable().getPageNumber() + 4);
+	// == Event 로직 끝 ==//
 
-		model.addAttribute("indexCalculator", events.getTotalElements() - events.getPageable().getPageNumber() * 3);
 
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("events", events);
-		return "client/event";
-	}
 }
