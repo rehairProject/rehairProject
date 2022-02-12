@@ -80,6 +80,7 @@
 							</tr>
 						</tbody>
 					</table>
+					<div th:if = "${notices.totalElements} != 0">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
 							<li class="page-item"
@@ -99,6 +100,7 @@
 							</li>
 						</ul>
 					</nav>
+					</div>
 					<!-- 추후 권한처리 필요 -->
 					<div class="text-end">
 						<button class="btn btn-primary rounded"

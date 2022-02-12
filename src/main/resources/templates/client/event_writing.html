@@ -27,9 +27,6 @@
         <input type="hidden" th:field="*{id}">
         <div class="mb-3">
             <input type="text" class="form-control" th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'" placeholder="제목을 입력하세요" id="title" th:field="*{title}">
-            <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="invalid-feedback">
-                제목 에러 메시지
-            </div>
         </div>
         <div class="mb-3">
             <input class="form-control mb-3" type="file" id="upload" name="file" multiple>
@@ -38,9 +35,6 @@
         </div>
         <div class="mb-3">
             <textarea class="form-control" th:classappend="${#fields.hasErrors('content')} ? 'is-invalid'" rows="10" id="content" th:field="*{content}"></textarea>
-            <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="invalid-feedback">
-                내용 에러 메시지
-            </div>
         </div>
         <div class="text-center mb-5">
             <button type="submit" class="btn btn_outline px-4 py-2" >등 록</button>

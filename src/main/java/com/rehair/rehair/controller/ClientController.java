@@ -5,11 +5,8 @@ import com.rehair.rehair.domain.Notice;
 import com.rehair.rehair.repository.EventRepository;
 import com.rehair.rehair.repository.NoticeRepository;
 import com.rehair.rehair.service.EventService;
-import com.rehair.rehair.validator.EventValidator;
 
 import lombok.RequiredArgsConstructor;
-
-import javax.persistence.EntityManager;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,7 +27,6 @@ public class ClientController {
 	private final NoticeRepository noticeRepository;
 	private final EventService eventService;
 	private final EventRepository eventRepository;
-	private final EventValidator eventValidator;
 
 	@GetMapping("/about")
 	public String about() {
@@ -119,11 +115,7 @@ public class ClientController {
 	}
 
 	@PostMapping("/event_writing")
-	public String eventSubmit(Event event, BindingResult bindingResult, MultipartFile file) throws Exception {
-		eventValidator.validate(event, bindingResult);
-		if (bindingResult.hasErrors()) {
-			return "client/event_writing";
-		}
+	public String eventSubmit(Event event, MultipartFile file) throws Exception {
 		eventService.save(event, file);
 		return "redirect:/client/notice";
 	}
