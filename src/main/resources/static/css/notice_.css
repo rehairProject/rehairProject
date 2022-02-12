@@ -1,0 +1,6 @@
+.re_banner { width:100%; height:350px; background-image: url("../images/communication.png"); background-size: cover; background-repeat : no-repeat; }
+.re_banner h1 {  text-align:center; padding:5%; line-height: 250px; font-weight: 900; color: #fff; margin-bottom: 0; }
+
+.btn_outline{border-color:#395781 !important; color:#395781 !important;}
+.btn_outline:hover{background:#395781; color:#fff !important;}
+.btn_lineup{background:#395781 !important; color:#fff !important;}

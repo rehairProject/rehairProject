@@ -8,14 +8,18 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/notice_.css}">
 </head>
 <body>
 	<div class="container">
 		<div th:insert="header.html" class="header"></div>
-		<div class="text-end mt-5">
-			<a class="btn btn-primary px-3 "
-				th:href="@{/client/notice_writing(id=${notice.id})}">수정</a> 
-			<a class="btn btn-danger px-3" onclick="return deleteConfirm()" th:href="@{/client/notice_delete(id=${notice.id})}">삭제</a>
+		<!-- 배너 -->
+		<div class="re_banner mb-5">
+			<h1>NOTICE & MEMBERSHIP</h1>
+		</div>
+		<div class="text-end">
+			<button class="btn btn_lineup rounded px-4 py-2"
+					th:onclick="|location.href='@{/client/notice}'|">목록</button>
 		</div>
 		<div>
 			<h2 class="mb-2" id="title" th:text="${notice.title}">제목</h2>
@@ -26,9 +30,10 @@
 			<hr class="m-0">
 			<div class="my-5 fs-5" id="content" th:text="${notice.content}">내용</div>
 		</div>
-		<div class="text-end">
-			<button class="btn btn-primary rounded"
-				th:onclick="|location.href='@{/client/notice}'|">목록으로</button>
+		<div class="text-end mt-5">
+			<a class="btn btn-primary px-4 py-2"
+			   th:href="@{/client/notice_writing(id=${notice.id})}">수정</a>
+			<a class="btn btn-danger px-4 py-2" onclick="return deleteConfirm()" th:href="@{/client/notice_delete(id=${notice.id})}">삭제</a>
 		</div>
 
 		<div th:insert="footer.html" class="footer"></div>

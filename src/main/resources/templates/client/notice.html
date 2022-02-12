@@ -28,6 +28,8 @@
 	background: #395781;
 	color: #fff !important;
 }
+.btn_outline{border-color:#395781 !important; color:#395781 !important;}
+.btn_outline:hover{background:#395781; color:#fff !important;}
 </style>
 </head>
 <body>
@@ -103,8 +105,8 @@
 					</div>
 					<!-- 추후 권한처리 필요 -->
 					<div class="text-end">
-						<button class="btn btn-primary rounded"
-							th:onclick="|location.href='@{/client/notice_writing}'|">글쓰기</button>
+						<button class="btn btn_outline rounded px-4 py-2"
+							th:onclick="|location.href='@{/client/notice_writing}'|">작성</button>
 					</div>
 				</div>
 			</div>

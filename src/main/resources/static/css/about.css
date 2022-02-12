@@ -81,3 +81,8 @@
                 bottom: -2rem;
             }
         }
+
+        .btn_outline{border-color:#395781 !important; color:#395781 !important;}
+        .btn_outline:hover{background:#395781; color:#fff !important;}
+        .btn_lineup{background:#395781 !important; color:#fff !important;}
+        .btn_lineup:hover{color:orange !important;}
