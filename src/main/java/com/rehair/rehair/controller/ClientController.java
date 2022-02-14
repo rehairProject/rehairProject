@@ -34,10 +34,13 @@ public class ClientController {
 	}
 
 	@GetMapping("/reservation")
-	public String reservation() {
+	public String reservation(@RequestParam(required = false) String designer, Model model) {
+		if (designer != null){
+			model.addAttribute("designer", designer);
+		}
 		return "client/reservation";
 	}
-	
+
 	@GetMapping("/reservation_check")
 	public String reservationCheck() {
 		return "client/reservation_check";
