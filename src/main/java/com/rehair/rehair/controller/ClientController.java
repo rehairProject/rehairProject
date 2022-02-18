@@ -1,6 +1,7 @@
 package com.rehair.rehair.controller;
 
 import com.rehair.rehair.domain.Event;
+import com.rehair.rehair.domain.EventDto;
 import com.rehair.rehair.domain.Notice;
 import com.rehair.rehair.repository.EventRepository;
 import com.rehair.rehair.repository.NoticeRepository;
@@ -14,9 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -134,9 +133,15 @@ public class ClientController {
 	}
 
 	@PostMapping("/event_writing")
-	public String eventSubmit(Event event, MultipartFile file) throws Exception {
-		eventService.save(event, file);
-		return "redirect:/client/notice";
+	public String eventSubmit(@ModelAttribute EventDto eventDto, RedirectAttributes redirectAttributes) throws Exception {
+		Event event = eventService.upload(eventDto.getImageFile());
+		event.setTitle(eventDto.getTitle());
+		event.setUsername(eventDto.getUsername());
+		event.setContent(eventDto.getContent());
+		eventRepository.save(event);
+		
+		redirectAttributes.addAttribute("writeStatus", true);
+		return "redirect:/client/event";
 	}
 
 	// == Event 로직 끝 ==//

@@ -28,6 +28,15 @@ public class Event {
     @LastModifiedDate
     private LocalDateTime dateUpdated;
 
-    private String filename;
-    private String filepath;
+    private String uploadFileName; // 고객이 업로드한 파일명
+	private String serverFileName; // 서버 내부에서 관리하는 파일명
+	
+	public Event() {}
+	
+	public Event(String uploadFileName, String serverFileName) {
+		this.uploadFileName = uploadFileName;
+		this.serverFileName = serverFileName;
+	}
+	
+	
 }

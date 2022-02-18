@@ -19,16 +19,20 @@
         <button class="btn btn_list px-4 py-2"
                 th:onclick="|location.href='@{/client/event}'|">목 록</button>
     </div>
-    <form action="#" name="eventForm" th:object="${event}" method="post" enctype="multipart/form-data">
+    <form name="eventForm" th:object="${event}" th:action method="post" enctype="multipart/form-data">
         <input type="hidden" th:field="*{id}">
         <div class="mb-3">
             <input type="text" class="form-control" placeholder="제목을 입력하세요" id="title" th:field="*{title}">
         </div>
         <div class="mb-3">
-            <input class="form-control mb-3" type="file" id="upload" name="file" multiple>
+            <input type="text" class="form-control" placeholder="제목을 입력하세요" id="username" th:field="*{username}">
+        </div>
+        <input type="file" name="imageFile">
+        <div class="mb-3">
+        <!-- <input class="form-control mb-3" type="file" id="upload" name="file" multiple>
             <div class="select_img"><img src="" /></div>
 
-        </div>
+        </div> -->
         <div class="mb-3">
             <textarea class="form-control" rows="10" id="content" th:field="*{content}"></textarea>
         </div>

@@ -24,12 +24,11 @@
         <h2 class="mb-2" id="title" th:text="${event.title}">제목</h2>
         <div class="d-flex">
             <p class="fs-6 me-3 text-black-50" th:text="${event.username}">작성자</p>
-            <p class="fs-6 text-black-50" th:text="${event.writingDate}">작성날짜</p>
+            <p class="fs-6 text-black-50" th:text="${event.dateCreated}">작성날짜</p>
         </div>
         <hr class="m-0">
-        <div class="my-5 fs-5" id="content"th:text="${event.content}">내용</div>
-        <img src="" th:src="@{${event.filepath}}" alt="이미지" />
-        <a th:href="@{${event.filepath}}" th:text="${event.filepath}">파일</a>
+        <div class="my-5 fs-5" id="content" th:text="${event.content}">내용</div>
+        <img th:src="|/files/${event.getServerFileName()}|" class="img-fluid img-thumbnail" src="../../static/images/vintage.jpg">
     </div>
 
     <div th:insert="footer.html" class="footer"></div>
