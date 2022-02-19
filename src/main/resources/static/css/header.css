@@ -6,11 +6,14 @@ box-sizing:border-box;
 .container nav .container-fluid { margin: 0; padding: 0; }
 .container div .navi { color:#395781; text-align: right; }
 .container div .navi:hover { color: #aaa; }
-#imgLogo { width: 160px; height: 110px; }
+#imgLogo { width: 129px; height: 104px; }
 
-#navbarsExample04 { padding-top: 90px; }
-#navbarsExample04 .navbar-nav { margin:0; padding:0; width: 100%; }
- #navbarsExample04 .navbar-nav .nav-item .navi{ color:#395781; text-align: right; padding: 0; border-bottom: 2px solid #fff; }
- #navbarsExample04 .navbar-nav .nav-item .navi:hover { border-color: #395781; }
+#navbar .navbar-nav { margin:0; padding:0; width: 100%; }
+#navbar .navbar-nav .nav-item .navi{ color:#395781; text-align: right; padding:0; padding-bottom:5px; border-bottom: 2px solid #fff; }
+#navbar .navbar-nav .nav-item .navi:hover { border-color: #395781; }
 
+@media (max-width: 992px) {
+  #navbar .navbar-nav .nav-item .navi{border-bottom: 2px solid #eee;}
+  #navbar .navbar-nav .nav-item .navi-last{border: 0;}
 
+ }
