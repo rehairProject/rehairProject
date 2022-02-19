@@ -3,401 +3,379 @@
 <head>
     <meta charset="UTF-8">
     <title>RESERVATION</title>
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+    <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="/css/datepicker.css"  th:href="@{/css/datepicker.css}" type="text/css" rel="stylesheet">
+
     <link href="/css/reservation.css"  th:href="@{/css/reservation.css}" type="text/css" rel="stylesheet">
-    <link href="/css/calendar.css" th:href="@{/css/calendar.css}"type="text/css" rel="stylesheet">
-
-<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>-->
-
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/reservation.js" th:src="@{/js/reservation.js}" type="text/javascript"></script>
-    <script src="js/calendar.js" th:src="@{/js/calendar.js}" type="text/javascript"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
-    </script>
-
-
 </head>
 <body>
-<div class="container">
-    <div th:insert="header.html" class="header"></div>
-</div>
-<main class="container mainWrap">
-    <!--    이미지 배너    -->
-    <div class ="re_banner">
-        <h1 class="re_title m-0">RESERVATION</h1>
-    <!--    <img src="images/reservation/re_banner.jpg" class="img-fluid" alt="예약 배너 이미지">-->
+<script>
+    $(function(){
+		$(function(){
+			var tomorrowDate = tomorrowDate();
+			$('#calendar').datepicker({
+			    dateFormat: 'yy-mm-dd',
+				dayNamesMin : ['월','화','수','목','금','토','일'],
+				monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				minDate: new Date(tomorrowDate),
+				onSelect: function(dateText, inst) {
+                    var date = $(this).val();
+                    alert('선택하신 날짜는'+date);
+                    $('#date').val(date);
+                }
+			});
+
+			function tomorrowDate(){
+                var tomorrowDate ="";
+                var today = new Date();
+                var dd = today.getDate()+1;
+                var mm = today.getMonth()+1;
+                var yyyy = today.getFullYear();
+                if(dd<10) {
+                    dd='0'+dd
+                }
+                if(mm<10) {
+                    mm='0'+mm
+                }
+                tomorrowDate = yyyy+'-'+mm+'-'+dd;
+                return tomorrowDate;
+            }
+		});
+	});
+    </script>
+    <div class="container">
+        <div th:insert="header.html" class="header"></div>
     </div>
-    <!--   탭 버튼   -->
-    <div class="text-center">
-        <div class="btn-group tab_box" role="group" aria-label="Basic example">
-            <button type="button" class="btn re_btn on m-0 py-2">예약하기</button>
-            <button type="button" class="btn re_btn m-0 py-2">예약확인</button>
+    <main class="container mainWrap">
+        <!--    이미지 배너    -->
+        <div class ="re_banner">
+            <h1 class="re_title m-0">RESERVATION</h1>
         </div>
-    </div>
-    <!--   예약하기   -->
-    <div class="reservation on mt-5">
-        <form  th:action="@{/client/reservation_check}" method="post" name="reservationInfo" id="reservationInfo">
-        <!--  날짜 시간 선택 영역  -->
-        <section class="cal-time-wrap mt-3">
-            <!--   달력   -->
-            <div id="calendar" class="calendar"></div>
-            <!--    시간    -->
-            <div class=" time">
-                <input type="hidden" name="reservationTime" id="reservationTime">
-                <h6 class="text-center mb-3 time-bg py-3"><strong>오전</strong></h6>
-                <div class="container ">
-                    <div class="row row-cols-md-2 row-cols-xxl-4 text-center">
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time10" name="time" autocomplete="off" value="10:00">
-                            <label class="btn timeChk disabled" for="time10">10:00</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time1030" name="time" autocomplete="off" value="10:30">
-                            <label class="btn timeChk" for="time1030">10:30</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time11" name="time" autocomplete="off" value="11:00">
-                            <label class="btn timeChk" for="time11">11:00</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time1130" name="time" autocomplete="off" value="11:30">
-                            <label class="btn timeChk" for="time1130">11:30</label>
-                        </div>
-                    </div>
-                </div>
-                <h6 class="text-center my-3 mt-5 time-bg py-3"><strong>오후</strong></h6>
-                <div class="container ">
-                    <div class="row row-cols-md-2 row-cols-xxl-4 text-center mb-2">
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time13" name="time" autocomplete="off" value="13:00">
-                            <label class="btn timeChk" for="time1030">13:00</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time1330" name="time" autocomplete="off" value="13:30">
-                            <label class="btn timeChk" for="time1330">13:30</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time1400" name="time" autocomplete="off" value="14:00">
-                            <label class="btn timeChk" for="time1400">14:00</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time1430" name="time" autocomplete="off" value="14:30">
-                            <label class="btn timeChk" for="time1430">14:30</label>
-                        </div>
-                    </div>
-                    <div class="row row-cols-md-2 row-cols-xxl-4 text-center mb-2">
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time15" name="time" autocomplete="off" value="15:00">
-                            <label class="btn timeChk" for="time15">15:00</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time1530" name="time" autocomplete="off" value="15:30">
-                            <label class="btn timeChk" for="time1530">15:30</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time16" name="time" autocomplete="off" value="16:00">
-                            <label class="btn timeChk" for="time16">16:00</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time1630" name="time" autocomplete="off" value="16:30">
-                            <label class="btn timeChk" for="time1630">16:30</label>
-                        </div>
-                    </div>
-                    <div class="row row-cols-md-2 row-cols-xxl-4 text-center mb-2">
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time17" name="time" autocomplete="off" value="17:00">
-                            <label class="btn timeChk" for="time17">17:00</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time1730" name="time" autocomplete="off" value="17:30">
-                            <label class="btn timeChk" for="time1730">17:30</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time18" name="time" autocomplete="off" value="18:00">
-                            <label class="btn timeChk" for="time18">18:00</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time1830" name="time" autocomplete="off" value="18:30">
-                            <label class="btn timeChk" for="time1830">18:30</label>
-                        </div>
-                    </div>
-                    <div class="row row-cols-md-2 row-cols-xxl-4 text-center mb-2">
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time19" name="time" autocomplete="off" value="19:00">
-                            <label class="btn timeChk" for="time19">19:00</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time1930" name="time" autocomplete="off" value="19:30">
-                            <label class="btn timeChk" for="time1930">19:30</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time20" name="time"autocomplete="off" value="20:00">
-                            <label class="btn timeChk" for="time20">20:00</label>
-                        </div>
-                        <div class="col">
-                            <input type="radio" class="btn-check" id="time2030" name="time" autocomplete="off" value="20:30">
-                            <label class="btn timeChk" for="time2030">20:30</label>
-                        </div>
-                    </div>
-                </div>
-
+        <!--   탭 버튼   -->
+        <div class="text-center">
+            <div class="btn-group tab_box" role="group" aria-label="Basic example">
+                <button type="button" class="btn re_btn on m-0 py-2">예약하기</button>
+                <button type="button" class="btn re_btn m-0 py-2">예약확인</button>
             </div>
-        </section>
-         <!--   디자이너, 시술 선택 영역-->
-        <section class="d-flex mt-5 ">
-            <!--    디자이너 선택  -->
-            <div class="w-50">
-                <h5 class="text-center">디자이너</h5>
-                <input type="hidden" name="reservationDesigner" id="reservationDesigner">
-                <div class="p-3">
-                    <div class="form-check mb-3 ">
-                        <input class="form-check-input" type="radio"  value="designer1" name="designer" id="designer1" th:checked="${#strings.equals(designer, 'designer1')}">
-                        <label class="form-check-label" for="designer1">
-                            김하나 원장
-                        </label>
-                    </div>
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="radio"  value="designer2" name="designer" id="designer2" th:checked="${#strings.equals(designer, 'designer2')}">
-                        <label class="form-check-label" for="designer2">
-                            장철 수석 디자이너
-                        </label>
-                    </div>
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="radio"  value="designer3" name="designer" id="designer3" th:checked="${#strings.equals(designer, 'designer3')}">
-                        <label class="form-check-label" for="designer3">
-                            송하나 디자이너
-                        </label>
-                    </div>
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="radio"  value="designer4" name="designer" id="designer4" th:checked="${#strings.equals(designer, 'designer4')}">
-                        <label class="form-check-label" for="designer4">
-                            안벨리사 디자이너
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <!--    시술 선택  -->
-            <div class="w-50">
-                <h5 class="text-center">시술</h5>
-                <input type="hidden" id="reservationTreatments" name="reservationTreatments">
-                <div class="accordion accordion-flush" >
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                커트
-                            </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" >
-                            <div class="accordion-body position-relative">
-                                <div class="form-check mb-2 ">
-                                    <input class="form-check-input" type="checkbox"  value="cut_woman" id="cut_woman" name="treatment">
-                                    <label class="form-check-label" for="cut_woman">
-                                        여성 커트<span class="position-absolute end-0 align-middle px-3">18,000</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox"  value="cut_man" id="cut_man" name="treatment">
-                                    <label class="form-check-label" for="cut_man">
-                                        남성 커트<span class="position-absolute end-0 align-middle px-3">15,000</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox"  value="cut_youth" id="cut_youth" name="treatment">
-                                    <label class="form-check-label" for="cut_youth">
-                                        청소년 커트<span class="position-absolute end-0 align-middle px-3">10,000</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox"  value="cut_bangs" id="cut_bangs" name="treatment">
-                                    <label class="form-check-label" for="cut_bangs">
-                                        앞머리 커트<span class="position-absolute end-0 align-middle px-3">5,000</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                염색
-                            </button>
-                        </h2>
-                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" >
-                            <div class="accordion-body position-relative">
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" value="color_root" id="color_root" name="treatment">
-                                    <label class="form-check-label" for="color_root">
-                                        뿌리 염색<span class="position-absolute end-0 align-middle px-3">30,000</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" value="color_basic" id="color_basic" name="treatment">
-                                    <label class="form-check-label" for="color_basic">
-                                        베이직<span class="position-absolute end-0 align-middle px-3">50,000</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" value="color_premium" id="color_premium" name="treatment">
-                                    <label class="form-check-label" for="color_premium">
-                                        프리미엄<span class="position-absolute end-0 align-middle px-3">80,000</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" value="color_manicure" id="color_manicure" name="treatment">
-                                    <label class="form-check-label" for="color_manicure">
-                                        매니큐어<span class="position-absolute end-0 align-middle px-3">100,000</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                펌
-                            </button>
-                        </h2>
-                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" >
-                            <div class="accordion-body position-relative">
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" value="perm_basic" id="perm_basic" name="treatment">
-                                    <label class="form-check-label" for="perm_basic">
-                                        베이직 펌<span class="position-absolute end-0 align-middle px-3">50,000</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" value="perm_design" id="perm_design" name="treatment">
-                                    <label class="form-check-label" for="perm_design">
-                                        디자인 펌<span class="position-absolute end-0 align-middle px-3">80,000</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" value="perm_volumeMagic" id="perm_volumeMagic" name="treatment">
-                                    <label class="form-check-label" for="perm_volumeMagic">
-                                        볼륨 매직<span class="position-absolute end-0 align-middle px-3">80,000</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" value="perm_man_down" id="perm_man_down" name="treatment">
-                                    <label class="form-check-label" for="perm_man_down">
-                                        남성 다운 펌<span class="position-absolute end-0 align-middle px-3">30,000</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-        <!--    다음 버튼    -->
-        <div class="text-center my-5">
-            <button type="button" class="btn btn_outline px-4 py-2" id="nextBtn">다음 ></button>
         </div>
-        </form>
-    </div>
-    <!--    예약확인   -->
-    <div class="reservation">
-        <!--  다가오는 예약 정보  -->
-        <section class="reservation_info mt-5 text-center">
-            <h5 class="border-3 py-3"> RECENT RESERVATION</h5>
-            <div class="reservation_list_area text-left">
-                <ul class="reservation_list">
-                    <li class="card_item">
-                        <div class="card_header">
-                            <div class="icon" id="recent_icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-scissors" viewBox="0 0 16 16">
-                                    <path d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61 3.5 3.5zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zm7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"/>
-                                </svg>
+        <!--   예약하기   -->
+        <div class="reservation on mt-5">
+            <form  th:action="@{/client/reservation_check}" method="post" name="reservationInfo" id="reservationInfo">
+            <!--  날짜 시간 선택 영역  -->
+            <section class="cal-time-wrap mt-3">
+                <!--   달력   -->
+                <div id="calendar" class="calendar" name="date"></div>
+                <input type="hidden" name="date" id="date" value="null">
+                <!--    시간    -->
+                <div class=" time">
+                    <input type="hidden" name="reservationTime" id="reservationTime">
+                    <h6 class="text-center mb-3 time-bg py-3"><strong>오전</strong></h6>
+                    <div class="container ">
+                        <div class="row row-cols-md-2 row-cols-xxl-4 text-center">
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time10" name="time" autocomplete="off" value="10:00">
+                                <label class="btn timeChk" for="time10">10:00</label>
                             </div>
-                            <div class="reservation_info">
-                                <div class="title">베이직 펌</div>
-                                <div class="info_box">장철 디자이너</div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time1030" name="time" autocomplete="off" value="10:30">
+                                <label class="btn timeChk" for="time1030">10:30</label>
                             </div>
-                            <hr>
-                            <p class="card-text"><span class="date">2022. 02. 05 토 | </span><span class="time">오후 4:00</span></p>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time11" name="time" autocomplete="off" value="11:00">
+                                <label class="btn timeChk" for="time11">11:00</label>
+                            </div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time1130" name="time" autocomplete="off" value="11:30">
+                                <label class="btn timeChk" for="time1130">11:30</label>
+                            </div>
                         </div>
-                    </li>
-                </ul>
-            </div>
-            <!--<table class="table table-borderless text-center align-middle mt-2 py-4 border-top border-bottom border-3">
-                <tbody>
-                <tr  height="50">
-                    <th class="py-2" scope="row">날짜</th>
-                    <td>2021.12.30 15:00</td>
-                </tr>
-                <tr height="50">
-                    <th scope="row">디자이너</th>
-                    <td>강현구 디자이너</td>
-                </tr>
-                <tr height="50">
-                    <th scope="row">시술</th>
-                    <td>디자인 펌</td>
-                </tr>
-                </tbody>
-            </table>-->
-            <button type="button" class="btn btn_outline py-2 px-4 mt-1">예약 취소</button>
-        </section>
-        <!--  예약 리스트  -->
-        <section class="mt-5">
-            <h5 class="text-center border-3 py-3 <!--border-bottom-->"> RESERVATION HISTORY</h5>
-            <div class="reservation_list_area">
-                <ul class="reservation_list">
-                    <li class="card_item">
-                        <div class="card_header">
-                            <div class="icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-scissors" viewBox="0 0 16 16">
-                                    <path d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61 3.5 3.5zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zm7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"/>
-                                </svg>
+                    </div>
+                    <h6 class="text-center my-3 mt-5 time-bg py-3"><strong>오후</strong></h6>
+                    <div class="container ">
+                        <div class="row row-cols-md-2 row-cols-xxl-4 text-center mb-2">
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time13" name="time" autocomplete="off" value="13:00">
+                                <label class="btn timeChk" for="time1030">13:00</label>
                             </div>
-                            <div class="reservation_info">
-                                <div class="title">남성 커트</div>
-                                <div class="info_box">김하나 원장</div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time1330" name="time" autocomplete="off" value="13:30">
+                                <label class="btn timeChk" for="time1330">13:30</label>
                             </div>
-                            <hr>
-                            <p class="card-text"><span class="date">2022. 01. 05 수 | </span><span class="time">오후 4:00</span></p>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time1400" name="time" autocomplete="off" value="14:00">
+                                <label class="btn timeChk" for="time1400">14:00</label>
+                            </div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time1430" name="time" autocomplete="off" value="14:30">
+                                <label class="btn timeChk" for="time1430">14:30</label>
+                            </div>
                         </div>
-                    </li>
-                </ul>
+                        <div class="row row-cols-md-2 row-cols-xxl-4 text-center mb-2">
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time15" name="time" autocomplete="off" value="15:00">
+                                <label class="btn timeChk" for="time15">15:00</label>
+                            </div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time1530" name="time" autocomplete="off" value="15:30">
+                                <label class="btn timeChk" for="time1530">15:30</label>
+                            </div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time16" name="time" autocomplete="off" value="16:00">
+                                <label class="btn timeChk" for="time16">16:00</label>
+                            </div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time1630" name="time" autocomplete="off" value="16:30">
+                                <label class="btn timeChk" for="time1630">16:30</label>
+                            </div>
+                        </div>
+                        <div class="row row-cols-md-2 row-cols-xxl-4 text-center mb-2">
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time17" name="time" autocomplete="off" value="17:00">
+                                <label class="btn timeChk" for="time17">17:00</label>
+                            </div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time1730" name="time" autocomplete="off" value="17:30">
+                                <label class="btn timeChk" for="time1730">17:30</label>
+                            </div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time18" name="time" autocomplete="off" value="18:00">
+                                <label class="btn timeChk" for="time18">18:00</label>
+                            </div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time1830" name="time" autocomplete="off" value="18:30">
+                                <label class="btn timeChk" for="time1830">18:30</label>
+                            </div>
+                        </div>
+                        <div class="row row-cols-md-2 row-cols-xxl-4 text-center mb-2">
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time19" name="time" autocomplete="off" value="19:00">
+                                <label class="btn timeChk" for="time19">19:00</label>
+                            </div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time1930" name="time" autocomplete="off" value="19:30">
+                                <label class="btn timeChk" for="time1930">19:30</label>
+                            </div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time20" name="time"autocomplete="off" value="20:00">
+                                <label class="btn timeChk" for="time20">20:00</label>
+                            </div>
+                            <div class="col">
+                                <input type="radio" class="btn-check" id="time2030" name="time" autocomplete="off" value="20:30">
+                                <label class="btn timeChk" for="time2030">20:30</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+             <!--   디자이너, 시술 선택 영역-->
+            <section class="d-flex mt-5 ">
+                <!--    디자이너 선택  -->
+                <div class="w-50">
+                    <h5 class="text-center">디자이너</h5>
+                    <input type="hidden" name="reservationDesigner" id="reservationDesigner">
+                    <div class="p-3">
+                        <div class="form-check mb-3 ">
+                            <input class="form-check-input" type="radio"  value="designer1" name="designer" id="designer1" th:checked="${#strings.equals(designer, 'designer1')}">
+                            <label class="form-check-label" for="designer1">
+                                김하나 원장
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio"  value="designer2" name="designer" id="designer2" th:checked="${#strings.equals(designer, 'designer2')}">
+                            <label class="form-check-label" for="designer2">
+                                장철 수석 디자이너
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio"  value="designer3" name="designer" id="designer3" th:checked="${#strings.equals(designer, 'designer3')}">
+                            <label class="form-check-label" for="designer3">
+                                송하나 디자이너
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio"  value="designer4" name="designer" id="designer4" th:checked="${#strings.equals(designer, 'designer4')}">
+                            <label class="form-check-label" for="designer4">
+                                안벨리사 디자이너
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!--    시술 선택  -->
+                <div class="w-50">
+                    <h5 class="text-center">시술</h5>
+                    <input type="hidden" id="reservationTreatments" name="reservationTreatments">
+                    <div class="accordion accordion-flush" >
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    커트
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" >
+                                <div class="accordion-body position-relative">
+                                    <div class="form-check mb-2 ">
+                                        <input class="form-check-input" type="checkbox"  value="여성 커트" id="cut_woman" name="treatment">
+                                        <label class="form-check-label" for="cut_woman">
+                                            여성 커트<span class="position-absolute end-0 align-middle px-3">18,000</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox"  value="남성 커트" id="cut_man" name="treatment">
+                                        <label class="form-check-label" for="cut_man">
+                                            남성 커트<span class="position-absolute end-0 align-middle px-3">15,000</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox"  value="청소년 커트" id="cut_youth" name="treatment">
+                                        <label class="form-check-label" for="cut_youth">
+                                            청소년 커트<span class="position-absolute end-0 align-middle px-3">10,000</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox"  value="앞머리 커트" id="cut_bangs" name="treatment">
+                                        <label class="form-check-label" for="cut_bangs">
+                                            앞머리 커트<span class="position-absolute end-0 align-middle px-3">5,000</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                    염색
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" >
+                                <div class="accordion-body position-relative">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="뿌리 염색" id="color_root" name="treatment">
+                                        <label class="form-check-label" for="color_root">
+                                            뿌리 염색<span class="position-absolute end-0 align-middle px-3">30,000</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="베이직 염색" id="color_basic" name="treatment">
+                                        <label class="form-check-label" for="color_basic">
+                                            베이직 염색<span class="position-absolute end-0 align-middle px-3">50,000</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="프리미엄 염색" id="color_premium" name="treatment">
+                                        <label class="form-check-label" for="color_premium">
+                                            프리미엄 염색<span class="position-absolute end-0 align-middle px-3">80,000</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="매니큐어" id="color_manicure" name="treatment">
+                                        <label class="form-check-label" for="color_manicure">
+                                            매니큐어<span class="position-absolute end-0 align-middle px-3">100,000</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                    펌
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" >
+                                <div class="accordion-body position-relative">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="베이직 펌" id="perm_basic" name="treatment">
+                                        <label class="form-check-label" for="perm_basic">
+                                            베이직 펌<span class="position-absolute end-0 align-middle px-3">50,000</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="디자인 펌" id="perm_design" name="treatment">
+                                        <label class="form-check-label" for="perm_design">
+                                            디자인 펌<span class="position-absolute end-0 align-middle px-3">80,000</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="볼륨 매직" id="perm_volumeMagic" name="treatment">
+                                        <label class="form-check-label" for="perm_volumeMagic">
+                                            볼륨 매직<span class="position-absolute end-0 align-middle px-3">80,000</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="남성 다운 펌" id="perm_man_down" name="treatment">
+                                        <label class="form-check-label" for="perm_man_down">
+                                            남성 다운 펌<span class="position-absolute end-0 align-middle px-3">30,000</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <!--    다음 버튼    -->
+            <div class="text-center my-5">
+                <button type="button" class="btn btn_outline px-4 py-2" id="nextBtn">다음 ></button>
             </div>
-            <!--<table class="table table-hover table-borderless text-center align-middle mt-2 border-top border-bottom border-3">
-                <thead>
-                <tr height="50" class="align-middle ">
-                    <th scope="col"></th>
-                    <th scope="col">디자이너</th>
-                    <th scope="col">시술</th>
-                    <th scope="col">날짜/시간</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr height="50">
-                    <th scope="row">2</th>
-                    <td>강현구 디자이너</td>
-                    <td>남성 커트</td>
-                    <td>2021.12.10 10:00</td>
-                </tr>
-                <tr height="50">
-                    <th scope="row">1</th>
-                    <td>강현구 디자이너</td>
-                    <td>베이직 염색</td>
-                    <td>2021.11.08 14:00</td>
-                </tr>
-                </tbody>
-            </table>-->
-        </section>
-    </div>
+            </form>
+        </div>
+        <!--    예약확인   -->
+        <div class="reservation">
+            <!--  다가오는 예약 정보  -->
+            <section class="reservation_info mt-5 text-center">
+                <h5 class="border-3 py-3"> RECENT RESERVATION</h5>
+                <div class="reservation_list_area text-left">
+                    <ul class="reservation_list">
+                        <li class="card_item">
+                            <div class="card_header">
+                                <div class="icon" id="recent_icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-scissors" viewBox="0 0 16 16">
+                                        <path d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61 3.5 3.5zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zm7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="reservation_info">
+                                    <div class="title">베이직 펌</div>
+                                    <div class="info_box">장철 디자이너</div>
+                                </div>
+                                <hr>
+                                <p class="card-text"><span class="date">2022. 02. 05 토 | </span><span class="time">오후 4:00</span></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn_outline py-2 px-4 mt-1">예약 취소</button>
+            </section>
+            <!--  예약 리스트  -->
+            <section class="mt-5">
+                <h5 class="text-center border-3 py-3 <!--border-bottom-->"> RESERVATION HISTORY</h5>
+                <div class="reservation_list_area">
+                    <ul class="reservation_list">
+                        <li class="card_item">
+                            <div class="card_header">
+                                <div class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-scissors" viewBox="0 0 16 16">
+                                        <path d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61 3.5 3.5zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zm7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="reservation_info">
+                                    <div class="title">남성 커트</div>
+                                    <div class="info_box">김하나 원장</div>
+                                </div>
+                                <hr>
+                                <p class="card-text"><span class="date">2022. 01. 05 수 | </span><span class="time">오후 4:00</span></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
 
-    <div th:insert="footer.html" class="footer"></div>
-
-
-</main>
-
+        <div th:insert="footer.html" class="footer"></div>
+    </main>
 </body>
 </html>
