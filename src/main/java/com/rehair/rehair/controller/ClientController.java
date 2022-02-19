@@ -137,8 +137,10 @@ public class ClientController {
 	}
 
 	@PostMapping("/event_writing")
-	public String eventSubmit(@ModelAttribute Event event, MultipartFile multipartFile, RedirectAttributes redirectAttributes) throws Exception {
-		event = eventService.upload(multipartFile);
+	public String eventSubmit(@ModelAttribute Event event, @RequestParam(value = "imageFile", required = false) MultipartFile multipartFile, RedirectAttributes redirectAttributes) throws Exception {
+		Event saveEvent = eventService.upload(multipartFile);
+		event.setServerFileName(saveEvent.getServerFileName());
+		event.setUploadFileName(saveEvent.getUploadFileName());
 		eventRepository.save(event);
 		
 		redirectAttributes.addAttribute("writeStatus", true);
