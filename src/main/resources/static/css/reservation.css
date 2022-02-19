@@ -27,12 +27,11 @@ box-sizing:border-box;
 .mainWrap div.on{display:block;}
 
 /* 달력, 시간 */
-.calendar{width:100%; height:600px; margin-right:1rem; /*border:2px solid #ccc;*/ margin-bottom:3rem;}
+.calendar{width:100%; height:600px; margin-right:1rem; margin-bottom:3rem;}
+.selectedDate{background-color: #abecf7 !important;}
+
 .time{width:100%; }
-.timeChk:hover {background:#395781; color:#fff !important;}
-
-
-.time .on{background:#395781; color:#fff;}
+.timeChk:hover {background-color: transparent; opacity: 0.6;}
 .time-bg{background-color:#eee;}
 
 .accordion-button:not(.collapsed){

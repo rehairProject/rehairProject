@@ -40,8 +40,12 @@ public class ClientController {
 		return "client/reservation";
 	}
 
-	@GetMapping("/reservation_check")
-	public String reservationCheck() {
+	@PostMapping("/reservation_check")
+	public String reservationCheck(@RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("designer") String designer, @RequestParam("treatment") String treatment, Model model) {
+		model.addAttribute("date", date);
+		model.addAttribute("time", time);
+		model.addAttribute("designer", designer);
+		model.addAttribute("treatment", treatment);
 		return "client/reservation_check";
 	}
 

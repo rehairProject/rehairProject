@@ -20,36 +20,42 @@
 <main class="container mainWrap">
     <!--    이미지 배너    -->
     <div class ="re_banner">
-        <h1 class="re_title m-0">R E S E R V A T I O N</h1>
-        <!--    <img src="images/reservation/re_banner.jpg" class="img-fluid" alt="예약 배너 이미지">-->
+        <h1 class="re_title m-0">RESERVATION</h1>
     </div>
-<!--    &lt;!&ndash;   탭 버튼   &ndash;&gt;-->
-<!--    <div class="text-center">-->
-<!--        <div class="btn-group tab_box" role="group" aria-label="Basic example">-->
-<!--            <button type="button" class="btn re_btn on m-0 py-2">예약하기</button>-->
-<!--            <button type="button" class="btn re_btn m-0 py-2">예약확인</button>-->
-<!--        </div>-->
-<!--    </div>-->
+    <!--    탭 버튼    -->
+    <div class="text-center">
+        <div class="btn-group tab_box" role="group" aria-label="Basic example">
+            <button type="button" class="btn re_btn on m-0 py-2">예약하기</button>
+            <button type="button" class="btn re_btn m-0 py-2">예약확인</button>
+        </div>
+    </div>
     <section class="reservation_info mt-5 text-center">
         <h5 class="border-3 py-3 <!--border-bottom-->"> RESERVATION CHECK</h5>
         <table class="table table-borderless text-center align-middle mt-2 py-4 border-top border-bottom border-3">
             <tbody>
             <tr height="50">
                 <th scope="row">날짜</th>
-                <td>2021.12.30 15:00</td>
+                <td><span th:text="${date}"></span></td>
+            </tr>
+            <tr height="50">
+                <th scope="row">시간</th>
+                <td><span th:text="${time}"></span></td>
             </tr>
             <tr height="50">
                 <th scope="row">디자이너</th>
-                <td>abc</td>
+                <td><span th:text="${designer}"></span></td>
             </tr>
             <tr height="50">
                 <th scope="row">시술</th>
-                <td>디자인 펌</td>
+                <td><span th:text="${treatment}"></span></td>
             </tr>
             </tbody>
         </table>
+        <button type="button" class="btn btn_outline mt-3 px-4 py-2" onclick="javascript:window.history.go(-1);">이 전</button>
         <button type="button" class="btn btn_outline mt-3 px-4 py-2" onclick="location.href='/'">예 약</button>
     </section>
+
+    <div th:insert="footer.html" class="footer"></div>
 </main>
 </body>
 </html>
