@@ -41,4 +41,8 @@ public class User {
     )
     private List<Auth> auths = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    List<Reservation> reservations = new ArrayList<>();
+
+
 }

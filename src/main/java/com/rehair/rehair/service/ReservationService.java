@@ -1,0 +1,37 @@
+package com.rehair.rehair.service;
+
+import com.rehair.rehair.domain.Reservation;
+import com.rehair.rehair.domain.User;
+import com.rehair.rehair.repository.ReservationRepository;
+import com.rehair.rehair.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+@Service
+public class ReservationService {
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
+
+    public Reservation test(){
+        User user = userRepository.findByUsername("abcd");
+
+
+        Reservation reservation = new Reservation();
+        reservation.setDesigner("장철");
+        reservation.setSurgery("뿌리염색");
+        reservation.setReservationTime(LocalDateTime.now());
+        reservation.setPrice(30000);
+        reservation.setCreatedDate(LocalDateTime.now());
+
+        reservation.setUser(user);
+        return reservationRepository.save(reservation);
+    }
+
+
+
+}
