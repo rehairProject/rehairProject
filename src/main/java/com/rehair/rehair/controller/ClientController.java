@@ -44,14 +44,7 @@ public class ClientController {
 	}
 
 	@GetMapping("/reservation")
-	public String reservation(@RequestParam(required = false) String designer, Model model) {
-		model.addAttribute("reservation", new Reservation());
-		if (designer != null){
-			model.addAttribute("designer", designer);
-		}
-
-		return "client/reservation";
-	}
+	public String reservation() { return "client/reservation"; }
 
 	@PostMapping("/reservation_check")
 	public String reservationCheck(@RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("designer") String designer, @RequestParam("style") String style, Model model) {
@@ -59,7 +52,6 @@ public class ClientController {
 		model.addAttribute("time", time);
 		model.addAttribute("designer", designer);
 		model.addAttribute("style", style);
-
 
 		return "client/reservation_check";
 	}
@@ -71,7 +63,8 @@ public class ClientController {
 		User currentUserInfo = userService.currentUserInfo(currentUser);
 
 		Reservation reservation = new Reservation();
-		reservation.setDay(date+" "+time);
+		reservation.setDay(date);
+		reservation.setTime(time);
 		reservation.setDesigner(designer);
 		reservation.setStyle(style);
 		reservation.setStatus(ReservationStatus.RESERVATION);

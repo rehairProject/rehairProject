@@ -36,6 +36,8 @@ public class Reservation {
 
 	@Column(name = "reservation_day")
 	private String day;
+	@Column(name = "reservation_time")
+	private String time;
 	@Column(name = "reservation_designer")
 	private String designer;
 	@Column(name = "reservation_style")
