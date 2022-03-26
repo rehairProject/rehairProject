@@ -5,6 +5,7 @@ import com.rehair.rehair.dto.ScheduleDto;
 import com.rehair.rehair.repository.*;
 import com.rehair.rehair.service.EventService;
 
+import com.rehair.rehair.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,7 @@ public class ClientController {
 	private final ScheduleRepository scheduleRepository;
 	private final ReservationRepository reservationRepository;
 	private final UserRepository userRepository;
+	private final UserService userService;
 
 	@GetMapping("/about")
 	public String about() {
@@ -41,10 +44,7 @@ public class ClientController {
 	}
 
 	@GetMapping("/reservation")
-	public String reservation(@RequestParam(required = false) String designer, Model model) {
-		if (designer != null){
-			model.addAttribute("designer", designer);
-		}
+	public String reservation() {
 		return "client/reservation";
 	}
 
@@ -54,17 +54,6 @@ public class ClientController {
 		System.out.println("scheduleDto.getStatus() = " + scheduleDto.getStatus());
 		Schedule schedule = scheduleDto.toSchedule();
 		return ResponseEntity.ok().body(schedule);
-	}
-
-	@PostMapping("/reservations")
-	@ResponseBody
-	public Map<Integer, Reservation> getReservations(@RequestParam(value = "reservationIds[]")List<Long> reservationIds){
-		Map<Integer, Reservation> map = new HashMap<>();
-
-		for (int i=0; i<reservationIds.size(); i++){
-			map.put(i, reservationRepository.getById(reservationIds.get(i)));
-		}
-		return map;
 	}
 
 	@PostMapping("/reservation_check")
@@ -78,7 +67,11 @@ public class ClientController {
 	}
 
 	@PostMapping("/reservation")
-	public String reservation(Authentication authentication, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price){
+	public String reservation(Principal principal, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price){
+		//현재 로그인된 유저정보
+		String currentUser = principal.getName();
+		User currentUserInfo = userService.currentUserInfo(currentUser);
+
 		Reservation reservation = new Reservation();
 		Schedule schedule = new Schedule();
 		schedule.setScheduleDay(date);
@@ -87,11 +80,10 @@ public class ClientController {
 		reservation.setTime(time);
 		reservation.setDesigner(designer);
 		reservation.setStyle(style);
+		reservation.setStatus(ReservationStatus.RESERVATION);
 		int intPrice = Integer.parseInt(price.replace(",",""));
 		reservation.setPrice(intPrice);
-		String userName = authentication.getName();
-		User user = userRepository.findByUsername(userName);
-		reservation.setUser(user);			//user id fk 값 세팅
+		reservation.setUser(currentUserInfo);
 		reservationRepository.save(reservation);
 		return "client/reservation";
 	}

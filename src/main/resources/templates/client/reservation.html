@@ -2,6 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}">
     <title>RESERVATION</title>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
@@ -249,6 +251,7 @@
                 <div class="text-center my-5">
                     <button type="button" class="btn btn_outline px-4 py-2" id="nextBtn">다음 ></button>
                 </div>
+                <input type='hidden' name='${_csrf.parameterName }' value='${_csrf.token }'>
             </form>
         </div>
         <!--    예약확인   -->

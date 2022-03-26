@@ -1,4 +1,9 @@
 $(document).ready(function() {
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options){
+        xhr.setRequestHeader(header, token);
+    });
     var reservations = null;
     var holidayDesigners = [];
 
@@ -127,6 +132,13 @@ $(document).ready(function() {
 //시간
     $('.time').find('.timeChk').bind('click',function () {
         $except = $(this);
+        console.log($except);
+        var selectedTimeRadio = $except[0].control;
+        console.log(selectedTimeRadio.id);
+        var selectedTimeId = selectedTimeRadio.id;
+        if ($(selectedTimeId).prop('checked')){
+            console.log('클릭');
+        }
         $except.css({'background':'#fcef7e', 'border-radius':'100%'});
         $('.time').find('.timeChk').not($(this)).css('background','white');
     });
