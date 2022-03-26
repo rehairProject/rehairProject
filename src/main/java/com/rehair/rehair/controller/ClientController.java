@@ -1,9 +1,8 @@
 package com.rehair.rehair.controller;
 
-import com.rehair.rehair.domain.Event;
-import com.rehair.rehair.domain.Notice;
-import com.rehair.rehair.repository.EventRepository;
-import com.rehair.rehair.repository.NoticeRepository;
+import com.rehair.rehair.domain.*;
+import com.rehair.rehair.dto.ScheduleDto;
+import com.rehair.rehair.repository.*;
 import com.rehair.rehair.service.EventService;
 
 import lombok.RequiredArgsConstructor;
@@ -12,11 +11,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/client")
@@ -26,6 +31,9 @@ public class ClientController {
 	private final NoticeRepository noticeRepository;
 	private final EventService eventService;
 	private final EventRepository eventRepository;
+	private final ScheduleRepository scheduleRepository;
+	private final ReservationRepository reservationRepository;
+	private final UserRepository userRepository;
 
 	@GetMapping("/about")
 	public String about() {
@@ -40,13 +48,52 @@ public class ClientController {
 		return "client/reservation";
 	}
 
+	@GetMapping("/reservation/{selectedDate}")
+	public ResponseEntity<Schedule> getSchedule(@PathVariable String selectedDate){
+		ScheduleDto scheduleDto = new ScheduleDto(scheduleRepository.getById(selectedDate));
+		System.out.println("scheduleDto.getStatus() = " + scheduleDto.getStatus());
+		Schedule schedule = scheduleDto.toSchedule();
+		return ResponseEntity.ok().body(schedule);
+	}
+
+	@PostMapping("/reservations")
+	@ResponseBody
+	public Map<Integer, Reservation> getReservations(@RequestParam(value = "reservationIds[]")List<Long> reservationIds){
+		Map<Integer, Reservation> map = new HashMap<>();
+
+		for (int i=0; i<reservationIds.size(); i++){
+			map.put(i, reservationRepository.getById(reservationIds.get(i)));
+		}
+		return map;
+	}
+
 	@PostMapping("/reservation_check")
-	public String reservationCheck(@RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("designer") String designer, @RequestParam("treatment") String treatment, Model model) {
+	public String reservationCheck(@RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("designer") String designer, @RequestParam("style") String style, Model model, @RequestParam("price") String price) {
 		model.addAttribute("date", date);
 		model.addAttribute("time", time);
 		model.addAttribute("designer", designer);
-		model.addAttribute("treatment", treatment);
+		model.addAttribute("style", style);
+		model.addAttribute("price", price);
 		return "client/reservation_check";
+	}
+
+	@PostMapping("/reservation")
+	public String reservation(Authentication authentication, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price){
+		Reservation reservation = new Reservation();
+		Schedule schedule = new Schedule();
+		schedule.setScheduleDay(date);
+		reservation.setDay(date);
+		reservation.setSchedule(schedule);	//schedule date fk 값 세팅
+		reservation.setTime(time);
+		reservation.setDesigner(designer);
+		reservation.setStyle(style);
+		int intPrice = Integer.parseInt(price.replace(",",""));
+		reservation.setPrice(intPrice);
+		String userName = authentication.getName();
+		User user = userRepository.findByUsername(userName);
+		reservation.setUser(user);			//user id fk 값 세팅
+		reservationRepository.save(reservation);
+		return "client/reservation";
 	}
 
 	// == Notice 로직 시작 ==//

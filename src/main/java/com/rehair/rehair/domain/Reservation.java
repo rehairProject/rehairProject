@@ -14,10 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.*;
+import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import lombok.Data;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -30,19 +30,23 @@ public class Reservation {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_user_id")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private User user;
 
 	@Column(name = "reservation_day")
 	private String day;
+	@Column(name = "reservation_time")
+	private String time;
 	@Column(name = "reservation_designer")
 	private String designer;
 	@Column(name = "reservation_style")
 	private String style;
 	@Column(name = "reservation_price")
 	private int price;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_schedule_day")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private Schedule schedule;
 	
 	@Enumerated(EnumType.STRING)
