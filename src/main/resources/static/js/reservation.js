@@ -42,15 +42,15 @@ $(document).ready(function() {
         $("#reservationDesigner").val(designer);
 
         //시술
-        var treatment = new Array();
-        $("input:checkbox[name='treatment']:checked").each(function(){
-            treatment.push(this.value);
+        var style = new Array();
+        $("input:checkbox[name='style']:checked").each(function(){
+            style.push(this.value);
         });
-        if (treatment.length = 0){
+        if (style.length = 0){
             alert("시술을 선택하세요.");
             return;
         }
-        $("#reservationTreatments").val(treatment);
+        $("#reservationStyle").val(style);
 
         $("#reservationInfo").submit();
     });

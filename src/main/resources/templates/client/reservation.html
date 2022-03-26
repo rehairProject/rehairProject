@@ -179,25 +179,25 @@
                     <input type="hidden" name="reservationDesigner" id="reservationDesigner">
                     <div class="p-3">
                         <div class="form-check mb-3 ">
-                            <input class="form-check-input" type="radio"  value="designer1" name="designer" id="designer1" th:checked="${#strings.equals(designer, 'designer1')}">
+                            <input class="form-check-input" type="radio"  value="김하나" name="designer" id="designer1" th:checked="${#strings.equals(designer, 'designer1')}">
                             <label class="form-check-label" for="designer1">
                                 김하나 원장
                             </label>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="radio"  value="designer2" name="designer" id="designer2" th:checked="${#strings.equals(designer, 'designer2')}">
+                            <input class="form-check-input" type="radio"  value="장철" name="designer" id="designer2" th:checked="${#strings.equals(designer, 'designer2')}">
                             <label class="form-check-label" for="designer2">
                                 장철 수석 디자이너
                             </label>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="radio"  value="designer3" name="designer" id="designer3" th:checked="${#strings.equals(designer, 'designer3')}">
+                            <input class="form-check-input" type="radio"  value="송하나" name="designer" id="designer3" th:checked="${#strings.equals(designer, 'designer3')}">
                             <label class="form-check-label" for="designer3">
                                 송하나 디자이너
                             </label>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="radio"  value="designer4" name="designer" id="designer4" th:checked="${#strings.equals(designer, 'designer4')}">
+                            <input class="form-check-input" type="radio"  value="안벨리사" name="designer" id="designer4" th:checked="${#strings.equals(designer, 'designer4')}">
                             <label class="form-check-label" for="designer4">
                                 안벨리사 디자이너
                             </label>
@@ -207,7 +207,7 @@
                 <!--    시술 선택  -->
                 <div class="w-50">
                     <h5 class="text-center">시술</h5>
-                    <input type="hidden" id="reservationTreatments" name="reservationTreatments">
+                    <input type="hidden" id="reservationStyle" name="reservationStyle">
                     <div class="accordion accordion-flush" >
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-headingOne">
@@ -218,25 +218,26 @@
                             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" >
                                 <div class="accordion-body position-relative">
                                     <div class="form-check mb-2 ">
-                                        <input class="form-check-input" type="checkbox"  value="여성 커트" id="cut_woman" name="treatment">
+                                        <input type="hidden" name="price" value="18000">
+                                        <input class="form-check-input" type="checkbox"  value="여성 커트" id="cut_woman" name="style">
                                         <label class="form-check-label" for="cut_woman">
                                             여성 커트<span class="position-absolute end-0 align-middle px-3">18,000</span>
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox"  value="남성 커트" id="cut_man" name="treatment">
+                                        <input class="form-check-input" type="checkbox"  value="남성 커트" id="cut_man" name="style">
                                         <label class="form-check-label" for="cut_man">
                                             남성 커트<span class="position-absolute end-0 align-middle px-3">15,000</span>
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox"  value="청소년 커트" id="cut_youth" name="treatment">
+                                        <input class="form-check-input" type="checkbox"  value="청소년 커트" id="cut_youth" name="style">
                                         <label class="form-check-label" for="cut_youth">
                                             청소년 커트<span class="position-absolute end-0 align-middle px-3">10,000</span>
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox"  value="앞머리 커트" id="cut_bangs" name="treatment">
+                                        <input class="form-check-input" type="checkbox"  value="앞머리 커트" id="cut_bangs" name="style">
                                         <label class="form-check-label" for="cut_bangs">
                                             앞머리 커트<span class="position-absolute end-0 align-middle px-3">5,000</span>
                                         </label>
@@ -253,25 +254,25 @@
                             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" >
                                 <div class="accordion-body position-relative">
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="뿌리 염색" id="color_root" name="treatment">
+                                        <input class="form-check-input" type="checkbox" value="뿌리 염색" id="color_root" name="style">
                                         <label class="form-check-label" for="color_root">
                                             뿌리 염색<span class="position-absolute end-0 align-middle px-3">30,000</span>
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="베이직 염색" id="color_basic" name="treatment">
+                                        <input class="form-check-input" type="checkbox" value="베이직 염색" id="color_basic" name="style">
                                         <label class="form-check-label" for="color_basic">
                                             베이직 염색<span class="position-absolute end-0 align-middle px-3">50,000</span>
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="프리미엄 염색" id="color_premium" name="treatment">
+                                        <input class="form-check-input" type="checkbox" value="프리미엄 염색" id="color_premium" name="style">
                                         <label class="form-check-label" for="color_premium">
                                             프리미엄 염색<span class="position-absolute end-0 align-middle px-3">80,000</span>
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="매니큐어" id="color_manicure" name="treatment">
+                                        <input class="form-check-input" type="checkbox" value="매니큐어" id="color_manicure" name="style">
                                         <label class="form-check-label" for="color_manicure">
                                             매니큐어<span class="position-absolute end-0 align-middle px-3">100,000</span>
                                         </label>
@@ -288,25 +289,25 @@
                             <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" >
                                 <div class="accordion-body position-relative">
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="베이직 펌" id="perm_basic" name="treatment">
+                                        <input class="form-check-input" type="checkbox" value="베이직 펌" id="perm_basic" name="style">
                                         <label class="form-check-label" for="perm_basic">
                                             베이직 펌<span class="position-absolute end-0 align-middle px-3">50,000</span>
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="디자인 펌" id="perm_design" name="treatment">
+                                        <input class="form-check-input" type="checkbox" value="디자인 펌" id="perm_design" name="style">
                                         <label class="form-check-label" for="perm_design">
                                             디자인 펌<span class="position-absolute end-0 align-middle px-3">80,000</span>
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="볼륨 매직" id="perm_volumeMagic" name="treatment">
+                                        <input class="form-check-input" type="checkbox" value="볼륨 매직" id="perm_volumeMagic" name="style">
                                         <label class="form-check-label" for="perm_volumeMagic">
                                             볼륨 매직<span class="position-absolute end-0 align-middle px-3">80,000</span>
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="남성 다운 펌" id="perm_man_down" name="treatment">
+                                        <input class="form-check-input" type="checkbox" value="남성 다운 펌" id="perm_man_down" name="style">
                                         <label class="form-check-label" for="perm_man_down">
                                             남성 다운 펌<span class="position-absolute end-0 align-middle px-3">30,000</span>
                                         </label>

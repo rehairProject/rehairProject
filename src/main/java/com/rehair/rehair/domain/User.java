@@ -48,12 +48,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name="auth_id")
     )
     private List<Auth> auths = new ArrayList<>();
-    
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Reservation> reservations = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user")
-    List<Reservation> reservations = new ArrayList<>();
-
+    private List<Reservation> reservations = new ArrayList<>();
 
 }

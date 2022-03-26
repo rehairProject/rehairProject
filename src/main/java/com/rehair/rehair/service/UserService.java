@@ -35,4 +35,9 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    //현재 로그인된 유저정보
+    public User currentUserInfo(String currentUser){
+        User user = userRepository.findByUsername(currentUser);
+        return user ;
+    }
 }

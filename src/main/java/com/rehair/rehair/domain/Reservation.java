@@ -14,10 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Builder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Data;
+
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -65,7 +67,7 @@ public class Reservation {
     
     // 가격 할인 로직
     
-    public int setCalcPrice(int price) {
+    public int setPrice(int price) {
     	int calcPrice = 0;
     	if(user.getGrade() == Grade.VIP) {
     		calcPrice = (int)(price * 0.95);
