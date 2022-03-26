@@ -79,6 +79,12 @@ $(document).ready(function() {
     }
 
    $('.btn-check').on('change', function(){
+        //날짜 선택 전에 시간선택하면,
+        var date = $('#date').val();
+        if (date == 'null'){
+            alert('날짜 먼저 선택해주세요.');
+            location.reload();
+        }
         //선택한 시간 값 가져오기
         var selectedTime = $(this).val();
         var radioDesigners = [];

@@ -19,10 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Controller
 @RequestMapping("/client")
 @RequiredArgsConstructor
@@ -54,17 +50,6 @@ public class ClientController {
 		System.out.println("scheduleDto.getStatus() = " + scheduleDto.getStatus());
 		Schedule schedule = scheduleDto.toSchedule();
 		return ResponseEntity.ok().body(schedule);
-	}
-
-	@PostMapping("/reservations")
-	@ResponseBody
-	public Map<Integer, Reservation> getReservations(@RequestParam(value = "reservationIds[]")List<Long> reservationIds){
-		Map<Integer, Reservation> map = new HashMap<>();
-
-		for (int i=0; i<reservationIds.size(); i++){
-			map.put(i, reservationRepository.getById(reservationIds.get(i)));
-		}
-		return map;
 	}
 
 	@PostMapping("/reservation_check")
