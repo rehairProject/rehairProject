@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable();
 		http
 			.authorizeRequests()
 				.antMatchers("/","/account/login","/account/join","/account/duplicateUsername","/client/about","/client/notice","/client/notice_detail","/client/event","/client/event_detail")
@@ -54,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						+ "from user "
 						+ "where username = ?")
 				.authoritiesByUsernameQuery("select u.username, a.name " // ManyToMany 매칭이므로 join을 이용하였다.
-						+ "from user_auth ua inner join user u on ua.user_id = u.id "
+						+ "from user_auth ua inner join user u on ua.user_id = u.user_id "
 						+ "inner join auth a on ua.auth_id = a.id "
 						+ "where u.username = ?")
 				.passwordEncoder(passwordEncoder()); // 비밀번호 암호화 추가

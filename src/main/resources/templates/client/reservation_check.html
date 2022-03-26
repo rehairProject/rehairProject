@@ -31,33 +31,34 @@
     </div>
     <section class="reservation_info mt-5 text-center">
         <h5 class="border-3 py-3 <!--border-bottom-->"> RESERVATION CHECK</h5>
-        <form th:action="@{/client/reservation_insert}" method="post">
-        <table class="table table-borderless text-center align-middle mt-2 py-4 border-top border-bottom border-3">
-            <tbody>
-            <tr height="50">
-                <input type="hidden" th:name="date" th:value="${date}">
-                <th scope="row">날짜</th>
-                <td><span th:text="${date}"></span></td>
-            </tr>
-            <tr height="50">
-                <input type="hidden" th:name="time" th:value="${time}">
-                <th scope="row">시간</th>
-                <td><span th:text="${time}"></span></td>
-            </tr>
-            <tr height="50">
-                <input type="hidden" th:name="designer" th:value="${designer}">
-                <th scope="row">디자이너</th>
-                <td><span th:text="${designer}"></span></td>
-            </tr>
-            <tr height="50">
-                <input type="hidden" th:name="style" th:value="${style}">
-                <th scope="row">시술</th>
-                <td><span th:text="${style}"></span></td>
-            </tr>
-            </tbody>
-        </table>
-        <button type="button" class="btn btn_outline mt-3 px-4 py-2" onclick="javascript:window.history.go(-1);">이 전</button>
-        <button type="submit" class="btn btn_outline mt-3 px-4 py-2" onclick="confirm('예약하시겠습니까?')">예 약</button>
+        <form action="/client/reservation" method="post">
+            <input type="hidden" name="date" th:value="${date}">
+            <input type="hidden" name="time" th:value="${time}">
+            <input type="hidden" name="designer" th:value="${designer}">
+            <input type="hidden" name="style" th:value="${style}">
+            <input type="hidden" name="price" th:value="${price}">
+            <table class="table table-borderless text-center align-middle mt-2 py-4 border-top border-bottom border-3">
+                <tbody>
+                <tr height="50">
+                    <th scope="row">날짜</th>
+                    <td><span th:text="${date}"></span></td>
+                </tr>
+                <tr height="50">
+                    <th scope="row">시간</th>
+                    <td><span th:text="${time}"></span></td>
+                </tr>
+                <tr height="50">
+                    <th scope="row">디자이너</th>
+                    <td><span th:text="${designer}"></span></td>
+                </tr>
+                <tr height="50">
+                    <th scope="row">시술</th>
+                    <td><span th:text="${style}"></span></td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn_outline mt-3 px-4 py-2" onclick="javascript:window.history.go(-1);">이 전</button>
+            <button type="submit" class="btn btn_outline mt-3 px-4 py-2">예 약</button>
         </form>
     </section>
 

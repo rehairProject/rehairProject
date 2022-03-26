@@ -1,12 +1,10 @@
 package com.rehair.rehair.controller;
 
 import com.rehair.rehair.domain.*;
-import com.rehair.rehair.repository.EventRepository;
-import com.rehair.rehair.repository.NoticeRepository;
-import com.rehair.rehair.repository.ReservationRepository;
+import com.rehair.rehair.dto.ScheduleDto;
+import com.rehair.rehair.repository.*;
 import com.rehair.rehair.service.EventService;
 
-import com.rehair.rehair.service.ReservationService;
 import com.rehair.rehair.service.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -14,8 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,11 +30,10 @@ public class ClientController {
 	private final NoticeRepository noticeRepository;
 	private final EventService eventService;
 	private final EventRepository eventRepository;
+	private final ScheduleRepository scheduleRepository;
 	private final ReservationRepository reservationRepository;
-	private final ReservationService reservationService;
-
 	private final UserService userService;
-
+	private final UserRepository userRepository;
 
 	@GetMapping("/about")
 	public String about() {
@@ -44,32 +41,46 @@ public class ClientController {
 	}
 
 	@GetMapping("/reservation")
-	public String reservation() { return "client/reservation"; }
+	public String reservation() {
+		return "client/reservation";
+	}
+
+	@GetMapping("/reservation/{selectedDate}")
+	public ResponseEntity<Schedule> getSchedule(@PathVariable String selectedDate){
+		ScheduleDto scheduleDto = new ScheduleDto(scheduleRepository.getById(selectedDate));
+		System.out.println("scheduleDto.getStatus() = " + scheduleDto.getStatus());
+		Schedule schedule = scheduleDto.toSchedule();
+		return ResponseEntity.ok().body(schedule);
+	}
 
 	@PostMapping("/reservation_check")
-	public String reservationCheck(@RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("designer") String designer, @RequestParam("style") String style, Model model) {
+	public String reservationCheck(@RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("designer") String designer, @RequestParam("style") String style, Model model, @RequestParam("price") String price) {
 		model.addAttribute("date", date);
 		model.addAttribute("time", time);
 		model.addAttribute("designer", designer);
 		model.addAttribute("style", style);
-
+		model.addAttribute("price", price);
 		return "client/reservation_check";
 	}
 
-	@PostMapping("/reservation_insert")
-	public String reservationCheck(Principal principal, @RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("designer") String designer, @RequestParam("style") String style) {
+	@PostMapping("/reservation")
+	public String reservationCheck(Principal principal, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price) {
 		//현재 로그인된 유저정보
 		String currentUser = principal.getName();
 		User currentUserInfo = userService.currentUserInfo(currentUser);
 
 		Reservation reservation = new Reservation();
+		Schedule schedule = new Schedule();
+		schedule.setScheduleDay(date);
 		reservation.setDay(date);
+		reservation.setSchedule(schedule);   //schedule date fk 값 세팅
 		reservation.setTime(time);
 		reservation.setDesigner(designer);
 		reservation.setStyle(style);
 		reservation.setStatus(ReservationStatus.RESERVATION);
+		int intPrice = Integer.parseInt(price.replace(",",""));
+		reservation.setPrice(intPrice);
 		reservation.setUser(currentUserInfo);
-//		reservation.setPrice(3000);
 		reservationRepository.save(reservation);
 
 		return "client/reservation";
