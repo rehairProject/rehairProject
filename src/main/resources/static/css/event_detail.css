@@ -7,5 +7,9 @@
 /* 이벤트 상세보기 */
 #eventDetail img { width: 80%; margin-bottom: 50px; }
 
+/* 수정,삭제 버튼 */
 .btn_outline{border-color:#395781 !important; color:#395781 !important;}
 .btn_outline:hover{background:#395781; color:#fff !important;}
+
+/* 목록버튼 */
+.btn_list{background:#395781 !important; color:#fff !important;}

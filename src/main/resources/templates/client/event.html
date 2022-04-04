@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,7 +31,7 @@
                 <div class="row overflow-hidden mt-5">
                     <div class="col-md-4" th:each="event : ${events}">
                     <a href="#" th:href="@{/client/event_detail(id=${event.id})}">
-                    <img th:src="|/files/${event.getServerFileName()}|" class="img-fluid img-thumbnail w-100 event_height" src="../../static/images/vintage.jpg">
+                    <img th:src="|/files/${event.getServerFileName()}|" class="img-fluid img-thumbnail w-100">
                     </a>
                     <p class="text-center border" th:text="${event.title}">이벤트</p>
                     </div>
@@ -38,7 +39,8 @@
             </div>
 
             <div class="text-end">
-                <button type="button" th:onclick="|location.href='@{/client/event_writing}'|" class="btn btn_outline px-4 py-2">작 성</button>
+                <button type="button" th:onclick="|location.href='@{/client/event_writing}'|"
+                        class="btn btn_outline px-4 py-2" >작 성</button>
             </div>
             <!-- 이벤트 페이징 -->
             <div th:if = "${events.totalElements} != 0">
