@@ -41,7 +41,8 @@ public class ClientController {
 	}
 
 	@GetMapping("/reservation")
-	public String reservation() {
+	public String reservation(@RequestParam(required = false, value = "tabFlag") boolean tabFlag, Model model) {
+		model.addAttribute("tabFlag", tabFlag);
 		return "client/reservation";
 	}
 
@@ -64,7 +65,7 @@ public class ClientController {
 	}
 
 	@PostMapping("/reservation")
-	public String reservationCheck(Principal principal, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price) {
+	public String reservation(Principal principal, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price){
 		//현재 로그인된 유저정보
 		String currentUser = principal.getName();
 		User currentUserInfo = userService.currentUserInfo(currentUser);
@@ -73,7 +74,7 @@ public class ClientController {
 		Schedule schedule = new Schedule();
 		schedule.setScheduleDay(date);
 		reservation.setDay(date);
-		reservation.setSchedule(schedule);   //schedule date fk 값 세팅
+		reservation.setSchedule(schedule);	//schedule date fk 값 세팅
 		reservation.setTime(time);
 		reservation.setDesigner(designer);
 		reservation.setStyle(style);
@@ -82,8 +83,7 @@ public class ClientController {
 		reservation.setPrice(intPrice);
 		reservation.setUser(currentUserInfo);
 		reservationRepository.save(reservation);
-
-		return "client/reservation";
+		return "redirect:/client/reservation" + "?tabFlag=" + true;
 	}
 
 	// == Notice 로직 시작 ==//
