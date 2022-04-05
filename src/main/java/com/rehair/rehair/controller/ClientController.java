@@ -21,9 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/client")
@@ -35,8 +32,8 @@ public class ClientController {
 	private final EventRepository eventRepository;
 	private final ScheduleRepository scheduleRepository;
 	private final ReservationRepository reservationRepository;
-	private final UserRepository userRepository;
 	private final UserService userService;
+	private final UserRepository userRepository;
 
 	@GetMapping("/about")
 	public String about() {
@@ -67,7 +64,7 @@ public class ClientController {
 	}
 
 	@PostMapping("/reservation")
-	public String reservation(Principal principal, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price){
+	public String reservationCheck(Principal principal, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price) {
 		//현재 로그인된 유저정보
 		String currentUser = principal.getName();
 		User currentUserInfo = userService.currentUserInfo(currentUser);
@@ -76,7 +73,7 @@ public class ClientController {
 		Schedule schedule = new Schedule();
 		schedule.setScheduleDay(date);
 		reservation.setDay(date);
-		reservation.setSchedule(schedule);	//schedule date fk 값 세팅
+		reservation.setSchedule(schedule);   //schedule date fk 값 세팅
 		reservation.setTime(time);
 		reservation.setDesigner(designer);
 		reservation.setStyle(style);
@@ -85,6 +82,7 @@ public class ClientController {
 		reservation.setPrice(intPrice);
 		reservation.setUser(currentUserInfo);
 		reservationRepository.save(reservation);
+
 		return "client/reservation";
 	}
 

@@ -1,14 +1,17 @@
 package com.rehair.rehair.service;
 
-import com.rehair.rehair.domain.Auth;
-import com.rehair.rehair.domain.Grade;
-import com.rehair.rehair.domain.User;
+import com.rehair.rehair.domain.*;
 import com.rehair.rehair.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +41,31 @@ public class UserService {
     public User currentUserInfo(String currentUser){
         User user = userRepository.findByUsername(currentUser);
         return user ;
+    }
+
+    @Transactional
+    @Scheduled(cron = "0 0 0 3 * *") // 매달 3일 0시에 실행
+    public void memberShipAutomatic() {
+        List<User> users = userRepository.findAll();
+
+        for (User user : users) {
+            int total = 0;
+
+            List<Reservation> reservations = user.getReservations().stream()
+                    .filter(r -> r.getStatus().equals(ReservationStatus.PAYMENT_COMPLETED)
+                            && r.getDateCreated().isAfter(LocalDateTime.now().minusYears(1)))
+                    .collect(Collectors.toList());
+            for (Reservation reservation : reservations) {
+                total += reservation.getPrice();
+            }
+
+            if (total >= 300000) {
+                user.setGrade(Grade.VIP);
+                userRepository.save(user);
+            } else if (100000 < total && total < 300000){
+                user.setGrade(Grade.FAMILY);
+                userRepository.save(user);
+            }
+        }
     }
 }
