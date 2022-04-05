@@ -69,7 +69,7 @@ public class ClientController {
 	}
 
 	@PostMapping("/reservation")
-	public String reservationCheck(Model model, Principal principal, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price) {
+	public String reservationSave(Model model, Principal principal, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price) {
 		//현재 로그인된 유저정보
 		String currentUser = principal.getName();
 		User currentUserInfo = userService.currentUserInfo(currentUser);
@@ -87,11 +87,6 @@ public class ClientController {
 		reservation.setPrice(intPrice);
 		reservation.setUser(currentUserInfo);
 		reservationRepository.save(reservation);
-
-//		List<Reservation> reservationList= this.reservationService.findUseJPQL(principal);
-
-
-//		model.addAttribute("reservation",reservationRepository.findByUsername(currentUser));
 
 		return "client/reservation";
 	}

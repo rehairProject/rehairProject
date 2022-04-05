@@ -19,9 +19,4 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final UserService userService;
 
-//    public List<Reservation> findUseJPQL(Principal principal){
-//        String currentUser = principal.getName();
-//        User currentUserInfo = userService.currentUserInfo(currentUser);
-//        return this.reservationRepository.findUseJPQL(currentUserInfo);
-//    }
 }
