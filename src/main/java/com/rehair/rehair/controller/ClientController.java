@@ -5,6 +5,7 @@ import com.rehair.rehair.dto.ScheduleDto;
 import com.rehair.rehair.repository.*;
 import com.rehair.rehair.service.EventService;
 
+import com.rehair.rehair.service.ReservationService;
 import com.rehair.rehair.service.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -77,7 +78,7 @@ public class ClientController {
 	}
 
 	@PostMapping("/reservation")
-	public String reservationSave(Model model, Principal principal, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price) {
+	public String reservationSave(Model model, Principal principal, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price, RedirectAttributes redirectAttributes) {
 		//현재 로그인된 유저정보
 		String currentUser = principal.getName();
 		User currentUserInfo = userService.currentUserInfo(currentUser);
@@ -96,6 +97,7 @@ public class ClientController {
 		reservation.setUser(currentUserInfo);
 		reservationRepository.save(reservation);
 
+		redirectAttributes.addAttribute("reservationStatus", true); // 상태 전송
 		return "redirect:/client/reservation" + "?tabFlag=" + true;
 	}
 

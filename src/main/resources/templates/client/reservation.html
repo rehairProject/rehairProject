@@ -29,6 +29,9 @@
                 <button type="button" class="btn re_btn m-0 py-2">예약확인</button>
             </div>
         </div>
+        <div th:if="${param.reservationStatus}" class="alert alert-primary text-center" role="alert">
+            예약 완료되셨습니다!
+        </div>
         <!--   예약하기   -->
         <div class="reservation on mt-5">
             <form  th:action="@{/client/reservation_check}" method="post" name="reservationInfo" id="reservationInfo">

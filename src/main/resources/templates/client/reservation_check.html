@@ -31,7 +31,7 @@
     </div>
     <section class="reservation_info mt-5 text-center">
         <h5 class="border-3 py-3 <!--border-bottom-->"> RESERVATION CHECK</h5>
-        <form action="/client/reservation" method="post">
+        <form th:action="@{/client/reservation}" method="post">
             <input type="hidden" name="date" th:value="${date}">
             <input type="hidden" name="time" th:value="${time}">
             <input type="hidden" name="designer" th:value="${designer}">
