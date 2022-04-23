@@ -37,8 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.formLogin()
 				.loginPage("/account/login")
-			//	.loginProcessingUrl("/account/login")
-			//	.defaultSuccessUrl("/")
+				.loginProcessingUrl("/account/login")
+				.defaultSuccessUrl("/")
 				.and()
 			.logout()
 				.invalidateHttpSession(true);

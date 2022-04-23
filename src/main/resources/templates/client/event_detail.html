@@ -17,18 +17,19 @@
         <h1>EVENT</h1>
     </div>
     <div class="text-end mt-5">
-        <a class="btn btn_outline px-3 " th:href="@{/client/event_writing(id=${event.id})}">수정</a>
-        <a class="btn btn_outline px-3 " >삭제</a>
+        <a class="btn btn_list px-3" th:href="@{/client/event}">목 록</a>
+        <a class="btn btn_outline px-3 " th:href="@{/client/event_modifying(id=${event.id})}">수정</a>
+        <a class="btn btn_outline px-3 "th:href="@{/client/event_delete(id=${event.id})}" onclick="confirm('삭제하시겠습니까?')">삭제</a>
     </div>
     <div>
         <h2 class="mb-2" id="title" th:text="${event.title}">제목</h2>
         <div class="d-flex">
             <p class="fs-6 me-3 text-black-50" th:text="${event.username}">작성자</p>
-            <p class="fs-6 text-black-50" th:text="${event.dateCreated}">작성날짜</p>
+            <p class="fs-6 text-black-50" th:text="${#temporals.format(event.dateUpdated,'yyyy-mm-dd :HH:mm')}">작성날짜</p>
         </div>
         <hr class="m-0">
-        <div class="my-5 fs-5" id="content" th:text="${event.content}">내용</div>
-        <img th:src="|/files/${event.getServerFileName()}|" class="img-fluid img-thumbnail" src="../../static/images/vintage.jpg">
+        <pre class="my-5 fs-5" id="content" th:text="${event.content}">내용</pre>
+        <img th:src="|/files/${event.getServerFileName()}|" class="img-fluid " src="../../static/images/vintage.jpg">
     </div>
 
     <div th:insert="footer.html" class="footer"></div>

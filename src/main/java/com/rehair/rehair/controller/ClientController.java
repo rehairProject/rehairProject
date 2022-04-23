@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/client")
@@ -32,6 +37,7 @@ public class ClientController {
 	private final EventRepository eventRepository;
 	private final ScheduleRepository scheduleRepository;
 	private final ReservationRepository reservationRepository;
+	private final ReservationService reservationService;
 	private final UserService userService;
 	private final UserRepository userRepository;
 
@@ -41,7 +47,13 @@ public class ClientController {
 	}
 
 	@GetMapping("/reservation")
-	public String reservation(@RequestParam(required = false, value = "tabFlag") boolean tabFlag, Model model) {
+	public String reservation(@RequestParam(required = false, value = "tabFlag") boolean tabFlag, Model model, Principal principal) {
+		String currentUsername = principal.getName();
+		User currentUserInfo = userService.currentUserInfo(currentUsername);
+
+		List<Reservation> reservations = reservationRepository.findUseJPQL(currentUserInfo);
+		model.addAttribute("reservations", reservations);
+		model.addAttribute("recent", reservations.get(0));
 		model.addAttribute("tabFlag", tabFlag);
 		return "client/reservation";
 	}
@@ -65,7 +77,7 @@ public class ClientController {
 	}
 
 	@PostMapping("/reservation")
-	public String reservation(Principal principal, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price){
+	public String reservationSave(Model model, Principal principal, @RequestParam String date, @RequestParam String time, @RequestParam String designer, @RequestParam String style, @RequestParam String price) {
 		//현재 로그인된 유저정보
 		String currentUser = principal.getName();
 		User currentUserInfo = userService.currentUserInfo(currentUser);
@@ -74,7 +86,7 @@ public class ClientController {
 		Schedule schedule = new Schedule();
 		schedule.setScheduleDay(date);
 		reservation.setDay(date);
-		reservation.setSchedule(schedule);	//schedule date fk 값 세팅
+		reservation.setSchedule(schedule);   //schedule date fk 값 세팅
 		reservation.setTime(time);
 		reservation.setDesigner(designer);
 		reservation.setStyle(style);
@@ -83,7 +95,16 @@ public class ClientController {
 		reservation.setPrice(intPrice);
 		reservation.setUser(currentUserInfo);
 		reservationRepository.save(reservation);
+
 		return "redirect:/client/reservation" + "?tabFlag=" + true;
+	}
+
+	@GetMapping("reservationCancel")
+	public String reservationCancel(@RequestParam(required = false) Long id){
+		Reservation recent = reservationRepository.findById(id).orElse(null);
+		recent.setStatus(ReservationStatus.CANCEL);
+		reservationRepository.save(recent);
+		return "redirect:/client/reservation";
 	}
 
 	// == Notice 로직 시작 ==//
@@ -162,14 +183,8 @@ public class ClientController {
 	}
 
 	@GetMapping("/event_writing")
-	public String eventWriting(Model model, @RequestParam(required = false) Long id) {
-		if (id == null) {
-			model.addAttribute("event", new Event());
-		} else {
-			Event event = eventRepository.findById(id).orElse(null);
-			model.addAttribute("event", event);
-		}
-
+	public String eventWriting(Model model) {
+		model.addAttribute("event", new Event());
 		return "client/event_writing";
 	}
 
@@ -179,8 +194,41 @@ public class ClientController {
 		event.setServerFileName(saveEvent.getServerFileName());
 		event.setUploadFileName(saveEvent.getUploadFileName());
 		eventRepository.save(event);
-		
+
 		redirectAttributes.addAttribute("writeStatus", true);
+		return "redirect:/client/event";
+	}
+
+	@GetMapping("/event_modifying")
+	public String eventModifyingForm(Model model, @RequestParam(required = false) Long id) {
+		Event event = eventRepository.findById(id).orElse(null);
+		model.addAttribute("event", event);
+		return "client/event_modifying";
+	}
+	@PostMapping("/event_modifying")
+	public String eventModifying(@ModelAttribute Event event, MultipartFile file, RedirectAttributes redirectAttributes) throws Exception {
+
+		//파일을 수정하지 않았을 경우
+		//이미 저장돼있는 파일 가져와서 저장
+		if(file.isEmpty()) {
+			Optional<Event> savedEvent = eventRepository.findById(event.getId());
+			event.setServerFileName(savedEvent.get().getServerFileName());
+			event.setUploadFileName(savedEvent.get().getUploadFileName());
+		}else{
+			Event saveEvent = eventService.upload(file);
+			event.setServerFileName(saveEvent.getServerFileName());
+			event.setUploadFileName(saveEvent.getUploadFileName());
+		}
+		eventRepository.save(event);
+
+		redirectAttributes.addAttribute("modifyStatus", true);
+		return "redirect:/client/event";
+	}
+
+	@GetMapping("/event_delete")
+	public String eventDelete(@RequestParam Long id, RedirectAttributes redirectAttributes) {
+		eventRepository.deleteById(id);
+		redirectAttributes.addAttribute("deleteStatus", true); // 상태 전송
 		return "redirect:/client/event";
 	}
 

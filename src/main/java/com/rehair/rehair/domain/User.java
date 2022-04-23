@@ -26,7 +26,8 @@ public class User {
     private String name;
     @Column(nullable = false, length = 50)
     private String phoneNumber;
-    @Column(nullable = false, length = 50)
+//    @Column(nullable = false, length = 50)
+    @Column(length = 50)
     private String birth;
     @Column(nullable = false, length = 5)
     private String gender;
@@ -48,8 +49,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name="auth_id")
     )
     private List<Auth> auths = new ArrayList<>();
-    
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Reservation> reservations = new ArrayList<>();
+    private List<Reservation> reservations = new ArrayList<>();
 
 }
