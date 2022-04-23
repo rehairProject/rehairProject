@@ -10,6 +10,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long>{
+    @Query("select re from Reservation re where re.user=:currentUser")
+    List<Reservation> findUseJPQL(@Param("currentUser") User currentUser);
+
 
 }
 

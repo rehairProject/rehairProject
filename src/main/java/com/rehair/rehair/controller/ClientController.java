@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +48,14 @@ public class ClientController {
 	}
 
 	@GetMapping("/reservation")
-	public String reservation() {
+	public String reservation(Model model, Principal principal) {
+		String currentUsername = principal.getName();
+		User currentUserInfo = userService.currentUserInfo(currentUsername);
+
+		List<Reservation> reservations = reservationRepository.findUseJPQL(currentUserInfo);
+		model.addAttribute("reservations", reservations);
+		model.addAttribute("recent", reservations.get(0));
+
 		return "client/reservation";
 	}
 
@@ -88,7 +97,15 @@ public class ClientController {
 		reservation.setUser(currentUserInfo);
 		reservationRepository.save(reservation);
 
-		return "client/reservation";
+		return "redirect:/client/reservation";
+	}
+
+	@GetMapping("reservationCancel")
+	public String reservationCancel(@RequestParam(required = false) Long id){
+		Reservation recent = reservationRepository.findById(id).orElse(null);
+		recent.setStatus(ReservationStatus.CANCEL);
+		reservationRepository.save(recent);
+		return "redirect:/client/reservation";
 	}
 
 	// == Notice 로직 시작 ==//
@@ -167,14 +184,8 @@ public class ClientController {
 	}
 
 	@GetMapping("/event_writing")
-	public String eventWriting(Model model, @RequestParam(required = false) Long id) {
-		if (id == null) {
-			model.addAttribute("event", new Event());
-		} else {
-			Event event = eventRepository.findById(id).orElse(null);
-			model.addAttribute("event", event);
-		}
-
+	public String eventWriting(Model model) {
+		model.addAttribute("event", new Event());
 		return "client/event_writing";
 	}
 
