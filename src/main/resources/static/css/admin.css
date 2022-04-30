@@ -1,0 +1,57 @@
+*{
+margin:0; padding:0;
+box-sizing:border-box;
+}
+*,.btn:focus{ box-shadow: none !important;}
+
+@media (min-width: 768px) {
+    .cal-time-wrap{display:flex;}
+    .calendar{width:70% !important; margin-bottom:1rem;  }
+    .time{width:30% !important;}
+
+}
+
+/* 배너 */
+.container-fluid{padding:0;}
+.re_banner{ width:100%; height:350px; background-image: url("../images/reservation.jpg"); background-size: cover; }
+.re_title{ text-align:center; padding:5%; line-height: 250px; font-weight: 900; color: #fff; }
+
+/* 탭 버튼 */
+.btn-group{width:100%;}
+.re_btn{ border-radius:0 !important;}
+.re_btn:hover{background-color:#395781; color:#fff !important;}
+.tab_box button.on{ background-color:#395781; color:#fff;}
+
+/* 탭 컨텐츠 hide show*/
+.mainWrap div.tab{display:none;}
+.mainWrap div.on{display:block;}
+
+/* 달력, 시간 */
+.calendar{width:100%; height:600px; margin-right:1rem; margin-bottom:3rem;}
+.selectedDate{background-color: #abecf7 !important;}
+
+.time{width:100%; }
+.timeChk:hover {background-color: transparent; opacity: 0.6;}
+.time-bg{background-color:#eee;}
+
+.accordion-button:not(.collapsed){
+    color:#000 !important;
+    background-color:#eee !important;
+}
+.accordion-button:not(.collapsed)::after {
+    background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+    transform: rotate(-180deg);
+}
+/* 디자이너 */
+.designer-bg {height: 50px; line-height: 50px;}
+/* 다음 버튼 */
+.btn_outline{border-color:#395781 !important; color:#395781 !important;}
+.btn_outline:hover{background:#395781; color:#fff !important;}
+
+
+/* 검색 버튼 */
+.search_btn{border-color:#395781 !important; color:#395781 !important;}
+.search_btn:hover{background:#395781; color:#fff !important;}
+
+.user table td,.user table th{padding:1%;}
+.user table thead th{background:#aaa; color:#fff; }
