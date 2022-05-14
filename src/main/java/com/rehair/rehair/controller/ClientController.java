@@ -5,7 +5,6 @@ import com.rehair.rehair.dto.ScheduleDto;
 import com.rehair.rehair.repository.*;
 import com.rehair.rehair.service.EventService;
 
-import com.rehair.rehair.service.ReservationService;
 import com.rehair.rehair.service.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -14,8 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,9 +33,7 @@ public class ClientController {
 	private final EventRepository eventRepository;
 	private final ScheduleRepository scheduleRepository;
 	private final ReservationRepository reservationRepository;
-	private final ReservationService reservationService;
 	private final UserService userService;
-	private final UserRepository userRepository;
 
 	@GetMapping("/about")
 	public String about() {

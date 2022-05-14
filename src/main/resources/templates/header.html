@@ -15,10 +15,10 @@
 <body>
 
 <div class="container">
-    <div class="text-end">
+    <div class="text-end" sec:authorize="hasRole('DESIGNER')">
         <a href="/designer" class="text-decoration-none navi d-inline-block"> 디자이너 페이지</a>
     </div>
-    <div class="text-end">
+    <div class="text-end" sec:authorize="hasRole('ADMIN')">
         <a href="/admin" class="text-decoration-none navi d-inline-block"> 관리자 페이지</a>
     </div>
     <div class="d-flex justify-content-end mt-3">

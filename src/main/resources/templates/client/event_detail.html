@@ -1,5 +1,6 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +17,7 @@
     <div class="re_banner">
         <h1>EVENT</h1>
     </div>
-    <div class="text-end mt-5">
+    <div class="text-end mt-5" sec:authorize="hasRole('ADMIN')">
         <a class="btn btn_list px-3" th:href="@{/client/event}">목 록</a>
         <a class="btn btn_outline px-3 " th:href="@{/client/event_modifying(id=${event.id})}">수정</a>
         <a class="btn btn_outline px-3 "th:href="@{/client/event_delete(id=${event.id})}" onclick="confirm('삭제하시겠습니까?')">삭제</a>
