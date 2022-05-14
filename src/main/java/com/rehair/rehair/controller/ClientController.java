@@ -14,17 +14,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,8 +50,15 @@ public class ClientController {
 		User currentUserInfo = userService.currentUserInfo(currentUsername);
 
 		List<Reservation> reservations = reservationRepository.findUseJPQL(currentUserInfo);
+		Reservation recent;
+		if (ObjectUtils.isEmpty(reservations)){
+			recent = null;
+		} else {
+			recent = reservations.get(0);
+		}
+
 		model.addAttribute("reservations", reservations);
-		model.addAttribute("recent", reservations.get(0));
+		model.addAttribute("recent", recent);
 		model.addAttribute("tabFlag", tabFlag);
 		return "client/reservation";
 	}
