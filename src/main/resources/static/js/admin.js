@@ -132,7 +132,7 @@ $(document).ready(function() {
         $("#reservationDesigner").val(designer);
         $("#holidayInfo").submit();
     });
-});
+//});
 
     $('#delBtn').on("click", function(){
         var date = $("#date").val();
