@@ -104,18 +104,8 @@ $(document).ready(function() {
         renderCalendar();
     });
 
-//날짜 선택
-    $('.date').on('click', function(){
-        var selectedDate = $(this).context.id;
-        $(this).css({"height":"60px", "background":"#fcef7e", "border-radius":"100%"});
-        $('.dates').find('.date').not($(this)).css('background','white');
-        alert('선택하신 날짜는 ' + selectedDate + " 입니다.");
-        $('#date').val(selectedDate);
-    });
-
 //휴무정보 유효성검사
     $("#nextBtn").on("click", function(){
-        //날짜
         var date = $("#date").val();
         if (date == "null"){
             alert("날짜를 선택하세요.");
@@ -123,7 +113,6 @@ $(document).ready(function() {
         }
         $("#date").val(date);
 
-        //디자이너
         var designer = $("input[name='designer']:checked").val();
         if (designer == null){
             alert("디자이너를 선택하세요.");
@@ -132,7 +121,6 @@ $(document).ready(function() {
         $("#reservationDesigner").val(designer);
         $("#holidayInfo").submit();
     });
-//});
 
     $('#delBtn').on("click", function(){
         var date = $("#date").val();
@@ -146,6 +134,17 @@ $(document).ready(function() {
         $('#holidayInfo').submit();
     });
 });
+
+//날짜 선택
+$(document).on('click', '.date', function(){
+    var selectedDate = $(this).context.id;
+    console.log(selectedDate);
+    $(this).css({"height":"60px", "background":"#fcef7e", "border-radius":"100%"});
+    $('.dates').find('.date').not($(this)).css('background','white');
+    alert('선택하신 날짜는 ' + selectedDate + " 입니다.");
+    $('#date').val(selectedDate);
+});
+
 function changeGrade(selectedAuth){
     //멤버십 선택된 value
     var gradeVal = selectedAuth.value;

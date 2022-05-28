@@ -3,19 +3,6 @@
              text-align:center; padding:5%; line-height: 250px; font-weight: 900; color: #fff;
         }
         *,.btn:focus{ box-shadow: none !important;}
-        /*.about-nav {
-            display: block; text-align: center; text-decoration: none;
-            padding: 1rem; margin-bottom: 10px; color: black; border-bottom: 1px solid #7eabf2;
-        }
-        .about-nav:hover {
-            background: #7eabf2;
-            color: white;
-
-        }
-        .about-nav.on {
-            background: #7eabf2;
-            color: white;
-        }*/
 
         /* 배너 */
         .re_banner{ width:100%; height:350px; background-image: url("../images/about_banner.png"); background-size: cover; }
@@ -85,4 +72,3 @@
         .btn_outline{border-color:#395781 !important; color:#395781 !important;}
         .btn_outline:hover{background:#395781; color:#fff !important;}
         .btn_lineup{background:#395781 !important; color:#fff !important;}
-        .btn_lineup:hover{color:orange !important;}

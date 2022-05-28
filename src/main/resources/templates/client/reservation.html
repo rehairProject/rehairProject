@@ -257,6 +257,10 @@
         </div>
         <!--    예약확인   -->
         <div class="reservation">
+            <!-- 존재하는 예약 없는 경우 -->
+            <section class="mt-5 mb-5 text-center" th:if="!${reservations}">
+                <h5>존재하는 예약이 없습니다.</h5>
+            </section>
             <!--  다가오는 예약 정보  -->
             <section class="reservation_info mt-5 text-center" th:if="${recent}">
                 <h5 class="border-3 py-3"> RECENT RESERVATION</h5>
@@ -283,8 +287,8 @@
                 <button type="button" class="btn btn_outline py-2 px-4 mt-1" th:onclick="|location.href='@{/client/reservationCancel(id=${recent.id})}'|">예약 취소</button>
             </section>
             <!--  예약 리스트  -->
-            <section class="mt-5">
-                <h5 class="text-center border-3 py-3 <!--border-bottom-->"> RESERVATION HISTORY</h5>
+            <section class="mt-5" th:if="${reservations}">
+                <h5 class="text-center border-3 py-3"> RESERVATION HISTORY</h5>
                 <div class="reservation_list_area">
                     <ul class="reservation_list">
                         <li class="card_item" th:each="reservation : ${reservations}">
