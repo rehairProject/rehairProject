@@ -5,7 +5,6 @@ import com.rehair.rehair.dto.ScheduleDto;
 import com.rehair.rehair.repository.*;
 import com.rehair.rehair.service.EventService;
 
-import com.rehair.rehair.service.ReservationService;
 import com.rehair.rehair.service.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -35,9 +34,7 @@ public class ClientController {
 	private final EventRepository eventRepository;
 	private final ScheduleRepository scheduleRepository;
 	private final ReservationRepository reservationRepository;
-	private final ReservationService reservationService;
 	private final UserService userService;
-	private final UserRepository userRepository;
 
 	@GetMapping("/about")
 	public String about() {
@@ -49,7 +46,7 @@ public class ClientController {
 		String currentUsername = principal.getName();
 		User currentUserInfo = userService.currentUserInfo(currentUsername);
 
-		List<Reservation> reservations = reservationRepository.findUseJPQL(currentUserInfo);
+		List<Reservation> reservations = reservationRepository.findByUser(currentUserInfo);
 		Reservation recent;
 		if (ObjectUtils.isEmpty(reservations)){
 			recent = null;

@@ -33,116 +33,76 @@
                 <button type="button" class="btn re_btn m-0 py-2">회원관리</button>
             </div>
         </div>
-        <!-- 예약관리 -->
+        <!-- 매출관리 -->
+        <div class="mt-5"></div>
         <div class="todayReservation tab on">
             <div class="card">
                 <div class="card-header">
-                    <i class="fas fa-table me-1"></i>
-                    당일 예약자 리스트
+                    <i class="fas fa-table me-1"></i> 예약 총 매출 현황
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3 text-end">
                             <div class="input-group mb-3">
-                                <select class="custom-select w-75 ms-3" aria-label="Example select with button addon">
-                                    <option selected>로그인한 디자이너</option>
-                                    <option value="1">디자이너1</option>
-                                    <option value="2">디자이너2</option>
-                                    <option value="3">디자이너3</option>
-                                </select>
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button">검색</button>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    오늘의 중점사항 (기능 미정)
-                                </div>
-                                <div class="card-body"><canvas width="100%" height="160"></canvas></div>
+                                <form th:action method="get">
+                                    <select class="form-select d-inline-block" aria-label="Default select example" id="reservationYear" name="reservationYear">
+                                        <option th:value="${nowYear}-2" th:text="${nowYear}-2"></option>
+                                        <option th:value="${nowYear}-1" th:text="${nowYear}-1"></option>
+                                        <option selected th:value="${nowYear}" th:text="${nowYear}"></option>
+                                    </select>
+                                    <select class="form-select" aria-label="Default select example" id="reservationMonth" name="reservationMonth">
+                                        <option selected>월 선택</option>
+                                        <option value="01">1</option>
+                                        <option value="02">2</option>
+                                        <option value="03">3</option>
+                                        <option value="04">4</option>
+                                        <option value="05">5</option>
+                                        <option value="06">6</option>
+                                        <option value="07">7</option>
+                                        <option value="08">8</option>
+                                        <option value="09">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="submit">검색</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">일자</th>
-                                    <th scope="col">성명</th>
-                                    <th scope="col">전화번호</th>
-                                    <th scope="col">선택옵션</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr id="#1" onclick="confirmmation()">
-                                    <th scope="row">1</th>
-                                    <td>2022-04-29 09:30</td>
-                                    <td>김철수</td>
-                                    <td>010-8538-5505</td>
-                                    <td>남성컷</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>2022-04-30 09:30</td>
-                                    <td>김철수</td>
-                                    <td>010-8538-5505</td>
-                                    <td>남성컷</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>2022-04-29 09:30</td>
-                                    <td>김철수</td>
-                                    <td>010-8538-5505</td>
-                                    <td>남성컷</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>2022-04-29 09:30</td>
-                                    <td>김철수</td>
-                                    <td>010-8538-5505</td>
-                                    <td>남성컷</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>2022-04-29 09:30</td>
-                                    <td>김철수</td>
-                                    <td>010-8538-5505</td>
-                                    <td>남성컷</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">6</th>
-                                    <td>2022-04-29 09:30</td>
-                                    <td>김철수</td>
-                                    <td>010-8538-5505</td>
-                                    <td>남성컷</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div class="col-md-3 text-end">
+                            <p> 총 예약 매출: </p>
+                            <p> 총 예약 건수: </p>
                         </div>
+                    </div>
+                    <div class="row">
                     </div>
                 </div>
             </div>
             <div class="card mt-5">
-                <div class="card-header">
-                    예약 확정 내역
-                </div>
+                <div class="card-header">상세 리스트</div>
                 <div class="card-body">
-                    <table class="table">
-                        <thead class="thead-dark">
+                    <table class="table table-sm">
+                        <caption>List of Reservations</caption>
+                        <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">일자</th>
-                            <th scope="col">성명</th>
-                            <th scope="col">전화번호</th>
-                            <th scope="col">선택옵션</th>
+                            <th class="col-1">NO</th>
+                            <th class="col-2"></th>
+                            <th class="col-2"></th>
+                            <th class="col-2"></th>
+                            <th class="col-2"></th>
+                            <th class="col-3"></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>2022-04-29 09:30</td>
-                            <td>김철수</td>
-                            <td>010-8538-5505</td>
-                            <td>남성컷</td>
+                        <tr th:each="reservation : ${reservations}">
+                            <td th:text="${reservation.id}"></td>
+                            <td th:text="${reservation.user.name}"></td>
+                            <td th:text="${reservation.designer}"></td>
+                            <td th:text="${reservation.day}"></td>
+                            <td th:text="${reservation.price}"></td>
+                            <td th:text="${reservation.status}"></td>
                         </tr>
                         </tbody>
                     </table>

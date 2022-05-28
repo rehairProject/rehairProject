@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +11,7 @@
     <title>EVENT</title>
 </head>
 <body>
-<div class="container">
+<div class="container" sec:authorize="hasRole('ADMIN')">
     <div th:insert="header.html" class="header"></div>
     <div class="re_banner mb-5">
         <h1>EVENT</h1>
@@ -24,9 +25,7 @@
         <div class="mb-3">
             <input type="text" class="form-control" placeholder="제목을 입력하세요" id="title" th:field="*{title}">
         </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="작성자를 입력하세요" id="username" th:field="*{username}">
-        </div>
+        <input type="hidden" th:value="${#authentication.name}" id="username" name="username">
         <div class="mb-3">
         <input class="form-control mb-3" type="file" id="upload" name="file">
             <div class="select_img"><img src="" /></div>
