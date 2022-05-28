@@ -144,3 +144,27 @@ $(document).on('click', '.date', function(){
     alert('선택하신 날짜는 ' + selectedDate + " 입니다.");
     $('#date').val(selectedDate);
 });
+
+function changeGrade(selectedAuth){
+    //멤버십 선택된 value
+    var gradeVal = selectedAuth.value;
+
+    var tr = selectedAuth.parentNode.parentNode.parentNode;
+    var username = tr.children[1].innerText;
+
+    selectedAuth.parentNode.children[0].value = username;
+    selectedAuth.parentNode.submit();
+}
+
+
+
+function changeAuth(selectedGrade){
+    //멤버십 선택된 value
+    var gradeVal = selectedGrade.value;
+
+    var tr = selectedGrade.parentNode.parentNode.parentNode;
+    var username = tr.children[1].innerText;
+
+    selectedGrade.parentNode.children[0].value = username;
+    selectedGrade.parentNode.submit();
+}
