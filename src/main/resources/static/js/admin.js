@@ -72,11 +72,6 @@ $(document).ready(function() {
 
 
 });
-//예약관리
-function payComplete(obj) {
-    var tr = obj.parentNode.parentNode;
-    tr.children[0].submit();
-   }
 
 function changeGrade(selectedAuth){
     //멤버십 선택된 value

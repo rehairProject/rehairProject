@@ -150,7 +150,7 @@ public class HomeController {
         model.addAttribute("reservations", allReservations);
         model.addAttribute("todayReservations", todayReservations);
         model.addAttribute("completeTodayReservation", completeTodayReservation);
-        return "admin_designer";
+        return "designer";
     }
     @PostMapping("/designer/reservationComplete")
     public String reservationComplete(@RequestParam(required = false) Long todayId){

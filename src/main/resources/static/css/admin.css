@@ -44,11 +44,14 @@ box-sizing:border-box;
 }
 /* 디자이너 */
 .designer-bg {height: 50px; line-height: 50px;}
+
 /* 버튼 */
 .btn_outline{border-color:#395781 !important; color:#395781 !important;}
 .btn_outline:hover{background:#395781; color:#fff !important;}
 
-.user table td,.user table th
-,.all-reservation table td, .all-reservation table th{padding:1%;}
-.user table thead th,.all-reservation table thead th{background:#f7f7f7; font-weight:normal;}
-.user table tr,.all-reservation table tr{border-bottom:1px solid #eee;}
+.user table tr{border-bottom:1px solid #eee;}
+.user table thead th{background:#f7f7f7; font-weight:normal;}
+.user table td,.user table th{padding:1%;}
+
+
+
