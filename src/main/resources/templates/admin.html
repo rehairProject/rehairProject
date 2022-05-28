@@ -11,7 +11,6 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
     <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <link href="/css/datepicker.css"  th:href="@{/css/datepicker.css}" type="text/css" rel="stylesheet">
 
     <link href="/css/admin.css"  th:href="@{/css/admin.css}" type="text/css" rel="stylesheet">
     <script src="js/admin.js" th:src="@{/js/admin.js}" type="text/javascript"></script>
@@ -28,6 +27,7 @@
         <!--   탭 버튼   -->
         <div class="text-center">
             <div class="btn-group tab_box" role="group" aria-label="Basic example">
+                <input type="hidden" th:value="${tabFlag}" id="tabFlag">
                 <button type="button" class="btn re_btn on m-0 py-2">매출관리</button>
                 <button type="button" class="btn re_btn m-0 py-2">휴무등록</button>
                 <button type="button" class="btn re_btn m-0 py-2">회원관리</button>
@@ -153,19 +153,37 @@
         <!-- 휴무등록 -->
         <div class="holiday mt-5 tab">
             <form  th:action="@{/admin/holiday}" method="post" name="holidayInfo" id="holidayInfo">
+                <input type="hidden" name="_method" value="" id="_method">
+                <div th:if="${#strings.equals(tabFlag, 'save')}" class="alert alert-primary text-center" role="alert">
+                    휴무가 등록되었습니다.
+                </div>
+                <div th:if="${#strings.equals(tabFlag, 'del')}" class="alert alert-primary text-center" role="alert">
+                    휴무가 삭제되었습니다.
+                </div>
                 <section class="cal-time-wrap mt-3">
                     <!-- 달력 -->
-                    <div id="calendar" class="calendar"></div>
-                    <input type="hidden" name="date" id="date" value="null">
-
-                    <div class="w-25">
-                        <!-- 휴무인 디자이너 보여주기 -->
-                        <h5 class="text-center bg-light designer-bg">휴무인 디자이너</h5>
-                        <div class="p-3 h-25">
-                            <p id="holidayDesigner"></p>
-                            <input type="button" class="btn btn-primary" id="holiDeleteBtn" value="삭제"></input>
+                    <div id="calendar" class="calendar">
+                        <div class="header">
+                            <a class="nav-btn go-prev text-decoration-none">&lt;</a>
+                            <div class="year-month"></div>
+                            <a class="nav-btn go-next text-decoration-none">&gt;</a>
                         </div>
-                        <!-- 디자이너 선택 -->
+                        <div class="main">
+                            <div class="days">
+                                <div class="day">일</div>
+                                <div class="day">월</div>
+                                <div class="day">화</div>
+                                <div class="day">수</div>
+                                <div class="day">목</div>
+                                <div class="day">금</div>
+                                <div class="day">토</div>
+                            </div>
+                            <div class="dates"></div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="date" id="date" value="null">
+                    <!-- 디자이너 선택 -->
+                    <div class="designerSelect">
                         <h5 class="text-center bg-light designer-bg">디자이너</h5>
                         <div class="p-3">
                             <div class="form-check mb-3 ">
@@ -195,9 +213,10 @@
                         </div>
                     </div>
                 </section>
-                <!--    다음 버튼    -->
+                <!-- 휴무 관리 버튼 -->
                 <div class="text-center my-5">
-                    <button type="button" class="btn btn_outline px-4 py-2" id="nextBtn">다음 ></button>
+                    <button type="button" class="btn btn_outline px-4 py-2" id="nextBtn">휴무등록</button>
+                    <a class="btn btn_outline px-4 py-2" id="delBtn">휴무삭제</a>
                 </div>
             </form>
         </div>

@@ -1,6 +1,14 @@
 *{
 margin:0; padding:0;
 box-sizing:border-box;
+font-family: sans-serif;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 *,.btn:focus{ box-shadow: none !important;}
 
@@ -13,7 +21,7 @@ box-sizing:border-box;
 
 /* 배너 */
 .container-fluid{padding:0;}
-.re_banner{ width:100%; height:350px; background-image: url("../images/admin.png"); background-size: cover; }
+.re_banner{ width:100%; height:350px; background-image: url("../images/designer.png"); background-size: cover; }
 .re_title{ text-align:center; padding:5%; line-height: 250px; font-weight: 900; color: #fff; }
 
 /* 탭 버튼 */
@@ -26,6 +34,10 @@ box-sizing:border-box;
 .mainWrap div.tab{display:none;}
 .mainWrap div.on{display:block;}
 
+/* 당일예약 */
+.table-hover tbody tr:hover{
+     background-color: #D2D2D2;
+}
 /* 달력 */
 .calendar{
     width: 600px;
@@ -84,6 +96,7 @@ box-sizing:border-box;
 .date:nth-child(7n){
     color: #0099ff;
 }
+
 .other {
     opacity: 0.2;
 }
@@ -105,26 +118,9 @@ box-sizing:border-box;
     border-radius: 50%;
     content: '';
 }
-.go-next, .go-prev {
-    color: #000;
-}
 .holidayDesigner {
     display: inline-block;
     color: orange;
     font-weight: 600;
     padding: 20px 0 0 0;
 }
-/* 디자이너 */
-.designer-bg {height: 50px; line-height: 50px;}
-.designerSelect {width: 300px; margin-left: 50px;}
-
-/* 다음 버튼 */
-.btn_outline{border-color:#395781 !important; color:#395781 !important;}
-.btn_outline:hover{background:#395781; color:#fff !important;}
-
-/* 검색 버튼 */
-.search_btn{border-color:#395781 !important; color:#395781 !important;}
-.search_btn:hover{background:#395781; color:#fff !important;}
-
-.user table td,.user table th{padding:1%;}
-.user table thead th{background:#aaa; color:#fff; }
