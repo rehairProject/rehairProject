@@ -57,9 +57,10 @@
 							<div class="input-group mb-3">
 							<form th:action method="get">
 								<select class="form-select d-inline-block" aria-label="Default select example" id="reservationYear" name="reservationYear">
-									<option selected>년도 선택</option>
-									<option th:value="${nowYear}" th:text="${nowYear}"></option>
-								</select> 
+									<option th:value="${nowYear}-2" th:text="${nowYear}-2"></option>
+									<option th:value="${nowYear}-1" th:text="${nowYear}-1"></option>
+									<option selected th:value="${nowYear}" th:text="${nowYear}"></option>
+								</select>
 								<select class="form-select" aria-label="Default select example" id="reservationMonth" name="reservationMonth">
 									<option selected>월 선택</option>
 									<option value="01">1</option>
@@ -82,6 +83,8 @@
 							</div>
 						</div>
 						<div class="col-md-3 text-end">
+							<p> 총 예약 매출: </p>
+							<p> 총 예약 건수: </p>
 						</div>
 					</div>
 					<div class="row">

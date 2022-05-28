@@ -46,7 +46,7 @@ public class ClientController {
 		String currentUsername = principal.getName();
 		User currentUserInfo = userService.currentUserInfo(currentUsername);
 
-		List<Reservation> reservations = reservationRepository.findUseJPQL(currentUserInfo);
+		List<Reservation> reservations = reservationRepository.findByUser(currentUserInfo);
 		Reservation recent;
 		if (ObjectUtils.isEmpty(reservations)){
 			recent = null;
