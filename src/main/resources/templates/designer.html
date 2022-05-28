@@ -161,8 +161,29 @@
     </div>
 
     <!-- 휴무확인 -->
-    <div class="user tab">
-
+    <div class="holiday tab">
+        <section class="cal-time-wrap">
+            <!-- 달력 -->
+            <div id="calendar" class="calendar">
+                <div class="header">
+                    <button class="nav-btn go-prev">&lt;</button>
+                    <div class="year-month"></div>
+                    <button class="nav-btn go-next">&gt;</button>
+                </div>
+                <div class="main">
+                    <div class="days">
+                        <div class="day">일</div>
+                        <div class="day">월</div>
+                        <div class="day">화</div>
+                        <div class="day">수</div>
+                        <div class="day">목</div>
+                        <div class="day">금</div>
+                        <div class="day">토</div>
+                    </div>
+                    <div class="dates"></div>
+                </div>
+            </div>
+        </section>
     </div>
     <div th:insert="footer.html" class="footer"></div>
 </main>

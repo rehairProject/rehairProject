@@ -13,7 +13,7 @@ box-sizing:border-box;
 
 /* 배너 */
 .container-fluid{padding:0;}
-.re_banner{ width:100%; height:350px; background-image: url("../images/reservation.jpg"); background-size: cover; }
+.re_banner{ width:100%; height:350px; background-image: url("../images/admin.png"); background-size: cover; }
 .re_title{ text-align:center; padding:5%; line-height: 250px; font-weight: 900; color: #fff; }
 
 /* 탭 버튼 */
@@ -26,21 +26,93 @@ box-sizing:border-box;
 .mainWrap div.tab{display:none;}
 .mainWrap div.on{display:block;}
 
-/* 달력, 시간 */
-.calendar{width:100%; height:600px; margin-right:1rem; margin-bottom:3rem;}
-.selectedDate{background-color: #abecf7 !important;}
-
-.time{width:100%; }
-.timeChk:hover {background-color: transparent; opacity: 0.6;}
-.time-bg{background-color:#eee;}
-
-.accordion-button:not(.collapsed){
-    color:#000 !important;
-    background-color:#eee !important;
+/* 달력 */
+.calendar{
+    width: 600px;
+    border: 1px solid #eee;
+    padding: 15px;
 }
-.accordion-button:not(.collapsed)::after {
-    background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
-    transform: rotate(-180deg);
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.year-month {
+    margin: 0 auto;
+    font-size: 1.5rem;
+}
+.nav-btn {
+    width: 28px;
+    height: 30px;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 34px;
+    background-color: transparent;
+    cursor: pointer;
+}
+.go-today{
+    width: 75px;
+}
+.days{
+    display: flex;
+    margin: 25px 0 10px;
+}
+.day{
+    width: calc(100% / 7);
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+.dates{
+    display: flex;
+    flex-flow: row wrap;
+    height: 500px;
+}
+.date {
+    width: calc(100% / 7);
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+.day:nth-child(7n + 1),
+.date:nth-child(7n + 1){
+    color: #ff0000;
+}
+.day:nth-child(7n),
+.date:nth-child(7n){
+    color: #0099ff;
+}
+.other {
+    opacity: 0.2;
+}
+.today{
+    position: relative;
+    color: #395781;
+    font-weight: 600;
+}
+.today::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    width: 30px;
+    height; 30px;
+    display: block;
+    background-color: #ff0000;
+    border-radius: 50%;
+    content: '';
+}
+.go-next, .go-prev {
+    color: #000;
+}
+.holidayDesigner {
+    display: inline-block;
+    color: orange;
+    font-weight: 600;
+    padding: 20px 0 0 0;
 }
 /* 디자이너 */
 .designer-bg {height: 50px; line-height: 50px;}

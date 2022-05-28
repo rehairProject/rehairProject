@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="text-end">
+            <div class="text-end" sec:authorize="hasRole('ADMIN')">
                 <button type="button" th:onclick="|location.href='@{/client/event_writing}'|"
                         class="btn btn_outline px-4 py-2" >작 성</button>
             </div>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>NOTICE</title>
@@ -30,7 +31,7 @@
 			<hr class="m-0">
 			<div class="my-5 fs-5" id="content" th:text="${notice.content}">내용</div>
 		</div>
-		<div class="text-end mt-5">
+		<div class="text-end mt-5" sec:authorize="hasRole('ADMIN')">
 			<a class="btn btn-primary px-4 py-2"
 			   th:href="@{/client/notice_writing(id=${notice.id})}">수정</a>
 			<a class="btn btn-danger px-4 py-2" onclick="return deleteConfirm()" th:href="@{/client/notice_delete(id=${notice.id})}">삭제</a>

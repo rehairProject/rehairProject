@@ -103,8 +103,7 @@
 						</ul>
 					</nav>
 					</div>
-					<!-- 추후 권한처리 필요 -->
-					<div class="text-end">
+					<div class="text-end" sec:authorize="hasRole('ADMIN')">
 						<button class="btn btn_outline rounded px-4 py-2"
 							th:onclick="|location.href='@{/client/notice_writing}'|">작성</button>
 					</div>
@@ -116,7 +115,7 @@
 						<img src="images/membership.png" th:src="@{/images/membership.png}">
 					</div>
 				</div>
-
+		</div>
 			<div th:insert="footer.html" class="footer"></div>
 
 		</div>

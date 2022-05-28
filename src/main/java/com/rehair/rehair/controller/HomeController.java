@@ -23,11 +23,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class HomeController {
 
     private final ScheduleRepository scheduleRepository;
@@ -35,7 +34,6 @@ public class HomeController {
     private final ReservationRepository reservationRepository;
     private final AuthRepository authRepository;
     private final UserService userService;
-
 
     @GetMapping("/")
     public String home() {
@@ -45,7 +43,8 @@ public class HomeController {
     @GetMapping("/admin")
     public String admin(Model model,
                         @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
-                        String searchKeyword
+                        String searchKeyword,
+                        @RequestParam(required = false) String reservationYear, @RequestParam(required = false) String reservationMonth, @RequestParam(required = false, value = "tabFlag") String tabFlag
     ){
         //유저 검색
         Page<User> users = null;
@@ -54,6 +53,20 @@ public class HomeController {
         }else{
             users = userRepository.findByUsernameContaining(searchKeyword,pageable);
         }
+
+    	String day = "";
+
+    	LocalDate now = LocalDate.now();
+    	model.addAttribute("nowYear", now.toString().substring(0, 4));
+
+		if(reservationYear == null && reservationMonth == null) {
+			day = now.toString().substring(0, 7);;
+		}else {
+			day = reservationYear + "-" + reservationMonth;
+		}
+
+		List<Reservation> reservations = reservationRepository.findByDayContaining(day);
+		model.addAttribute("reservations", reservations);
 
         List<Schedule> schedules = scheduleRepository.findAll();
 
@@ -70,6 +83,10 @@ public class HomeController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("users", users);
+        model.addAttribute("tabFlag", tabFlag);
+        if (tabFlag == null){
+            model.addAttribute("tabFlag", "null");
+        }
         return "admin";
     }
 
@@ -101,15 +118,14 @@ public class HomeController {
     }
 
     @PostMapping("/admin/holiday")
-    public String holiday(@RequestParam String date, @RequestParam String designer){
-        //DB에 휴무 직원 저장
+    public String holiday(@RequestParam String date, @RequestParam(required = false) String designer){
         Schedule schedule = scheduleRepository.getById(date);
         schedule.setStatus(HolidayStatus.nameOf(designer));
         scheduleRepository.save(schedule);
-        return "redirect:/admin";
+        return "redirect:/admin?tabFlag=save";
     }
 
-    @GetMapping("admin/holiday/{date}")
+    @GetMapping("/admin/holiday/{date}")
     public @ResponseBody String holidayDesigner(@PathVariable String date){
         Schedule schedule = scheduleRepository.getById(date);
         String holidayDesigner;
@@ -122,6 +138,16 @@ public class HomeController {
         return holidayDesigner;
     }
 
+    @PostMapping("/admin/holiday/{date}")
+    public String holidayDelete(@PathVariable String date){
+        System.out.println("휴무삭제컨트롤러");
+        Schedule schedule = scheduleRepository.getById(date);
+        schedule.setStatus(null);
+        scheduleRepository.save(schedule);
+        return "redirect:/admin?tabFlag=del";
+    }
+
+    /* 디자이너 */
     @GetMapping("/designer")
     public String designerPage(Principal principal, Model model,@PageableDefault(size = 10, sort = "day", direction = Sort.Direction.DESC) Pageable pageable){
         String currentUsername = principal.getName();
@@ -160,5 +186,16 @@ public class HomeController {
         reservationRepository.save(selectedReservation.get());
         return "redirect:/designer";
     }
-}
 
+    @GetMapping("/holidayCheck")
+    public @ResponseBody Map<String, String> holidayCheck(){
+        List<Schedule> schedules = scheduleRepository.findAll();
+        Map<String, String> holidayMap = new HashMap<>();
+        for (Schedule schedule : schedules){
+            if (schedule.getStatus() != null || !ObjectUtils.isEmpty(schedule.getStatus())) {
+                holidayMap.put(schedule.getScheduleDay(), schedule.getStatus().getName());
+            }
+        }
+        return holidayMap;
+    }
+}

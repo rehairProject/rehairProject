@@ -1,6 +1,14 @@
 *{
 margin:0; padding:0;
 box-sizing:border-box;
+font-family: sans-serif;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 *,.btn:focus{ box-shadow: none !important;}
 
@@ -13,7 +21,7 @@ box-sizing:border-box;
 
 /* 배너 */
 .container-fluid{padding:0;}
-.re_banner{ width:100%; height:350px; background-image: url("../images/reservation.jpg"); background-size: cover; }
+.re_banner{ width:100%; height:350px; background-image: url("../images/designer.png"); background-size: cover; }
 .re_title{ text-align:center; padding:5%; line-height: 250px; font-weight: 900; color: #fff; }
 
 /* 탭 버튼 */
@@ -26,6 +34,96 @@ box-sizing:border-box;
 .mainWrap div.tab{display:none;}
 .mainWrap div.on{display:block;}
 
+/* 당일예약 */
+.table-hover tbody tr:hover{
+     background-color: #D2D2D2;
+}
+/* 달력 */
+.calendar{
+    width: 600px;
+    border: 1px solid #eee;
+    padding: 15px;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.year-month {
+    margin: 0 auto;
+    font-size: 1.5rem;
+}
+.nav-btn {
+    width: 28px;
+    height: 30px;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 34px;
+    background-color: transparent;
+    cursor: pointer;
+}
+.go-today{
+    width: 75px;
+}
+.days{
+    display: flex;
+    margin: 25px 0 10px;
+}
+.day{
+    width: calc(100% / 7);
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+.dates{
+    display: flex;
+    flex-flow: row wrap;
+    height: 500px;
+}
+.date {
+    width: calc(100% / 7);
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+.day:nth-child(7n + 1),
+.date:nth-child(7n + 1){
+    color: #ff0000;
+}
+.day:nth-child(7n),
+.date:nth-child(7n){
+    color: #0099ff;
+}
+
+.other {
+    opacity: 0.2;
+}
+.today{
+    position: relative;
+    color: #395781;
+    font-weight: 600;
+}
+.today::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    width: 30px;
+    height; 30px;
+    display: block;
+    background-color: #ff0000;
+    border-radius: 50%;
+    content: '';
+}
+.holidayDesigner {
+    display: inline-block;
+    color: orange;
+    font-weight: 600;
+    padding: 20px 0 0 0;
+}
 /* 버튼 */
 .btn_outline{border-color:#395781 !important; color:#395781 !important;}
 .btn_outline:hover{background:#395781; color:#fff !important;}

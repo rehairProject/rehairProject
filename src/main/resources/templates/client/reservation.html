@@ -258,7 +258,7 @@
         <!--    예약확인   -->
         <div class="reservation">
             <!--  다가오는 예약 정보  -->
-            <section class="reservation_info mt-5 text-center">
+            <section class="reservation_info mt-5 text-center" th:if="${recent}">
                 <h5 class="border-3 py-3"> RECENT RESERVATION</h5>
                 <div class="reservation_list_area text-left">
                     <ul class="reservation_list">

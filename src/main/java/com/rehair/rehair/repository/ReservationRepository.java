@@ -17,6 +17,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>{
     List<Reservation> findByUser(User currentUser);
     Page<Reservation> findByDesigner( String name, Pageable pageable);
     List<Reservation> findByDayAndDesignerAndStatus(String nowDate, String name, ReservationStatus status);
-
+    List<Reservation> findByDayContaining(String day);
 }
 
