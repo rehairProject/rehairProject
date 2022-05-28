@@ -94,7 +94,7 @@ public class ClientController {
 		reservation.setStyle(style);
 		reservation.setStatus(ReservationStatus.RESERVATION);
 		int intPrice = Integer.parseInt(price.replace(",",""));
-		reservation.setPrice(intPrice);
+		reservation.setPrice(reservation.setCalcPrice(currentUserInfo, intPrice));
 		reservation.setUser(currentUserInfo);
 		reservationRepository.save(reservation);
 

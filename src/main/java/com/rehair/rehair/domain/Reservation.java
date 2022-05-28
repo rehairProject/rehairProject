@@ -69,7 +69,7 @@ public class Reservation {
     
     // 가격 할인 로직
     
-    public int setCalcPrice(int price) {
+    public int setCalcPrice(User user, int price) {
     	int calcPrice = 0;
     	if(user.getGrade() == Grade.VIP) {
     		calcPrice = (int)(price * 0.95);
