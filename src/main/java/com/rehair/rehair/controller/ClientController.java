@@ -52,9 +52,13 @@ public class ClientController {
 		String currentUsername = principal.getName();
 		User currentUserInfo = userService.currentUserInfo(currentUsername);
 
-		List<Reservation> reservations = reservationRepository.findUseJPQL(currentUserInfo);
+		List<Reservation> reservations = reservationRepository.findByUser(currentUserInfo);
+		if(reservations.isEmpty()){
+			model.addAttribute("recent", new Reservation());
+		}else {
+			model.addAttribute("recent", reservations.get(0));
+		}
 		model.addAttribute("reservations", reservations);
-		model.addAttribute("recent", reservations.get(0));
 		model.addAttribute("tabFlag", tabFlag);
 		return "client/reservation";
 	}

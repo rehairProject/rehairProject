@@ -68,9 +68,36 @@ $(document).ready(function() {
         $("#reservationDesigner").val(designer);
         $("#holidayInfo").submit();
     });
-});
 
+
+
+});
 //예약관리
-function confirmmation() {
-    confirm("금일 09:30 김철수님 방문 확정하시겠습니까?");
+function payComplete(obj) {
+    var tr = obj.parentNode.parentNode;
+    tr.children[0].submit();
+   }
+
+function changeGrade(selectedAuth){
+    //멤버십 선택된 value
+    var gradeVal = selectedAuth.value;
+
+    var tr = selectedAuth.parentNode.parentNode.parentNode;
+    var username = tr.children[1].innerText;
+
+    selectedAuth.parentNode.children[0].value = username;
+    selectedAuth.parentNode.submit();
+}
+
+
+
+function changeAuth(selectedGrade){
+    //멤버십 선택된 value
+    var gradeVal = selectedGrade.value;
+
+    var tr = selectedGrade.parentNode.parentNode.parentNode;
+    var username = tr.children[1].innerText;
+
+    selectedGrade.parentNode.children[0].value = username;
+    selectedGrade.parentNode.submit();
 }

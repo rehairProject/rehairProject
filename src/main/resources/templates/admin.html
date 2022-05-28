@@ -204,13 +204,13 @@
 
         <!-- 직원관리 -->
         <div class="user tab">
-            <form class="mb-3 mt-4 overflow-hidden">
+            <form th:action="@{/admin}" method="get" name="search-form" class="mb-3 mt-4 overflow-hidden">
                 <div class="d-flex float-end">
-                    <input class="form-control me-2 col" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn search_btn py-2 px-4" type="submit">검 색</button>
+                    <input class="form-control me-2 col" type="search" name="searchKeyword" placeholder="아이디를 입력하세요." aria-label="Search">
+                    <button class="btn btn_outline py-2 px-4" type="submit" >검 색</button>
                 </div>
             </form>
-            <table class="table table-borderless text-center align-middle">
+            <table class="table text-center align-middle table-borderless">
                 <thead>
                 <tr>
                     <th scope="col" class="col-md-1">NO</th>
@@ -220,71 +220,62 @@
                     <th scope="col">생일</th>
                     <th scope="col">멤버십 등급</th>
                     <th scope="col">가입날짜</th>
-                    <th scope="col" class="col-md-1">권한</th>
-                    <th scope="col" class="col-md-1">블랙리스트</th>
+                    <th scope="col" class="col-md-2">권한</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>JOO</td>
-                    <td>박진주</td>
-                    <td>010-1234-7890</td>
-                    <td>2022.04.12</td>
-                    <td>WELCOME</td>
-                    <td>2022.04.12</td>
+                <tr th:each="user : ${users}">
+                    <th th:text="${indexCalculator - userStat.index}" scope="row">1</th>
+                    <td th:text="${user.username}">JOO</td>
+                    <td th:text="${user.name}">박진주</td>
+                    <td th:text="${user.phoneNumber}">010-1234-7890</td>
+                    <td th:text="${user.birth}">2022.04.12</td>
                     <td>
-                        <select class="form-select form-select-sm" aria-label="Default select example">
-                            <option selected value="1">user</option>
-                            <option value="2">designer</option>
-                        </select>
+                        <form th:action="@{/admin/gradeAuthModify}" method="get">
+                            <input type="hidden" name="selectedUser" value="">
+                            <select name="grade"class="form-select form-select-sm" id="selectBoxGrade" aria-label="Default select example" onchange="changeGrade(this)">
+                                <th:block th:each="grade : ${grades}">
+                                <option th:value="${grade}" th:text="${grade}" th:selected="${grade} == ${user.grade}"></option>
+                                </th:block>
+                            </select>
+                        </form>
                     </td>
+                    <td th:text=${#temporals.format(user.dateCreated,'yyyy-MM-dd')}>2022.04.12</td>
                     <td>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-emoji-frown-fill" viewBox="0 0 16 16">
-                            <a href="#">
-                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-2.715 5.933a.5.5 0 0 1-.183-.683A4.498 4.498 0 0 1 8 9.5a4.5 4.5 0 0 1 3.898 2.25.5.5 0 0 1-.866.5A3.498 3.498 0 0 0 8 10.5a3.498 3.498 0 0 0-3.032 1.75.5.5 0 0 1-.683.183zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
-                            </a>
-                        </svg>
-
+                        <form th:action="@{/admin/gradeAuthModify}" method="get">
+                            <input type="hidden" name="selectedUser" value="">
+                            <select name="auth" class="form-select form-select-sm" id="selectBoxAuth" onchange="changeAuth(this)" aria-label="Default select example" >
+                                <th:block th:each="auth : ${auths}">
+                                <span th:each="a : ${user.auths}">
+                                    <option th:value="${auth.name}" th:text="${auth.name}"  th:selected="${auth.name} == ${a.name}"></option>
+                                </span>
+                                </th:block>
+                            </select>
+                        </form>
                     </td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>JOO</td>
-                    <td>박진주</td>
-                    <td>010-1234-7890</td>
-                    <td>2022.04.12</td>
-                    <td>WELCOME</td>
-                    <td>2022.04.12</td>
-                    <td>
-                        <select class="form-select form-select-sm" aria-label="Default select example">
-                            <option selected value="1">user</option>
-                            <option value="2">designer</option>
-                        </select>
-                    </td>
-                    <td><button class="btn btn-outline-dark">취 소</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>JOO</td>
-                    <td>박진주</td>
-                    <td>010-1234-7890</td>
-                    <td>2022.04.12</td>
-                    <td>WELCOME</td>
-                    <td>2022.04.12</td>
-                    <td>
-                        <select class="form-select form-select-sm" aria-label="Default select example">
-                            <option selected value="1">user</option>
-                            <option value="2">designer</option>
-                        </select>
-                    </td>
-                    <td><button class="btn btn-outline-dark">등 록</button></td>
                 </tr>
                 </tbody>
             </table>
-        </div>
+            <div th:if = "${users.totalElements} != 0">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:classappend="${1 == users.pageable.pageNumber+1} ? 'disabled'">
+                            <a class="page-link" th:href="@{/admin(page=${users.pageable.pageNumber-1})}" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"  th:classappend="${i == users.pageable.pageNumber+1} ? 'disabled'" th:each="i:${#numbers.sequence(startPage, endPage)}">
+                            <a class="page-link" th:text="${i}" th:href="@{/admin(page=${i-1},searchKeyword = ${param.searchKeyword})}" href="#">1</a></li>
 
+                        <li class="page-item"  th:classappend="${users.totalPages == users.pageable.pageNumber+1} ? 'disabled'">
+                            <a class="page-link" th:href="@{/admin(page=${users.pageable.pageNumber+1})}" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
         <div th:insert="footer.html" class="footer"></div>
     </main>
 </body>
