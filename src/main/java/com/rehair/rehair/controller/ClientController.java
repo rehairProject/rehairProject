@@ -51,6 +51,7 @@ public class ClientController {
 		Reservation recent;
 		if (ObjectUtils.isEmpty(reservations)){
 			recent = null;
+			reservations = null;
 		} else {
 			recent = reservations.get(0);
 		}
