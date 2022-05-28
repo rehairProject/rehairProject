@@ -124,3 +124,10 @@ section{
     font-weight: 600;
     padding: 20px 0 0 0;
 }
+/* 버튼 */
+.btn_outline{border-color:#395781 !important; color:#395781 !important;}
+.btn_outline:hover{background:#395781; color:#fff !important;}
+
+.all-reservation table td, .all-reservation table th{padding:1%;}
+.all-reservation table thead th{background:#f7f7f7 !important; font-weight:normal;}
+.all-reservation table tr{border-bottom:1px solid #eee;}

@@ -35,6 +35,7 @@ public class ClientController {
 	private final ScheduleRepository scheduleRepository;
 	private final ReservationRepository reservationRepository;
 	private final UserService userService;
+	private final UserRepository userRepository;
 
 	@GetMapping("/about")
 	public String about() {

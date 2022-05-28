@@ -135,6 +135,28 @@ $(document).ready(function() {
     });
 });
 
+function changeGrade(selectedAuth){
+    //멤버십 선택된 value
+    var gradeVal = selectedAuth.value;
+
+    var tr = selectedAuth.parentNode.parentNode.parentNode;
+    var username = tr.children[1].innerText;
+
+    selectedAuth.parentNode.children[0].value = username;
+    selectedAuth.parentNode.submit();
+}
+
+function changeAuth(selectedGrade){
+    //멤버십 선택된 value
+    var gradeVal = selectedGrade.value;
+
+    var tr = selectedGrade.parentNode.parentNode.parentNode;
+    var username = tr.children[1].innerText;
+
+    selectedGrade.parentNode.children[0].value = username;
+    selectedGrade.parentNode.submit();
+}
+
 //날짜 선택
 $(document).on('click', '.date', function(){
     var selectedDate = $(this).context.id;
