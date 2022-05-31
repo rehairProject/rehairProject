@@ -89,6 +89,21 @@ public class HomeController {
         }
         return "admin";
     }
+    
+    @ResponseBody
+    @GetMapping("/admin/chart")
+    public List<Reservation> reservationJsonForChart(@RequestParam(required = false) String reservationYear, @RequestParam(required = false) String reservationMonth) {
+    	String day = "";
+
+    	LocalDate now = LocalDate.now();
+		if(reservationYear == null && reservationMonth == null) {
+			day = now.toString().substring(0, 7);;
+		}else {
+			day = reservationYear + "-" + reservationMonth;
+		}
+		List<Reservation> reservations = reservationRepository.findByDayContaining(day);
+    	return reservations;
+    }
 
     //멤버십 등급&권한 변경
     @GetMapping("/admin/gradeAuthModify")
