@@ -7,8 +7,7 @@ box-sizing:border-box;
 @media (min-width: 768px) {
     .cal-time-wrap{display:flex;}
     .calendar{width:70% !important; margin-bottom:1rem;  }
-    .time{width:30% !important;}
-
+    .designerSelect{width:30% !important;}
 }
 
 /* 배너 */
@@ -28,7 +27,7 @@ box-sizing:border-box;
 
 /* 달력 */
 .calendar{
-    width: 600px;
+    width:100%;
     border: 1px solid #eee;
     padding: 15px;
 }
@@ -68,7 +67,7 @@ box-sizing:border-box;
 .dates{
     display: flex;
     flex-flow: row wrap;
-    height: 500px;
+    height: 550px;
 }
 .date {
     width: calc(100% / 7);
@@ -115,6 +114,7 @@ box-sizing:border-box;
     padding: 20px 0 0 0;
 }
 /* 디자이너 */
+/*.designerSelect {margin: 0 auto; width: 25%;}*/
 .designer-bg {height: 50px; line-height: 50px;}
 
 /* 버튼 */

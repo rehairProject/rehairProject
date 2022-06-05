@@ -6,6 +6,8 @@ $(document).ready(function() {
         $(".tab_box > .re_btn").eq(1).addClass("on");
         $(".mainWrap > .tab:not(:eq(1))").hide();
         $(".mainWrap > .tab").eq(1).show();
+        $('#tabFlag').val(null);
+        tabFlag = $('#tabFlag').val();
     } else {
         $(".tab_box > .re_btn").click(function() {
             var idx = ($(this).index() -1);
@@ -15,6 +17,15 @@ $(document).ready(function() {
             $(".mainWrap > .tab").eq(idx).show();
         });
     }
+
+    $(".tab_box > .re_btn").click(function() {
+        var idx = ($(this).index() -1);
+        $(".tab_box > .re_btn").removeClass("on");
+        $(".tab_box > .re_btn").eq(idx).addClass("on");
+        $(".mainWrap > .tab:not(:eq(idx))").hide();
+        $(".mainWrap > .tab").eq(idx).show();
+    });
+
 //달력
     let date = new Date();
     const renderCalendar = () => {
