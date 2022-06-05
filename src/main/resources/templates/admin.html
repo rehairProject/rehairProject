@@ -14,6 +14,7 @@
 
     <link href="/css/admin.css"  th:href="@{/css/admin.css}" type="text/css" rel="stylesheet">
     <script src="js/admin.js" th:src="@{/js/admin.js}" type="text/javascript"></script>
+    <script src="https://www.google.com/jsapi"></script>
 </head>
 <body>
     <div class="container">
@@ -38,20 +39,19 @@
         <div class="todayReservation tab on">
             <div class="card">
                 <div class="card-header">
-                    <i class="fas fa-table me-1"></i> 예약 총 매출 현황
+                    <i class="fas fa-table me-1"></i> 월 단위 총 매출 및 점유율 현황
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3 text-end">
-                            <div class="input-group mb-3">
+                        <div class="col-sm-3 text-end">
+                            <div class="input-group d-inline-block">
                                 <form th:action method="get">
-                                    <select class="form-select d-inline-block" aria-label="Default select example" id="reservationYear" name="reservationYear">
+                                    <select class="form-select" aria-label="Default select example" id="reservationYear" name="reservationYear">
                                         <option th:value="${nowYear}-2" th:text="${nowYear}-2"></option>
                                         <option th:value="${nowYear}-1" th:text="${nowYear}-1"></option>
                                         <option selected th:value="${nowYear}" th:text="${nowYear}"></option>
                                     </select>
-                                    <select class="form-select" aria-label="Default select example" id="reservationMonth" name="reservationMonth">
-                                        <option selected>월 선택</option>
+                                    <select class="form-select mb-3" aria-label="Default select example" id="reservationMonth" name="reservationMonth">
                                         <option value="01">1</option>
                                         <option value="02">2</option>
                                         <option value="03">3</option>
@@ -66,14 +66,24 @@
                                         <option value="12">12</option>
                                     </select>
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="submit">검색</button>
+                                        <button class="btn btn-outline-secondary w-100" type="submit">검색</button>
                                     </div>
                                 </form>
                             </div>
+                            <div class="card mt-5">
+                            	<div class="card-header">
+                    			<i class="fas fa-table me-1"></i> 월 단위 총 매출 및 점유율 현황
+                    			</div>
+                           	 	<div class="card-body">
+                           	    	<p><b>월 총 매출</b> : <span id="resultPrice"></span></p>
+                            		<p>총 예약건 : <span id="resultReservation"></span></p>
+                            		<p>총 결재완료건  : <span id="resultPaymentComplete"></span></p>
+                            		<p>총 취소건 : <span id="resultCancle"></span></p>
+                            	</div>
+                			</div>
                         </div>
-                        <div class="col-md-3 text-end">
-<!--                            <p> 총 예약 매출: </p>-->
-<!--                            <p> 총 예약 건수: </p>-->
+                        <div class="col-sm-9 text-end">
+                       		 <div id="piechart" style="height: 500px;"></div>
                         </div>
                     </div>
                     <div class="row">
@@ -86,21 +96,23 @@
                     <table class="table table-sm">
                         <caption>List of Reservations</caption>
                         <thead>
-                        <tr>
+                        <tr class="text-center">
                             <th class="col-1">NO</th>
-                            <th class="col-2"></th>
-                            <th class="col-2"></th>
-                            <th class="col-2"></th>
-                            <th class="col-2"></th>
-                            <th class="col-3"></th>
+                            <th class="col-2">고객명</th>
+                            <th class="col-2">디자이너</th>
+                            <th class="col-2">날짜</th>
+                            <th class="col-2">스타일</th>
+                            <th class="col-2">가격</th>
+                            <th class="col-3">결제여부</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                         <tr th:each="reservation : ${reservations}">
-                            <td th:text="${reservation.id}"></td>
+                            <td th:text="${reservationStat.index} + 1"></td>
                             <td th:text="${reservation.user.name}"></td>
                             <td th:text="${reservation.designer}"></td>
                             <td th:text="${reservation.day}"></td>
+                            <td th:text="${reservation.style}"></td>
                             <td th:text="${reservation.price}"></td>
                             <td th:text="${reservation.status}"></td>
                         </tr>
@@ -258,4 +270,88 @@
         <div th:insert="footer.html" class="footer"></div>
     </main>
 </body>
+<script th:inline="javascript">
+	const url = new URL(window.location.href);
+	const urlParams = url.searchParams;
+
+	if(urlParams.has('reservationMonth')) {
+		$('#reservationMonth').val(urlParams.get('reservationMonth')).attr("selected", "selected");
+	}else {
+		let thisMonth = Number(new Date().getMonth()) + 1;
+		
+		thisMonth = String(thisMonth).length === 1 ? '0' + thisMonth : thisMonth;
+		$('#reservationMonth').val(thisMonth).attr("selected", "selected");
+	}
+	
+	google.charts.load('current', {packages: ['corechart', 'line']});
+	google.setOnLoadCallback(drawChart);
+
+	function drawChart(){
+		const thisChartYear = $("#reservationYear").val();
+		const thisChartMonth = $("#reservationMonth").val();
+		
+		const jsonData = $.ajax({
+			url:"/admin/chart?&reservationYear="+thisChartYear+"&reservationMonth="+thisChartMonth,
+			type: "get",
+			dataType:"json",
+			success: function(data) {
+				// 총 매출
+				let totalPrice = 0;
+				
+				// 점유율 차트 계산 위함
+				let HANNA = 0;
+				let CHUL = 0;
+				let HANA = 0;
+				let BELLISSA = 0;
+				
+				let rCount = 0; // 예약상태
+				let pcCount = 0; // 결제완료
+				let cCount = 0; // 취소된예약
+				
+				for(idx in data) {
+					if(data[idx].status == 'PAYMENT_COMPLETED') {
+						pcCount++;
+						totalPrice += data[idx].price;
+						
+						if(data[idx].designer == '김한나')
+							HANNA++;
+						else if(data[idx].designer == '장철')
+							CHUL++;
+						else if(data[idx].designer == '송하나')
+							HANA++;
+						else
+							BELLISSA++;
+					}else if(data[idx].status == 'CANCEL') {
+						cCount++;
+					}else
+						rCount++;
+				}
+				$('#resultPrice').text(totalPrice);
+				$('#resultReservation').text(pcCount+cCount+rCount);
+				$('#resultPaymentComplete').text(pcCount);
+				$('#resultCancle').text(cCount);
+				
+				const chartData = google.visualization.arrayToDataTable([
+			          ['DESIGNER', 'PAYMENT_COMPLETED'],
+			          ['HANNA',     HANNA],
+			          ['CHUL',      CHUL],
+			          ['HANA',  HANA],
+			          ['BELLISSA', BELLISSA]
+			        ]);
+				
+				const options = {
+				          title: '결제 완료 기준 월 점유율',
+				          is3D: true,
+				          width: '100%'
+				        };
+
+				const chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+				chart.draw(chartData, options);
+			},
+			async:false
+		});
+				
+	}
+</script>
 </html>
