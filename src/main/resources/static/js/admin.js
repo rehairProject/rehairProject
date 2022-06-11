@@ -2,12 +2,21 @@ $(document).ready(function() {
 //탭 버튼
     var tabFlag = $('#tabFlag').val();
     if (tabFlag != 'null'){
-        $(".tab_box > .re_btn").removeClass("on");
-        $(".tab_box > .re_btn").eq(1).addClass("on");
-        $(".mainWrap > .tab:not(:eq(1))").hide();
-        $(".mainWrap > .tab").eq(1).show();
-        $('#tabFlag').val(null);
-        tabFlag = $('#tabFlag').val();
+        if (tabFlag == 'save' || tabFlag == 'del'){
+            $(".tab_box > .re_btn").removeClass("on");
+            $(".tab_box > .re_btn").eq(1).addClass("on");
+            $(".mainWrap > .tab:not(:eq(1))").hide();
+            $(".mainWrap > .tab").eq(1).show();
+            $('#tabFlag').val(null);
+            tabFlag = $('#tabFlag').val();
+        } else if (tabFlag == 'manage') {
+            $(".tab_box > .re_btn").removeClass("on");
+            $(".tab_box > .re_btn").eq(2).addClass("on");
+            $(".mainWrap > .tab:not(:eq(2))").hide();
+            $(".mainWrap > .tab").eq(2).show();
+            $('#tabFlag').val(null);
+            tabFlag = $('#tabFlag').val();
+        }
     } else {
         $(".tab_box > .re_btn").click(function() {
             var idx = ($(this).index() -1);

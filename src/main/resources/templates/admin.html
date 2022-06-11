@@ -196,6 +196,7 @@
         <!-- 직원관리 -->
         <div class="user tab">
             <form th:action="@{/admin}" method="get" name="search-form" class="mb-3 mt-4 overflow-hidden">
+                <input type="hidden" name="tabFlag" value="manage">
                 <div class="d-flex float-end">
                     <input class="form-control me-2 col" type="search" name="searchKeyword" placeholder="아이디를 입력하세요." aria-label="Search">
                     <button class="btn btn_outline py-2 px-4" type="submit" >검 색</button>
@@ -251,15 +252,15 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         <li class="page-item" th:classappend="${1 == users.pageable.pageNumber+1} ? 'disabled'">
-                            <a class="page-link" th:href="@{/admin(page=${users.pageable.pageNumber-1})}" href="#" aria-label="Previous">
+                            <a class="page-link" th:href="@{/admin(page=${users.pageable.pageNumber-1}, tabFlag='manage')}" href="#" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <li class="page-item"  th:classappend="${i == users.pageable.pageNumber+1} ? 'disabled'" th:each="i:${#numbers.sequence(startPage, endPage)}">
-                            <a class="page-link" th:text="${i}" th:href="@{/admin(page=${i-1},searchKeyword = ${param.searchKeyword})}" href="#">1</a></li>
+                            <a class="page-link" th:text="${i}" th:href="@{/admin(page=${i-1},searchKeyword = ${param.searchKeyword}, tabFlag='manage')}" href="#">1</a></li>
 
                         <li class="page-item"  th:classappend="${users.totalPages == users.pageable.pageNumber+1} ? 'disabled'">
-                            <a class="page-link" th:href="@{/admin(page=${users.pageable.pageNumber+1})}" href="#" aria-label="Next">
+                            <a class="page-link" th:href="@{/admin(page=${users.pageable.pageNumber+1}, tabFlag='manage')}" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
