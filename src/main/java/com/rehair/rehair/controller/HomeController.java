@@ -103,7 +103,7 @@ public class HomeController {
 
     //멤버십 등급&권한 변경
     @GetMapping("/admin/gradeAuthModify")
-    public String admin(Grade grade, String selectedUser,String auth, Model model){
+    public String admin(Grade grade, String selectedUser,String auth, String page, Model model){
         User user = userRepository.findByUsername(selectedUser);
         if(grade!=null){
             user.setGrade(grade);
@@ -122,7 +122,7 @@ public class HomeController {
         }
         userRepository.save(user);
         model.addAttribute("tabFlag","manage");
-        return "redirect:/admin";
+        return "redirect:/admin?page=" + page;
     }
 
     @PostMapping("/admin/holiday")

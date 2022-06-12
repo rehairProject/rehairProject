@@ -225,6 +225,7 @@
                     <td>
                         <form th:action="@{/admin/gradeAuthModify}" method="get">
                             <input type="hidden" name="selectedUser" value="">
+                            <input type="hidden" name="page" th:value="${users.pageable.pageNumber}">
                             <select name="grade"class="form-select form-select-sm" id="selectBoxGrade" aria-label="Default select example" onchange="changeGrade(this)">
                                 <th:block th:each="grade : ${grades}">
                                 <option th:value="${grade}" th:text="${grade}" th:selected="${grade} == ${user.grade}"></option>
@@ -236,6 +237,7 @@
                     <td>
                         <form th:action="@{/admin/gradeAuthModify}" method="get">
                             <input type="hidden" name="selectedUser" value="">
+                            <input type="hidden" name="page" th:value="${users.pageable.pageNumber}">
                             <select name="auth" class="form-select form-select-sm" id="selectBoxAuth" onchange="changeAuth(this)" aria-label="Default select example" >
                                 <th:block th:each="auth : ${auths}">
                                 <span th:each="a : ${user.auths}">
