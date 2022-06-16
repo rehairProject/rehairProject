@@ -7,7 +7,6 @@ import com.rehair.rehair.repository.ScheduleRepository;
 import com.rehair.rehair.repository.UserRepository;
 import com.rehair.rehair.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -15,13 +14,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.*;
 
@@ -89,31 +85,43 @@ public class HomeController {
         }
         return "admin";
     }
+    
+    @ResponseBody
+    @GetMapping("/admin/chart")
+    public List<Reservation> reservationJsonForChart(@RequestParam(required = false) String reservationYear, @RequestParam(required = false) String reservationMonth) {
+    	String day = "";
+
+    	LocalDate now = LocalDate.now();
+		if(reservationYear == null && reservationMonth == null) {
+			day = now.toString().substring(0, 7);;
+		}else {
+			day = reservationYear + "-" + reservationMonth;
+		}
+		List<Reservation> reservations = reservationRepository.findByDayContaining(day);
+    	return reservations;
+    }
 
     //멤버십 등급&권한 변경
     @GetMapping("/admin/gradeAuthModify")
-    public String admin(Grade grade, String selectedUser,String auth){
-        //멤버십등급 변경
-        System.out.println(grade);
-        System.out.println(selectedUser);
-        System.out.println(auth); //ROLE_ADMIN
-
+    public String admin(Grade grade, String selectedUser,String auth, Model model){
         User user = userRepository.findByUsername(selectedUser);
-
         if(grade!=null){
             user.setGrade(grade);
-        }else if(auth!=null){
-            System.out.println(auth);
-
-            user.getAuths().get(0).setId(2l);
-            System.out.println("여기");
-            System.out.println(user.getAuths().get(0).getId());
-            System.out.println(user.getAuths().get(0).getName());
-            System.out.println(user.getName());
         }
 
+        Auth saveAuth = new Auth();
+        if(auth!=null && auth.equals("ROLE_ADMIN")) {
+            saveAuth.setId(1L);
+            user.getAuths().set(0, saveAuth);
+        } else if(auth!=null && auth.equals("ROLE_DESIGNER")) {
+            saveAuth.setId(2L);
+            user.getAuths().set(0, saveAuth);
+        } else if(auth!=null && auth.equals("ROLE_USER")) {
+            saveAuth.setId(3L);
+            user.getAuths().set(0, saveAuth);
+        }
         userRepository.save(user);
-
+        model.addAttribute("tabFlag","manage");
         return "redirect:/admin";
     }
 
@@ -140,7 +148,6 @@ public class HomeController {
 
     @PostMapping("/admin/holiday/{date}")
     public String holidayDelete(@PathVariable String date){
-        System.out.println("휴무삭제컨트롤러");
         Schedule schedule = scheduleRepository.getById(date);
         schedule.setStatus(null);
         scheduleRepository.save(schedule);

@@ -2,10 +2,21 @@ $(document).ready(function() {
 //탭 버튼
     var tabFlag = $('#tabFlag').val();
     if (tabFlag != 'null'){
-        $(".tab_box > .re_btn").removeClass("on");
-        $(".tab_box > .re_btn").eq(1).addClass("on");
-        $(".mainWrap > .tab:not(:eq(1))").hide();
-        $(".mainWrap > .tab").eq(1).show();
+        if (tabFlag == 'save' || tabFlag == 'del'){
+            $(".tab_box > .re_btn").removeClass("on");
+            $(".tab_box > .re_btn").eq(1).addClass("on");
+            $(".mainWrap > .tab:not(:eq(1))").hide();
+            $(".mainWrap > .tab").eq(1).show();
+            $('#tabFlag').val(null);
+            tabFlag = $('#tabFlag').val();
+        } else if (tabFlag == 'manage') {
+            $(".tab_box > .re_btn").removeClass("on");
+            $(".tab_box > .re_btn").eq(2).addClass("on");
+            $(".mainWrap > .tab:not(:eq(2))").hide();
+            $(".mainWrap > .tab").eq(2).show();
+            $('#tabFlag').val(null);
+            tabFlag = $('#tabFlag').val();
+        }
     } else {
         $(".tab_box > .re_btn").click(function() {
             var idx = ($(this).index() -1);
@@ -15,6 +26,15 @@ $(document).ready(function() {
             $(".mainWrap > .tab").eq(idx).show();
         });
     }
+
+    $(".tab_box > .re_btn").click(function() {
+        var idx = ($(this).index() -1);
+        $(".tab_box > .re_btn").removeClass("on");
+        $(".tab_box > .re_btn").eq(idx).addClass("on");
+        $(".mainWrap > .tab:not(:eq(idx))").hide();
+        $(".mainWrap > .tab").eq(idx).show();
+    });
+
 //달력
     let date = new Date();
     const renderCalendar = () => {
@@ -135,16 +155,6 @@ $(document).ready(function() {
     });
 });
 
-//날짜 선택
-$(document).on('click', '.date', function(){
-    var selectedDate = $(this).context.id;
-    console.log(selectedDate);
-    $(this).css({"height":"60px", "background":"#fcef7e", "border-radius":"100%"});
-    $('.dates').find('.date').not($(this)).css('background','white');
-    alert('선택하신 날짜는 ' + selectedDate + " 입니다.");
-    $('#date').val(selectedDate);
-});
-
 function changeGrade(selectedAuth){
     //멤버십 선택된 value
     var gradeVal = selectedAuth.value;
@@ -156,8 +166,6 @@ function changeGrade(selectedAuth){
     selectedAuth.parentNode.submit();
 }
 
-
-
 function changeAuth(selectedGrade){
     //멤버십 선택된 value
     var gradeVal = selectedGrade.value;
@@ -168,3 +176,13 @@ function changeAuth(selectedGrade){
     selectedGrade.parentNode.children[0].value = username;
     selectedGrade.parentNode.submit();
 }
+
+//날짜 선택
+$(document).on('click', '.date', function(){
+    var selectedDate = $(this).context.id;
+    console.log(selectedDate);
+    $(this).css({"height":"60px", "background":"#fcef7e", "border-radius":"100%"});
+    $('.dates').find('.date').not($(this)).css('background','white');
+    alert('선택하신 날짜는 ' + selectedDate + " 입니다.");
+    $('#date').val(selectedDate);
+});
