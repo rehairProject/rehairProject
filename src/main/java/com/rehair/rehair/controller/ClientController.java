@@ -47,16 +47,24 @@ public class ClientController {
 		String currentUsername = principal.getName();
 		User currentUserInfo = userService.currentUserInfo(currentUsername);
 
-		List<Reservation> reservations = reservationRepository.findByUser(currentUserInfo);
+		//유저의 예약된 내역들
+		ReservationStatus completed = ReservationStatus.PAYMENT_COMPLETED;
+		ReservationStatus cancel = ReservationStatus.CANCEL;
+		ReservationStatus reservation = ReservationStatus.RESERVATION;
+		List<Reservation> history = reservationRepository.findByUserAndStatusNotLikeOrderByDayDesc(currentUserInfo,reservation);
+		List<Reservation> reservations = reservationRepository.findByUserAndStatusOrderByDayDesc(currentUserInfo,reservation);
 		Reservation recent;
 		if (ObjectUtils.isEmpty(reservations)){
 			recent = null;
-			reservations = null;
 		} else {
 			recent = reservations.get(0);
 		}
 
-		model.addAttribute("reservations", reservations);
+		if (ObjectUtils.isEmpty(history)){
+			history = null;
+		}
+
+		model.addAttribute("history", history);
 		model.addAttribute("recent", recent);
 		model.addAttribute("tabFlag", tabFlag);
 		return "client/reservation";

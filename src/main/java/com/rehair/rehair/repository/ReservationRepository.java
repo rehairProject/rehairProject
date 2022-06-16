@@ -14,7 +14,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long>{
-    List<Reservation> findByUser(User currentUser);
+    List<Reservation> findByUserAndStatusNotLikeOrderByDayDesc(User currentUser,ReservationStatus reservation);
+    List<Reservation> findByUserAndStatusOrderByDayDesc(User currentUser,ReservationStatus reservation);
     Page<Reservation> findByDesigner( String name, Pageable pageable);
     List<Reservation> findByDayAndDesignerAndStatus(String nowDate, String name, ReservationStatus status);
     List<Reservation> findByDayContaining(String day);

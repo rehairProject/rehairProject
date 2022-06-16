@@ -154,8 +154,8 @@ public class HomeController {
         User currentUserInfo = userService.currentUserInfo(currentUsername);
         String name = currentUserInfo.getName();
 
-//        String nowDate = LocalDate.now().toString();
-        String nowDate = "2022-05-16";
+        String nowDate = LocalDate.now().toString();
+//        String nowDate = "2022-05-16";
 
         //로그인된 디자이너 본인 전체 예약리스트
         Page<Reservation> allReservations = reservationRepository.findByDesigner(name, pageable);
