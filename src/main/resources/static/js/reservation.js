@@ -38,7 +38,6 @@ $(document).ready(function() {
             }).done(function(resp){
                 holidayDesigners.splice(0, holidayDesigners.length);
                 reservations = resp.reservations;
-
                 var radioDesigners = [];
                 for (var i=1; i<5; i++){
                     radioDesigners.push($('#designer' + i).val());
@@ -100,23 +99,25 @@ $(document).ready(function() {
         }
 
         var rt = [];
+        var rd = [];
         $.each(reservations, function(idx, item){
             rt.push(reservations[idx].time);
         });
         if (rt.indexOf(selectedTime) > -1){
             $.each(reservations, function(idx, item){
-                var rd = [];
-                if (selectedTime == reservations[idx].time){
+                if (selectedTime == reservations[idx].time && reservations[idx].status == 'RESERVATION'){
                     rd.push(reservations[idx].designer);
+                    console.log(holidayDesigners);
+                    console.log('rd: ' + rd);
                     $.each(holidayDesigners, function(idxH, itemH){
+                        if (holidayDesigners[idxH] == '휴무'){
+                             $('input[name=designer]').eq(idxH).attr('disabled', true);
+                        } else {
+                            $('input[name=designer]').eq(idxH).attr('disabled', false);
+                        }
                         $.each(rd, function(i, it){
-                                if (holidayDesigners[idxH] == '휴무'){
-                                    $('input[name=designer]').eq(idxH).attr('disabled', true);
-                                } else if (holidayDesigners[idxH] != '휴무'){
-                                    $('input[name=designer]').eq(idxH).attr('disabled', false);
-                                if (rd[i] == holidayDesigners[idxH]){
-                                    $('input[name=designer]').eq(idxH).attr('disabled', true);
-                                }
+                            if (rd[i] == holidayDesigners[idxH]){
+                                $('input[name=designer]').eq(idxH).attr('disabled', true);
                             }
                         });
                     });

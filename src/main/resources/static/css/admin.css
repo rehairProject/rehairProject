@@ -4,7 +4,7 @@ box-sizing:border-box;
 }
 *,.btn:focus{ box-shadow: none !important;}
 
-@media (min-width: 768px)
+@media (min-width: 768px) {
     .cal-time-wrap{display:flex;}
     .calendar{width:70% !important; margin-bottom:1rem;  }
     .designerSelect{width:30% !important;}
