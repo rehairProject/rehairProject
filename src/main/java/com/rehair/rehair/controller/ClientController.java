@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
@@ -74,7 +75,19 @@ public class ClientController {
 	}
 
 	@PostMapping("/reservation_check")
-	public String reservationCheck(@RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("designer") String designer, @RequestParam("style") String style, Model model, @RequestParam("price") String price) {
+	public String reservationCheck(@RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("designer") String designer, @RequestParam("style") String style, Model model, @RequestParam("price") String price, Authentication authentication) {
+		String username = authentication.getName();
+		User user = userRepository.findByUsername(username);
+		List<Reservation> reservations = user.getReservations();
+
+		for (int i=0; i<reservations.size(); i++){
+			if (reservations.get(i).getDay().equals(date)){
+				model.addAttribute("sameDateFail", true);
+			} else{
+				model.addAttribute("sameDateFail", false);
+			}
+		}
+
 		model.addAttribute("date", date);
 		model.addAttribute("time", time);
 		model.addAttribute("designer", designer);

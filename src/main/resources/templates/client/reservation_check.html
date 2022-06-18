@@ -30,8 +30,12 @@
         </div>
     </div>
     <section class="reservation_info mt-5 text-center">
-        <h5 class="border-3 py-3 <!--border-bottom-->"> RESERVATION CHECK</h5>
+        <h5 class="border-3 py-3"> RESERVATION CHECK</h5>
         <form th:action="@{/client/reservation}" method="post">
+            <div th:if="${sameDateFail}" class="alert alert-warning text-center" role="alert">
+                <span th:text="${date}"></span> 에 이미 예약이 존재합니다. <br>
+                다른 날짜로 예약해주세요.
+            </div>
             <input type="hidden" name="date" th:value="${date}">
             <input type="hidden" name="time" th:value="${time}">
             <input type="hidden" name="designer" th:value="${designer}">
@@ -58,7 +62,7 @@
                 </tbody>
             </table>
             <button type="button" class="btn btn_outline mt-3 px-4 py-2" onclick="javascript:window.history.go(-1);">이 전</button>
-            <button type="submit" class="btn btn_outline mt-3 px-4 py-2" onclick="confirm('예약하시겠습니까?')">예 약</button>
+            <button th:if="${!sameDateFail}" type="submit" class="btn btn_outline mt-3 px-4 py-2" onclick="confirm('예약하시겠습니까?')">예 약</button>
         </form>
     </section>
 

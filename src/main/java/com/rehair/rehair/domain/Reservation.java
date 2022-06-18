@@ -23,8 +23,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Getter
-@Setter
+@Getter @Setter
 public class Reservation {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
