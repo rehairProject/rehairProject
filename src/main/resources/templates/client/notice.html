@@ -60,7 +60,7 @@
 					<div th:if="${param.deleteStatus}"
 						class="alert alert-danger text-center" role="alert">정상적으로 삭제
 						되었습니다.</div>
-					<table class="table table-striped">
+					<table class="table table-hover">
 						<thead>
 							<tr id="firstRow">
 								<th class="col-3">NO</th>
@@ -75,7 +75,7 @@
 							<tr th:each="notice : ${notices}">
 								<td th:text="${indexCalculator - noticeStat.index}"></td>
 								<!-- onclick="displayView()" class="clickRow" -->
-								<td><a th:text="${notice.title}"
+								<td><a th:text="${notice.title}" class="text-decoration-none text-black"
 									th:href="@{/client/notice_detail(id=${notice.id})}"></a></td>
 								<td
 									th:text="${#temporals.format(notice.dateCreated, 'yyyy-MM-dd')}"></td>
@@ -88,7 +88,7 @@
 							<li class="page-item"
 								th:classappend="${1 == notices.pageable.pageNumber + 1} ? 'disabled'">
 								<a class="page-link"
-								th:href="@{/client/notice(page=${notices.pageable.pageNumber - 1})}">Previous</a>
+								th:href="@{/client/notice(page=${notices.pageable.pageNumber - 1})}">&laquo;</a>
 							</li>
 							<li class="page-item"
 								th:classappend="${i == notices.pageable.pageNumber + 1} ? 'disabled'"
@@ -98,7 +98,7 @@
 							<li class="page-item"
 								th:classappend="${notices.totalPages == notices.pageable.pageNumber + 1} ? 'disabled'">
 								<a class="page-link" href="#"
-								th:href="@{/client/notice(page=${notices.pageable.pageNumber + 1})}">Next</a>
+								th:href="@{/client/notice(page=${notices.pageable.pageNumber + 1})}">&raquo;</a>
 							</li>
 						</ul>
 					</nav>

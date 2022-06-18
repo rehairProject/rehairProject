@@ -2,6 +2,7 @@
 margin:0; padding:0;
 box-sizing:border-box;
 font-family: sans-serif;
+
 }
 
 section{
@@ -31,6 +32,17 @@ section{
 .table-hover tbody tr:hover{
      background-color: #D2D2D2;
 }
+
+/* 버튼 */
+.btn_outline{border-color:#395781 !important; color:#395781 !important;}
+.btn_outline:hover{background:#395781; color:#fff !important;}
+.btn_fill{color:#fff !important; background:#395781 !important;}
+
+/* 전체예약 */
+.all-reservation table td, .all-reservation table th{padding:1%;}
+.all-reservation table thead th{background:#f7f7f7; font-weight:normal;}
+.all-reservation table tr{border-bottom:1px solid #eee;}
+
 /* 달력 */
 .calendar{
     width: 800px;

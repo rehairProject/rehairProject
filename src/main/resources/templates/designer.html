@@ -38,20 +38,22 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="input-group mb-3">
-                            <select class="custom-select w-75 ms-3" aria-label="Example select with button addon">
-                                <option selected>로그인한 디자이너</option>
-                                <option value="1">디자이너1</option>
-                                <option value="2">디자이너2</option>
-                                <option value="3">디자이너3</option>
-                            </select>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">검색</button>
+                        <form method="get" th:action="@{/designer}">
+                            <div class="input-group mb-3">
+                                <select name="designerName" class="custom-select w-75 ms-3" aria-label="Example select with button addon">
+                                    <option th:value="김한나" th:Selected="${username} == '김한나'">김한나</option>
+                                    <option th:value="장철" th:Selected="${username} == '장철'">장철</option>
+                                    <option th:value="송하나" th:Selected="${username} == '송하나'">송하나</option>
+                                    <option th:value="안벨리사" th:Selected="${username} == '안벨리사'">안벨리사</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn btn_fill" type="submit">검색</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="col-md-8">
-                        <table class="table table-hover align-middle text-center">
+                        <table class="table align-middle text-center">
                             <thead>
                             <tr>
                                 <th scope="col">NO</th>

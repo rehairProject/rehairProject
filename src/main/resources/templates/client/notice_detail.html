@@ -18,9 +18,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<div class="re_banner mb-5">
 			<h1>NOTICE & MEMBERSHIP</h1>
 		</div>
-		<div class="text-end">
-			<button class="btn btn_lineup rounded px-4 py-2"
-					th:onclick="|location.href='@{/client/notice}'|">목록</button>
+		<div class="text-end mt-5" sec:authorize="hasRole('ADMIN')">
+			<a class="btn btn_lineup px-3" th:onclick="|location.href='@{/client/notice}'|">목록</a>
+			<a class="btn btn_outline px-3 " th:href="@{/client/notice_writing(id=${notice.id})}">수정</a>
+			<a class="btn btn_outline px-3 "th:href="@{/client/notice_delete(id=${notice.id})}" onclick="confirm('삭제하시겠습니까?')">삭제</a>
 		</div>
 		<div>
 			<h2 class="mb-2" id="title" th:text="${notice.title}">제목</h2>
@@ -30,11 +31,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			</div>
 			<hr class="m-0">
 			<div class="my-5 fs-5" id="content" th:text="${notice.content}">내용</div>
-		</div>
-		<div class="text-end mt-5" sec:authorize="hasRole('ADMIN')">
-			<a class="btn btn-primary px-4 py-2"
-			   th:href="@{/client/notice_writing(id=${notice.id})}">수정</a>
-			<a class="btn btn-danger px-4 py-2" onclick="return deleteConfirm()" th:href="@{/client/notice_delete(id=${notice.id})}">삭제</a>
 		</div>
 
 		<div th:insert="footer.html" class="footer"></div>

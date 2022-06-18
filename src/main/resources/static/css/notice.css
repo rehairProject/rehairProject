@@ -21,6 +21,11 @@
 .clickRow { cursor:pointer; text-decoration: none; color: black; }
 tbody tr #hideRow { display:none; }
 
+/* 버튼 */
+.btn_outline{border-color:#395781 !important; color:#395781 !important;}
+.btn_outline:hover{background:#395781; color:#fff !important;}
+.btn_lineup{background:#395781 !important; color:#fff !important;}
+
 /* 멤버쉽 */
 #membershipContainer img { height: 500px; }
 

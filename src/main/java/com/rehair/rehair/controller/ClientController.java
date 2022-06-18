@@ -48,20 +48,15 @@ public class ClientController {
 		User currentUserInfo = userService.currentUserInfo(currentUsername);
 
 		//유저의 예약된 내역들
-		ReservationStatus completed = ReservationStatus.PAYMENT_COMPLETED;
-		ReservationStatus cancel = ReservationStatus.CANCEL;
-		ReservationStatus reservation = ReservationStatus.RESERVATION;
-		List<Reservation> history = reservationRepository.findByUserAndStatusNotLikeOrderByDayDesc(currentUserInfo,reservation);
-		List<Reservation> reservations = reservationRepository.findByUserAndStatusOrderByDayDesc(currentUserInfo,reservation);
+		ReservationStatus reservationStatus = ReservationStatus.RESERVATION;
+		List<Reservation> history = reservationRepository.findByUserAndStatusNotLikeOrderByDayDesc(currentUserInfo,reservationStatus);
+		List<Reservation> reservations = reservationRepository.findByUserAndStatusOrderByDayDesc(currentUserInfo,reservationStatus);
 		Reservation recent;
+
 		if (ObjectUtils.isEmpty(reservations)){
 			recent = null;
 		} else {
 			recent = reservations.get(0);
-		}
-
-		if (ObjectUtils.isEmpty(history)){
-			history = null;
 		}
 
 		model.addAttribute("history", history);
@@ -175,7 +170,7 @@ public class ClientController {
 
 	@GetMapping("/event")
 	public String event(Model model,
-						@PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+						@PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 		Page<Event> events = eventRepository.findAll(pageable);
 		int startPage = Math.max(1, events.getPageable().getPageNumber() - 4);
 		int endPage = Math.min(events.getTotalPages(), events.getPageable().getPageNumber() + 4);

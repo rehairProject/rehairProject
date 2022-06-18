@@ -103,7 +103,7 @@ public class HomeController {
 
     //멤버십 등급&권한 변경
     @GetMapping("/admin/gradeAuthModify")
-    public String admin(Grade grade, String selectedUser,String auth, Model model){
+    public String gradeAuthModify(Grade grade, String selectedUser,String auth, Model model){
         User user = userRepository.findByUsername(selectedUser);
         if(grade!=null){
             user.setGrade(grade);
@@ -156,23 +156,31 @@ public class HomeController {
 
     /* 디자이너 */
     @GetMapping("/designer")
-    public String designerPage(Principal principal, Model model,@PageableDefault(size = 10, sort = "day", direction = Sort.Direction.DESC) Pageable pageable){
+    public String designerPage(Principal principal, Model model,@PageableDefault(size = 10, sort = "day", direction = Sort.Direction.DESC) Pageable pageable
+                                ,@RequestParam(required = false) String designerName){
         String currentUsername = principal.getName();
         User currentUserInfo = userService.currentUserInfo(currentUsername);
-        String name = currentUserInfo.getName();
+        String username = currentUserInfo.getName();
 
+        //로그인된 디자이너 전체 예약리스트
+        Page<Reservation> allReservations = reservationRepository.findByDesigner(username, pageable);
+
+        List<Reservation> todayReservations;
         String nowDate = LocalDate.now().toString();
 //        String nowDate = "2022-05-16";
-
-        //로그인된 디자이너 본인 전체 예약리스트
-        Page<Reservation> allReservations = reservationRepository.findByDesigner(name, pageable);
-        //로그인된 디자이너 본인 오늘 예약리스트
         ReservationStatus reservationStatus = ReservationStatus.RESERVATION;
-        List<Reservation> todayReservations = reservationRepository.findByDayAndDesignerAndStatus(nowDate, name, reservationStatus);
+        if(designerName==null){
+            //로그인된 디자이너 오늘 예약리스트
+            todayReservations = reservationRepository.findByDayAndDesignerAndStatus(nowDate, username, reservationStatus);
+        }else{
+            //셀렉트박스 디자이너 검색 예약리스트
+            todayReservations = reservationRepository.findByDayAndDesignerAndStatus(nowDate,designerName,reservationStatus);
+            username=designerName;
+        }
+
         //로그인된 디자이너 본인 오늘 예약확정 리스트
         ReservationStatus completeStatus = ReservationStatus.PAYMENT_COMPLETED;
-        List<Reservation> completeTodayReservation = reservationRepository.findByDayAndDesignerAndStatus(nowDate, name, completeStatus);
-
+        List<Reservation> completeTodayReservation = reservationRepository.findByDayAndDesignerAndStatus(nowDate, username, completeStatus);
 
         int startPage = Math.max(1, allReservations.getPageable().getPageNumber() - 4);
         int endPage = Math.min(allReservations.getTotalPages(), allReservations.getPageable().getPageNumber() + 4);
@@ -183,6 +191,7 @@ public class HomeController {
         model.addAttribute("reservations", allReservations);
         model.addAttribute("todayReservations", todayReservations);
         model.addAttribute("completeTodayReservation", completeTodayReservation);
+        model.addAttribute("username", username);
         return "designer";
     }
     @PostMapping("/designer/reservationComplete")

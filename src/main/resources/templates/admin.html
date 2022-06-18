@@ -193,7 +193,7 @@
             </form>
         </div>
 
-        <!-- 직원관리 -->
+        <!-- 회원관리 -->
         <div class="user tab">
             <form th:action="@{/admin}" method="get" name="search-form" class="mb-3 mt-4 overflow-hidden">
                 <input type="hidden" name="tabFlag" value="manage">
@@ -225,7 +225,7 @@
                     <td>
                         <form th:action="@{/admin/gradeAuthModify}" method="get">
                             <input type="hidden" name="selectedUser" value="">
-                            <select name="grade"class="form-select form-select-sm" id="selectBoxGrade" aria-label="Default select example" onchange="changeGrade(this)">
+                            <select name="grade" class="form-select form-select-sm" id="selectBoxGrade" aria-label="Default select example" onchange="changeGrade(this)">
                                 <th:block th:each="grade : ${grades}">
                                 <option th:value="${grade}" th:text="${grade}" th:selected="${grade} == ${user.grade}"></option>
                                 </th:block>
@@ -257,8 +257,8 @@
                             </a>
                         </li>
                         <li class="page-item"  th:classappend="${i == users.pageable.pageNumber+1} ? 'disabled'" th:each="i:${#numbers.sequence(startPage, endPage)}">
-                            <a class="page-link" th:text="${i}" th:href="@{/admin(page=${i-1},searchKeyword = ${param.searchKeyword}, tabFlag='manage')}" href="#">1</a></li>
-
+                            <a class="page-link" th:text="${i}" th:href="@{/admin(page=${i-1},searchKeyword = ${param.searchKeyword}, tabFlag='manage')}" href="#">1</a>
+                        </li>
                         <li class="page-item"  th:classappend="${users.totalPages == users.pageable.pageNumber+1} ? 'disabled'">
                             <a class="page-link" th:href="@{/admin(page=${users.pageable.pageNumber+1}, tabFlag='manage')}" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
