@@ -38,7 +38,7 @@ public class HomeController {
 
     @GetMapping("/admin")
     public String admin(Model model,
-                        @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+                        @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
                         String searchKeyword,
                         @RequestParam(required = false) String reservationYear, @RequestParam(required = false) String reservationMonth, @RequestParam(required = false, value = "tabFlag") String tabFlag
     ){
@@ -75,7 +75,7 @@ public class HomeController {
         model.addAttribute("schedules", schedules);
         model.addAttribute("grades", grades);
         model.addAttribute("auths", auths);
-        model.addAttribute("indexCalculator", users.getTotalElements() - users.getPageable().getPageNumber() * 3);
+        model.addAttribute("indexCalculator", users.getTotalElements() - users.getPageable().getPageNumber() * 10);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("users", users);

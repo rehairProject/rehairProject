@@ -16,12 +16,15 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Data
+@Getter
+@Setter
 public class Reservation {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)

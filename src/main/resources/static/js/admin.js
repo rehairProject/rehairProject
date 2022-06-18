@@ -127,6 +127,12 @@ $(document).ready(function() {
 //휴무정보 유효성검사
     $("#nextBtn").on("click", function(){
         var date = $("#date").val();
+        var dateCheck = new Date(date).getDay();
+
+        if(dateCheck == 0){
+            alert('정기 휴일 입니다.');
+            return false;
+        }
         if (date == "null"){
             alert("날짜를 선택하세요.");
             return;
@@ -156,6 +162,7 @@ $(document).ready(function() {
 });
 
 function changeGrade(selectedAuth){
+    if(confirm("멤버십 등급을 변경하시겠습니까?")){
     //멤버십 선택된 value
     var gradeVal = selectedAuth.value;
 
@@ -164,10 +171,12 @@ function changeGrade(selectedAuth){
 
     selectedAuth.parentNode.children[0].value = username;
     selectedAuth.parentNode.submit();
+    }
 }
 
 function changeAuth(selectedGrade){
-    //멤버십 선택된 value
+    if(confirm("회원권한을 변경하시겠습니까?")){
+    //권한 선택된 value
     var gradeVal = selectedGrade.value;
 
     var tr = selectedGrade.parentNode.parentNode.parentNode;
@@ -175,6 +184,8 @@ function changeAuth(selectedGrade){
 
     selectedGrade.parentNode.children[0].value = username;
     selectedGrade.parentNode.submit();
+    }
+
 }
 
 //날짜 선택

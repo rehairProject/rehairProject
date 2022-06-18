@@ -175,7 +175,7 @@ public class ClientController {
 		int startPage = Math.max(1, events.getPageable().getPageNumber() - 4);
 		int endPage = Math.min(events.getTotalPages(), events.getPageable().getPageNumber() + 4);
 
-		model.addAttribute("indexCalculator", events.getTotalElements() - events.getPageable().getPageNumber() * 3);
+		model.addAttribute("indexCalculator", events.getTotalElements() - events.getPageable().getPageNumber() * 6);
 
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
