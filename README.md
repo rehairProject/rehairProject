@@ -19,3 +19,7 @@ thymeleaf
 
 ## DB 
 MySQL
+> ORM 기술인 스프링 데이터 JPA 사용을 위한 설계
+
+<img width="601" alt="DB 최종" src="https://user-images.githubusercontent.com/93297109/179343005-63ce8005-8b62-4844-941e-5b36a621c062.png">
+
