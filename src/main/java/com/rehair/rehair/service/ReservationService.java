@@ -28,12 +28,12 @@ public class ReservationService {
         List<Reservation> reservations = reservationRepository.findAll();
         LocalDate now = LocalDate.now();
 
-        reservations.stream().filter(
+        List<Reservation> cancelReservations = reservations.stream().filter(
         		r -> r.getDay().equals(now.toString()) && 
         		r.getStatus().equals(ReservationStatus.RESERVATION)
         		).collect(Collectors.toList());
         
-        for (Reservation reservation : reservations) {
+        for (Reservation reservation : cancelReservations) {
         	
 			reservation.setStatus(ReservationStatus.CANCEL);
 		}
