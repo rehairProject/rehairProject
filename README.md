@@ -7,19 +7,13 @@
 ### Key Requirements: 예약 기능이 구현된 미용실 웹 페이지 제작 프로젝트
 
 -----
-## 프로젝트 환경설정
+### 프로젝트 주 역할
 
-## Backend
-Java 11, 
-Spring Boot 2.6.1,
-Gradle Project
++ 강현구: 엔티티설계, 로그인, 권한처리, 서비스 로직, 차트 API
++ 배경난: 회원가입, 예약, 휴무, 달력 UI 및 예약 휴무 로직 연결
++ 최희주: 로고 디자인, 이벤트, 파일 업로드 로직, 당일 예약확인
 
-## View template
-thymeleaf
+-----
 
-## DB 
-MySQL
-> ORM 기술인 스프링 데이터 JPA 사용을 위한 설계
-
-<img width="601" alt="DB 최종" src="https://user-images.githubusercontent.com/93297109/179343005-63ce8005-8b62-4844-941e-5b36a621c062.png">
+#### [프로젝트 환경](https://github.com/rehairProject/rehairProject/issues/15)
 
