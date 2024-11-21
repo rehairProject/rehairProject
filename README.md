@@ -14,6 +14,3 @@
 + 최희주: 로고 디자인, 이벤트, 파일 업로드 로직, 당일 예약확인
 
 -----
-
-#### [프로젝트 환경](https://github.com/rehairProject/rehairProject/issues/15)
-
